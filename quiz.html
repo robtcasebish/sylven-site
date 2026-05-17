@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Health Assessment — Sylven</title>
+<meta name="description" content="Begin your Sylven health assessment. A licensed Canadian physician will review your information within 24 hours.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --parchment: #F4EFE6;
+  --cream: #FAF8F3;
+  --mist: #EDE8DF;
+  --ink: #1A1714;
+  --ink-mid: #2D2825;
+  --dust: #8A8078;
+  --brass: #9C845A;
+  --brass-light: #B89D70;
+  --white: #FFFFFF;
+  --success: #3D6B4F;
+  --error: #8B2E2E;
+  --font-display: 'Newsreader', Georgia, serif;
+  --font-body: 'Jost', sans-serif;
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--parchment);
+  color: var(--ink);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* DISCLAIMER BAR */
+.disclaimer-bar {
+  background: var(--ink-mid);
+  padding: 0.5rem 2rem;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 300;
+}
+.disclaimer-bar p {
+  font-size: 0.68rem;
+  font-weight: 300;
+  color: rgba(244,239,230,0.45);
+  line-height: 1.5;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.disclaimer-bar strong { font-weight: 500; color: rgba(244,239,230,0.7); }
+.disclaimer-bar a { color: var(--brass-light); text-decoration: none; }
+
+/* NAV */
+nav {
+  position: fixed;
+  top: var(--nav-top, 34px); left: 0; right: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 4rem;
+  background: rgba(244, 239, 230, 0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(26,23,20,0.08);
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+.nav-back {
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dust);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: color 0.2s;
+}
+.nav-back:hover { color: var(--ink); }
+.nav-back::before { content: '←'; }
+
+/* MAIN LAYOUT */
+.quiz-wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 10rem 1.5rem 4rem;
+}
+.quiz-card {
+  background: var(--white);
+  width: 100%;
+  max-width: 680px;
+  border: 1px solid rgba(26,23,20,0.08);
+  position: relative;
+}
+
+/* PROGRESS */
+.quiz-progress {
+  padding: 1.75rem 2.5rem 0;
+}
+.progress-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+.progress-step {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--brass);
+}
+.progress-fraction {
+  font-size: 0.68rem;
+  font-weight: 400;
+  color: var(--dust);
+  letter-spacing: 0.04em;
+}
+.progress-bar {
+  height: 1px;
+  background: rgba(26,23,20,0.08);
+  position: relative;
+  overflow: hidden;
+}
+.progress-fill {
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  background: var(--brass);
+  transition: width 0.5s var(--ease);
+}
+
+/* STEP CONTENT */
+.quiz-body {
+  padding: 2.5rem 2.5rem 2rem;
+}
+
+.step { display: none; }
+.step.active { display: block; animation: stepIn 0.35s var(--ease); }
+
+@keyframes stepIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+.step-eyebrow {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dust);
+  margin-bottom: 0.6rem;
+  display: block;
+}
+
+.step h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 1.85rem);
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  margin-bottom: 0.5rem;
+}
+.step h2 em { font-style: italic; }
+
+.step-desc {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--dust);
+  line-height: 1.7;
+  margin-bottom: 1.75rem;
+}
+
+/* OPTIONS */
+.options-grid {
+  display: grid;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+.options-grid.two-col { grid-template-columns: 1fr 1fr; }
+.options-grid.three-col { grid-template-columns: 1fr 1fr 1fr; }
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  padding: 0.95rem 1.1rem;
+  border: 1px solid rgba(26,23,20,0.12);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  user-select: none;
+  background: var(--white);
+}
+.option:hover { border-color: rgba(26,23,20,0.3); background: rgba(26,23,20,0.015); }
+.option.selected { border-color: var(--ink); background: rgba(26,23,20,0.03); }
+.option.selected .option-indicator { background: var(--ink); border-color: var(--ink); }
+.option.selected .option-indicator::after { opacity: 1; }
+
+.option-indicator {
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid rgba(26,23,20,0.25);
+  border-radius: 50%;
+  flex-shrink: 0;
+  position: relative;
+  transition: background 0.15s, border-color 0.15s;
+}
+.option-indicator.square { border-radius: 3px; }
+.option-indicator::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  background: var(--parchment);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.option-indicator.square::after {
+  border-radius: 1px;
+  content: '✓';
+  background: none;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: white;
+  font-weight: 600;
+}
+
+.option-text { font-size: 0.875rem; font-weight: 400; color: var(--ink); line-height: 1.4; }
+.option-sub { font-size: 0.75rem; font-weight: 300; color: var(--dust); margin-top: 0.1rem; display: block; }
+
+.option.coming-soon { opacity: 0.4; cursor: not-allowed; }
+.option.coming-soon:hover { border-color: rgba(26,23,20,0.12); background: var(--white); }
+
+.option.danger.selected { border-color: var(--error); background: rgba(139,46,46,0.04); }
+.option.danger.selected .option-indicator { background: var(--error); border-color: var(--error); }
+
+/* FORM INPUTS */
+.field-group {
+  margin-bottom: 1.25rem;
+}
+.field-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dust);
+  margin-bottom: 0.45rem;
+  display: block;
+}
+.field-input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid rgba(26,23,20,0.15);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--ink);
+  background: var(--white);
+  outline: none;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+}
+.field-input:focus { border-color: var(--ink); }
+.field-input::placeholder { color: var(--dust); }
+
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+.field-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem; }
+
+.unit-toggle {
+  display: flex;
+  gap: 0;
+  margin-bottom: 1.25rem;
+  border: 1px solid rgba(26,23,20,0.15);
+  width: fit-content;
+}
+.unit-btn {
+  padding: 0.5rem 1.25rem;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dust);
+  background: var(--white);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.unit-btn.active { background: var(--ink); color: var(--parchment); }
+
+.bmi-display {
+  margin-top: 1rem;
+  padding: 0.875rem 1rem;
+  background: var(--mist);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.bmi-display.visible { opacity: 1; }
+.bmi-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dust); }
+.bmi-value { font-family: var(--font-display); font-size: 1.5rem; font-weight: 400; color: var(--ink); }
+.bmi-note { font-size: 0.72rem; font-weight: 300; color: var(--dust); text-align: right; }
+
+.section-divider {
+  border: none;
+  border-top: 1px solid rgba(26,23,20,0.08);
+  margin: 1.5rem 0;
+}
+.section-title {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dust);
+  margin-bottom: 0.875rem;
+  display: block;
+}
+
+.text-area {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid rgba(26,23,20,0.15);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: var(--ink);
+  background: var(--white);
+  outline: none;
+  resize: vertical;
+  min-height: 90px;
+  transition: border-color 0.2s;
+  line-height: 1.6;
+}
+.text-area:focus { border-color: var(--ink); }
+.text-area::placeholder { color: var(--dust); }
+
+/* NAVIGATION */
+.quiz-nav {
+  padding: 0 2.5rem 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.btn-continue {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--parchment);
+  background: var(--ink);
+  padding: 0.9rem 2.25rem;
+  border: none;
+  cursor: pointer;
+  transition: background 0.25s;
+  flex-shrink: 0;
+}
+.btn-continue:hover { background: var(--brass); }
+.btn-continue:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-back {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--dust);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.btn-back::before { content: '←'; }
+.btn-back:hover { color: var(--ink); }
+
+/* RESULT SCREENS */
+.result-screen { display: none; }
+.result-screen.active { display: block; }
+
+.result-eligible {
+  padding: 2.5rem 2.5rem 0;
+}
+.result-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.875rem;
+  background: rgba(61,107,79,0.1);
+  border: 1px solid rgba(61,107,79,0.2);
+  margin-bottom: 1.5rem;
+}
+.result-badge span {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--success);
+}
+.result-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--success);
+  flex-shrink: 0;
+}
+.result-eligible h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 1.85rem);
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  margin-bottom: 0.75rem;
+}
+.result-eligible h2 em { font-style: italic; }
+.result-eligible p {
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: var(--dust);
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+}
+
+.what-next {
+  background: var(--mist);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 2rem;
+}
+.what-next p {
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: var(--dust);
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+.what-next strong { font-weight: 500; color: var(--ink); }
+
+/* PAYMENT */
+.payment-section {
+  border-top: 1px solid rgba(26,23,20,0.08);
+  padding: 2rem 2.5rem 2.5rem;
+}
+.payment-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+.payment-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--ink);
+}
+.payment-amount {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 300;
+  color: var(--ink);
+  line-height: 1;
+}
+.payment-amount span {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: var(--dust);
+}
+.payment-includes {
+  margin-bottom: 1.5rem;
+}
+.payment-includes li {
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: var(--dust);
+  line-height: 1.6;
+  padding: 0.3rem 0;
+  padding-left: 1rem;
+  position: relative;
+  list-style: none;
+}
+.payment-includes li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--brass);
+  font-size: 0.75rem;
+}
+
+/* Stripe placeholder */
+.stripe-placeholder {
+  border: 1px solid rgba(26,23,20,0.12);
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  background: var(--white);
+}
+.stripe-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 0.75rem; }
+.stripe-field {
+  width: 100%;
+  padding: 0.7rem 0.875rem;
+  border: 1px solid rgba(26,23,20,0.12);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--ink);
+  background: var(--white);
+  outline: none;
+}
+.stripe-field:focus { border-color: var(--ink); }
+.stripe-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dust);
+  margin-bottom: 0.35rem;
+  display: block;
+}
+.stripe-powered {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+.stripe-powered p {
+  font-size: 0.65rem;
+  color: var(--dust);
+  font-weight: 300;
+}
+
+.btn-pay {
+  width: 100%;
+  padding: 1rem;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--parchment);
+  background: var(--ink);
+  border: none;
+  cursor: pointer;
+  transition: background 0.25s;
+  margin-bottom: 0.875rem;
+}
+.btn-pay:hover { background: var(--brass); }
+
+.payment-legal {
+  font-size: 0.68rem;
+  font-weight: 300;
+  color: var(--dust);
+  line-height: 1.65;
+  text-align: center;
+}
+
+/* DECLINE SCREEN */
+.result-decline {
+  padding: 2.5rem;
+}
+.decline-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.875rem;
+  background: rgba(26,23,20,0.05);
+  border: 1px solid rgba(26,23,20,0.1);
+  margin-bottom: 1.5rem;
+}
+.decline-badge span {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dust);
+}
+.result-decline h2 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+.result-decline p {
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: var(--dust);
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+.result-decline a {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+  transition: color 0.2s;
+}
+.result-decline a::after { content: '→'; }
+.result-decline a:hover { color: var(--brass); }
+
+/* ERROR */
+.field-error {
+  font-size: 0.72rem;
+  color: var(--error);
+  margin-top: 0.35rem;
+  display: none;
+}
+.field-error.visible { display: block; }
+
+/* RESPONSIVE */
+@media (max-width: 640px) {
+  nav { padding: 1rem 1.25rem; }
+  .quiz-body { padding: 1.75rem 1.5rem 1.25rem; }
+  .quiz-nav { padding: 0 1.5rem 2rem; }
+  .quiz-progress { padding: 1.5rem 1.5rem 0; }
+  .options-grid.two-col { grid-template-columns: 1fr; }
+  .options-grid.three-col { grid-template-columns: 1fr; }
+  .field-row { grid-template-columns: 1fr; }
+  .payment-section { padding: 1.5rem 1.5rem 2rem; }
+  .result-eligible { padding: 1.75rem 1.5rem 0; }
+  .result-decline { padding: 1.75rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="disclaimer-bar">
+  <p><strong>Medical Information Only.</strong> This platform facilitates access to independent licensed Canadian physicians. All treatment decisions are made solely by your treating physician. <a href="medical-consent.html">Learn more →</a></p>
+</div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Sylven</a>
+  <a href="index.html" class="nav-back">Back to site</a>
+</nav>
+
+<div class="quiz-wrap">
+  <div class="quiz-card">
+
+    <!-- PROGRESS BAR -->
+    <div class="quiz-progress" id="quizProgress">
+      <div class="progress-meta">
+        <span class="progress-step" id="stepLabel">Step 1 of 6</span>
+        <span class="progress-fraction" id="stepFraction">Health assessment</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width: 16.6%"></div>
+      </div>
+    </div>
+
+    <!-- ===== STEP 1: GOAL ===== -->
+    <div class="quiz-body">
+      <div class="step active" id="step-1">
+        <span class="step-eyebrow">Getting started</span>
+        <h2>What brings you<br>to <em>Sylven</em> today?</h2>
+        <p class="step-desc">Select all that apply. You can address multiple goals with one assessment.</p>
+        <div class="options-grid">
+          <div class="option" data-group="goal" data-value="weight-loss" onclick="toggleOption(this)">
+            <div class="option-indicator square"></div>
+            <div class="option-text">Weight Loss<span class="option-sub">GLP-1 programs, generic semaglutide</span></div>
+          </div>
+          <div class="option coming-soon" data-group="goal" data-value="mens-health">
+            <div class="option-indicator square"></div>
+            <div class="option-text">Men's Health<span class="option-sub">Coming soon — join the waitlist</span></div>
+          </div>
+          <div class="option coming-soon" data-group="goal" data-value="womens-health">
+            <div class="option-indicator square"></div>
+            <div class="option-text">Women's Health<span class="option-sub">Coming soon — join the waitlist</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== STEP 2: ABOUT YOU ===== -->
+      <div class="step" id="step-2">
+        <span class="step-eyebrow">About you</span>
+        <h2>A few details so your<br>physician knows <em>you.</em></h2>
+        <p class="step-desc">Your province determines which physician is licensed to assess you.</p>
+        <div class="field-group">
+          <label class="field-label" for="province">Province of residence</label>
+          <select class="field-input" id="province">
+            <option value="">Select your province</option>
+            <option value="AB">Alberta</option>
+            <option value="BC">British Columbia</option>
+            <option value="MB">Manitoba</option>
+            <option value="NB">New Brunswick</option>
+            <option value="NL">Newfoundland and Labrador</option>
+            <option value="NS">Nova Scotia</option>
+            <option value="ON">Ontario</option>
+            <option value="PE">Prince Edward Island</option>
+            <option value="QC">Quebec</option>
+            <option value="SK">Saskatchewan</option>
+            <option value="NT">Northwest Territories</option>
+            <option value="NU">Nunavut</option>
+            <option value="YT">Yukon</option>
+          </select>
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label class="field-label" for="age">Age</label>
+            <input class="field-input" type="number" id="age" placeholder="e.g. 42" min="18" max="120">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Sex assigned at birth</label>
+            <div class="options-grid" style="margin-bottom: 0;">
+              <div class="option" data-group="sex" data-value="female" onclick="selectSingle(this)">
+                <div class="option-indicator"></div>
+                <div class="option-text">Female</div>
+              </div>
+              <div class="option" data-group="sex" data-value="male" onclick="selectSingle(this)">
+                <div class="option-indicator"></div>
+                <div class="option-text">Male</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== STEP 3: HEIGHT & WEIGHT ===== -->
+      <div class="step" id="step-3">
+        <span class="step-eyebrow">Your measurements</span>
+        <h2>Height and <em>weight.</em></h2>
+        <p class="step-desc">Used to calculate your BMI. Your physician uses this to determine clinical eligibility.</p>
+        <div class="unit-toggle">
+          <button class="unit-btn active" id="metricBtn" onclick="setUnit('metric')">Metric</button>
+          <button class="unit-btn" id="imperialBtn" onclick="setUnit('imperial')">Imperial</button>
+        </div>
+        <!-- METRIC -->
+        <div id="metricFields">
+          <div class="field-row">
+            <div class="field-group">
+              <label class="field-label" for="heightCm">Height (cm)</label>
+              <input class="field-input" type="number" id="heightCm" placeholder="e.g. 170" oninput="calcBMI()">
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="weightKg">Weight (kg)</label>
+              <input class="field-input" type="number" id="weightKg" placeholder="e.g. 92" oninput="calcBMI()">
+            </div>
+          </div>
+        </div>
+        <!-- IMPERIAL -->
+        <div id="imperialFields" style="display:none;">
+          <div class="field-row-3">
+            <div class="field-group">
+              <label class="field-label" for="heightFt">Feet</label>
+              <input class="field-input" type="number" id="heightFt" placeholder="5" oninput="calcBMI()">
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="heightIn">Inches</label>
+              <input class="field-input" type="number" id="heightIn" placeholder="8" oninput="calcBMI()">
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="weightLbs">Weight (lbs)</label>
+              <input class="field-input" type="number" id="weightLbs" placeholder="205" oninput="calcBMI()">
+            </div>
+          </div>
+        </div>
+        <div class="bmi-display" id="bmiDisplay">
+          <div>
+            <div class="bmi-label">Your BMI</div>
+          </div>
+          <div style="text-align: right;">
+            <div class="bmi-value" id="bmiValue">—</div>
+            <div class="bmi-note" id="bmiNote"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== STEP 4: HEALTH CONDITIONS ===== -->
+      <div class="step" id="step-4">
+        <span class="step-eyebrow">Your health</span>
+        <h2>Tell us about any<br><em>health conditions.</em></h2>
+        <p class="step-desc">Select everything that applies. This helps your physician assess you accurately and safely.</p>
+
+        <span class="section-title" id="comorbidSection">Do you have any of the following?</span>
+        <div class="options-grid" id="comorbidOptions">
+          <div class="option" data-group="comorbid" data-value="t2diabetes" onclick="toggleOption(this)">
+            <div class="option-indicator square"></div>
+            <div class="option-text">Type 2 diabetes</div>
+          </div>
+          <div class="option" data-group="comorbid" data-value="hypertension" onclick="toggleOption(this)">
+            <div class="option-indicator square"></div>
+            <div class="option-text">High blood pressure</div>
+          </div>
+          <div class="option" data-group="comorbid" data-value="cholesterol" onclick="toggleOption(this)">
+            <div class="option-indicator square"></div>
+            <div class="option-text">High cholesterol</div>
+          </div>
+          <div class="option" data-group="comorbid" data-value="sleep-apnea" onclick="toggleOption(this)">
+            <div class="option-indicator square"></div>
+            <div class="option-text">Sleep apnea</div>
+          </div>
+          <div class="option" data-group="comorbid" data-value="cardiovascular" onclick="toggleOption(this)">
+            <div class="option-indicator square"></div>
+            <div class="option-text">Heart disease or prior heart attack / stroke</div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+        <span class="section-title">Have you ever been diagnosed with any of these?</span>
+        <p class="step-desc" style="margin-bottom: 0.875rem; font-size: 0.8rem;">These conditions may affect whether GLP-1 therapy is safe for you.</p>
+        <div class="options-grid">
+          <div class="option danger" data-group="contraindication" data-value="pancreatitis" onclick="toggleOption(this)">
+            <div class="option-indicator square"></div>
+            <div class="option-text">Pancreatitis (inflammation of the pancreas)</div>
+          </div>
+          <div class="option danger" data-group="contraindication" data-value="thyroid-mtc" onclick="toggleOption(this)">
+            <div class="option-indicator square"></div>
+            <div class="option-text">Medullary thyroid cancer, or MEN2 syndrome<span class="option-sub">A specific type of thyroid cancer, or a hereditary condition</span></div>
+          </div>
+          <div class="option" data-group="contraindication" data-value="kidney-disease" onclick="toggleOption(this)">
+            <div class="option-indicator square"></div>
+            <div class="option-text">Severe kidney disease or dialysis</div>
+          </div>
+          <div class="option" data-group="contraindication" data-value="gi-disease" onclick="toggleOption(this)">
+            <div class="option-indicator square"></div>
+            <div class="option-text">Severe digestive disease (gastroparesis, Crohn's)</div>
+          </div>
+          <div class="option" data-group="contraindication" data-value="t1diabetes" onclick="toggleOption(this)">
+            <div class="option-indicator square"></div>
+            <div class="option-text">Type 1 diabetes</div>
+          </div>
+          <div class="option" data-group="contraindication" data-value="none" onclick="selectNone(this)">
+            <div class="option-indicator square"></div>
+            <div class="option-text">None of the above</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== STEP 5: MEDICATIONS ===== -->
+      <div class="step" id="step-5">
+        <span class="step-eyebrow">Your medications</span>
+        <h2>What medications are<br>you currently <em>taking?</em></h2>
+        <p class="step-desc">Your physician needs to check for interactions. Include all prescription medications, supplements, and vitamins.</p>
+
+        <span class="section-title">Are you currently taking any of these?</span>
+        <div class="options-grid" style="margin-bottom: 1.5rem;">
+          <div class="option" data-group="meds" data-value="insulin" onclick="toggleOption(this)">
+            <div class="option-indicator square"></div>
+            <div class="option-text">Insulin</div>
+          </div>
+          <div class="option" data-group="meds" data-value="diabetes-meds" onclick="toggleOption(this)">
+            <div class="option-indicator square"></div>
+            <div class="option-text">Other diabetes medications<span class="option-sub">Metformin, SGLT-2 inhibitors, etc.</span></div>
+          </div>
+          <div class="option" data-group="meds" data-value="blood-thinners" onclick="toggleOption(this)">
+            <div class="option-indicator square"></div>
+            <div class="option-text">Blood thinners<span class="option-sub">Warfarin, Eliquis, aspirin therapy, etc.</span></div>
+          </div>
+          <div class="option danger" data-group="meds" data-value="pregnant" onclick="toggleOption(this)" id="pregnantOption">
+            <div class="option-indicator square"></div>
+            <div class="option-text">I am pregnant or breastfeeding</div>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="otherMeds">Other medications, supplements, or vitamins</label>
+          <textarea class="text-area" id="otherMeds" placeholder="List any other medications, vitamins, or supplements you take regularly. Your physician will review these."></textarea>
+        </div>
+      </div>
+
+      <!-- ===== STEP 6: WEIGHT HISTORY ===== -->
+      <div class="step" id="step-6">
+        <span class="step-eyebrow">Your history</span>
+        <h2>Tell us about your<br><em>weight journey.</em></h2>
+        <p class="step-desc">This helps your physician understand your situation and set appropriate expectations.</p>
+
+        <span class="section-title">How long have you been managing your weight?</span>
+        <div class="options-grid two-col" style="margin-bottom: 1.5rem;">
+          <div class="option" data-group="duration" data-value="under-1" onclick="selectSingle(this)">
+            <div class="option-indicator"></div>
+            <div class="option-text">Less than a year</div>
+          </div>
+          <div class="option" data-group="duration" data-value="1-3" onclick="selectSingle(this)">
+            <div class="option-indicator"></div>
+            <div class="option-text">1 – 3 years</div>
+          </div>
+          <div class="option" data-group="duration" data-value="3-5" onclick="selectSingle(this)">
+            <div class="option-indicator"></div>
+            <div class="option-text">3 – 5 years</div>
+          </div>
+          <div class="option" data-group="duration" data-value="5-plus" onclick="selectSingle(this)">
+            <div class="option-indicator"></div>
+            <div class="option-text">More than 5 years</div>
+          </div>
+        </div>
+
+        <span class="section-title">What have you tried before?</span>
+        <div class="options-grid" style="margin-bottom: 1.5rem;">
+          <div class="option" data-group="tried" data-value="diet-exercise" onclick="toggleOption(this)">
+            <div class="option-indicator square"></div>
+            <div class="option-text">Diet and exercise changes</div>
+          </div>
+          <div class="option" data-group="tried" data-value="weight-programs" onclick="toggleOption(this)">
+            <div class="option-indicator square"></div>
+            <div class="option-text">Structured weight loss programs</div>
+          </div>
+          <div class="option" data-group="tried" data-value="previous-meds" onclick="toggleOption(this)">
+            <div class="option-indicator square"></div>
+            <div class="option-text">Prescription weight loss medication</div>
+          </div>
+          <div class="option" data-group="tried" data-value="nothing" onclick="selectNone(this)">
+            <div class="option-indicator square"></div>
+            <div class="option-text">Nothing yet</div>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="additionalInfo">Is there anything else your physician should know?</label>
+          <textarea class="text-area" id="additionalInfo" placeholder="Optional — any additional context about your health, lifestyle, or goals that would help your physician."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- NAV BUTTONS -->
+    <div class="quiz-nav" id="quizNav">
+      <button class="btn-back" id="btnBack" onclick="prevStep()" style="visibility: hidden;">Back</button>
+      <button class="btn-continue" id="btnContinue" onclick="nextStep()">Continue</button>
+    </div>
+
+    <!-- ===== RESULT: ELIGIBLE ===== -->
+    <div class="result-screen" id="resultEligible">
+      <div class="result-eligible">
+        <div class="result-badge"><span>Assessment complete</span></div>
+        <h2>You appear to be a<br>strong <em>candidate.</em></h2>
+        <p>Based on your responses, you meet the clinical criteria for a GLP-1 therapy assessment. An independent Canadian physician — licensed in your province — will review your full file and respond within 24 hours.</p>
+        <div class="what-next">
+          <p><strong>What happens next:</strong> Once you complete your program membership below, your assessment enters the physician review queue. If approved, a prescription is sent to our pharmacy partner and your medication ships within 3–5 business days. If the physician determines GLP-1 therapy is not appropriate for you, <strong>you receive a full refund</strong>.</p>
+        </div>
+      </div>
+      <div class="payment-section">
+        <div class="payment-header">
+          <span class="payment-title">Program membership</span>
+          <div>
+            <div class="payment-amount">$89<span>/month</span></div>
+          </div>
+        </div>
+        <ul class="payment-includes">
+          <li>Physician assessment and ongoing check-ins</li>
+          <li>Registered dietitian consultations</li>
+          <li>Patient portal and progress tracking</li>
+          <li>24/7 care team messaging</li>
+          <li>Prescription renewal coordination</li>
+          <li>Cancel anytime — no long-term commitment</li>
+        </ul>
+        <!-- STRIPE INTEGRATION POINT -->
+        <!-- Replace this block with Stripe.js Elements when Stripe account is set up -->
+        <!-- stripe.elements() → cardElement.mount('#card-element') -->
+        <div class="stripe-placeholder">
+          <span class="stripe-label">Card number</span>
+          <input class="stripe-field" type="text" placeholder="1234 1234 1234 1234" style="width: 100%; margin-bottom: 0.75rem;">
+          <div class="stripe-row">
+            <div>
+              <span class="stripe-label">Expiry</span>
+              <input class="stripe-field" type="text" placeholder="MM / YY" style="width: 100%;">
+            </div>
+            <div>
+              <span class="stripe-label">CVC</span>
+              <input class="stripe-field" type="text" placeholder="123" style="width: 100%;">
+            </div>
+          </div>
+          <div class="stripe-powered">
+            <p>Secured by Stripe · 256-bit encryption</p>
+          </div>
+        </div>
+        <!-- END STRIPE BLOCK -->
+        <button class="btn-pay" onclick="handlePayment()">Begin My Program — $89/month</button>
+        <p class="payment-legal">Your membership begins today. Cancel anytime via your patient portal or by messaging your care team. Medication costs are separate and paid directly to our pharmacy partner. Full refund if physician determines GLP-1 therapy is not appropriate for you. © Corbin Care Health Inc.</p>
+      </div>
+    </div>
+
+    <!-- ===== RESULT: HARD STOP ===== -->
+    <div class="result-screen" id="resultDecline">
+      <div class="result-decline">
+        <div class="decline-badge"><span>Assessment reviewed</span></div>
+        <h2>We can't process your<br>assessment right now.</h2>
+        <p>Based on one or more of your answers, GLP-1 therapy via Sylven may not be safe for you at this time. This is not a final medical determination — it means your situation requires a more detailed clinical assessment than our current platform can provide.</p>
+        <p>We strongly recommend speaking with your primary care physician or an obesity medicine specialist. They can review your full medical history and advise on all available options.</p>
+        <p>There is no charge. Your information has not been shared and will not be retained beyond this session.</p>
+        <a href="index.html">Return to Sylven</a>
+      </div>
+    </div>
+
+    <!-- ===== RESULT: LOW BMI ===== -->
+    <div class="result-screen" id="resultLowBMI">
+      <div class="result-decline">
+        <div class="decline-badge"><span>Assessment reviewed</span></div>
+        <h2>Your physician will<br>need more information.</h2>
+        <p>Based on your BMI, you may not meet the standard clinical criteria for GLP-1 weight loss therapy in Canada. The current Health Canada guidelines indicate GLP-1 therapy for adults with a BMI of 30 or above, or 27 or above with a qualifying health condition.</p>
+        <p>This doesn't mean GLP-1 therapy is definitely not right for you — it means a physician needs to assess your full clinical picture before making that determination. If you'd like to proceed, your case will be reviewed individually.</p>
+        <a href="mailto:hello@corbincare.com">Contact us to discuss your situation →</a>
+      </div>
+    </div>
+
+  </div><!-- end quiz-card -->
+</div>
+
+<script>
+// ============================================
+// STATE
+// ============================================
+let currentStep = 1;
+const totalSteps = 6;
+let bmi = 0;
+let unit = 'metric';
+let hardStop = false;
+let isPregnant = false;
+let eligibilityStatus = 'unknown'; // 'qualified', 'conditional', 'low-bmi'
+
+const stepLabels = [
+  'Your goals',
+  'About you',
+  'Measurements',
+  'Health conditions',
+  'Medications',
+  'Your history'
+];
+
+// ============================================
+// HEADER POSITIONING
+// ============================================
+function positionHeader() {
+  const bar = document.querySelector('.disclaimer-bar');
+  const nav = document.getElementById('navbar');
+  if (!bar || !nav) return;
+  const h = bar.offsetHeight;
+  document.documentElement.style.setProperty('--nav-top', h + 'px');
+}
+positionHeader();
+window.addEventListener('resize', positionHeader);
+
+// ============================================
+// OPTION SELECTION
+// ============================================
+function toggleOption(el) {
+  if (el.classList.contains('coming-soon')) return;
+  el.classList.toggle('selected');
+  const indicator = el.querySelector('.option-indicator');
+  // If 'none of the above' was previously selected, deselect it
+  if (!el.dataset.value.includes('none')) {
+    const group = el.dataset.group;
+    const noneOpt = document.querySelector(`.option[data-group="${group}"][data-value="none"]`);
+    if (noneOpt) noneOpt.classList.remove('selected');
+  }
+}
+
+function selectSingle(el) {
+  if (el.classList.contains('coming-soon')) return;
+  const group = el.dataset.group;
+  document.querySelectorAll(`.option[data-group="${group}"]`).forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function selectNone(el) {
+  const group = el.dataset.group;
+  document.querySelectorAll(`.option[data-group="${group}"]`).forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+// ============================================
+// UNIT TOGGLE
+// ============================================
+function setUnit(u) {
+  unit = u;
+  document.getElementById('metricBtn').classList.toggle('active', u === 'metric');
+  document.getElementById('imperialBtn').classList.toggle('active', u === 'imperial');
+  document.getElementById('metricFields').style.display = u === 'metric' ? 'block' : 'none';
+  document.getElementById('imperialFields').style.display = u === 'imperial' ? 'block' : 'none';
+  calcBMI();
+}
+
+// ============================================
+// BMI CALCULATION
+// ============================================
+function calcBMI() {
+  let heightM, weightKg;
+  if (unit === 'metric') {
+    const cm = parseFloat(document.getElementById('heightCm').value);
+    const kg = parseFloat(document.getElementById('weightKg').value);
+    if (!cm || !kg) { hideBMI(); return; }
+    heightM = cm / 100;
+    weightKg = kg;
+  } else {
+    const ft = parseFloat(document.getElementById('heightFt').value) || 0;
+    const inches = parseFloat(document.getElementById('heightIn').value) || 0;
+    const lbs = parseFloat(document.getElementById('weightLbs').value);
+    if ((!ft && !inches) || !lbs) { hideBMI(); return; }
+    const totalInches = (ft * 12) + inches;
+    heightM = totalInches * 0.0254;
+    weightKg = lbs * 0.453592;
+  }
+  if (heightM <= 0 || weightKg <= 0) { hideBMI(); return; }
+  bmi = weightKg / (heightM * heightM);
+  bmi = Math.round(bmi * 10) / 10;
+  document.getElementById('bmiValue').textContent = bmi.toFixed(1);
+  let note = '';
+  if (bmi < 18.5) note = 'Underweight';
+  else if (bmi < 25) note = 'Healthy weight';
+  else if (bmi < 30) note = 'Overweight';
+  else if (bmi < 35) note = 'Obese (Class I)';
+  else if (bmi < 40) note = 'Obese (Class II)';
+  else note = 'Obese (Class III)';
+  document.getElementById('bmiNote').textContent = note;
+  document.getElementById('bmiDisplay').classList.add('visible');
+
+  if (bmi >= 30) eligibilityStatus = 'qualified';
+  else if (bmi >= 27) eligibilityStatus = 'conditional';
+  else eligibilityStatus = 'low-bmi';
+}
+
+function hideBMI() {
+  document.getElementById('bmiDisplay').classList.remove('visible');
+  bmi = 0;
+}
+
+// ============================================
+// NAVIGATION
+// ============================================
+function updateProgress() {
+  const pct = (currentStep / totalSteps) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('stepLabel').textContent = `Step ${currentStep} of ${totalSteps}`;
+  document.getElementById('stepFraction').textContent = stepLabels[currentStep - 1];
+  document.getElementById('btnBack').style.visibility = currentStep > 1 ? 'visible' : 'hidden';
+}
+
+function showStep(n) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.getElementById(`step-${n}`).classList.add('active');
+  currentStep = n;
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function validateStep() {
+  if (currentStep === 1) {
+    const selected = document.querySelector('.option[data-group="goal"].selected:not(.coming-soon)');
+    if (!selected) { alert('Please select at least one goal to continue.'); return false; }
+  }
+  if (currentStep === 2) {
+    if (!document.getElementById('province').value) { alert('Please select your province.'); return false; }
+    const age = parseInt(document.getElementById('age').value);
+    if (!age || age < 18 || age > 120) { alert('Please enter a valid age. You must be 18 or older.'); return false; }
+    if (!document.querySelector('.option[data-group="sex"].selected')) { alert('Please select your sex.'); return false; }
+  }
+  if (currentStep === 3) {
+    if (bmi === 0) { alert('Please enter your height and weight.'); return false; }
+  }
+  return true;
+}
+
+function nextStep() {
+  if (!validateStep()) return;
+  if (currentStep < totalSteps) {
+    showStep(currentStep + 1);
+  } else {
+    submitAssessment();
+  }
+}
+
+function prevStep() {
+  if (currentStep > 1) showStep(currentStep - 1);
+}
+
+// ============================================
+// SUBMIT & ELIGIBILITY
+// ============================================
+function submitAssessment() {
+  // Check for hard stops
+  const hardStopValues = ['pancreatitis', 'thyroid-mtc'];
+  const selectedContra = [...document.querySelectorAll('.option[data-group="contraindication"].selected')]
+    .map(el => el.dataset.value);
+  hardStop = hardStopValues.some(v => selectedContra.includes(v));
+
+  // Check pregnancy
+  isPregnant = !!document.querySelector('.option[data-group="meds"][data-value="pregnant"].selected');
+  if (isPregnant) hardStop = true;
+
+  // Check conditional BMI eligibility
+  if (eligibilityStatus === 'conditional') {
+    const hasComorbidity = !!document.querySelector('.option[data-group="comorbid"].selected');
+    if (!hasComorbidity) eligibilityStatus = 'low-bmi';
+  }
+
+  // Hide quiz chrome
+  document.getElementById('quizProgress').style.display = 'none';
+  document.getElementById('quizNav').style.display = 'none';
+  document.querySelectorAll('.step').forEach(s => s.style.display = 'none');
+
+  // Show result
+  if (hardStop) {
+    document.getElementById('resultDecline').classList.add('active');
+  } else if (eligibilityStatus === 'low-bmi') {
+    document.getElementById('resultLowBMI').classList.add('active');
+  } else {
+    document.getElementById('resultEligible').classList.add('active');
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ============================================
+// PAYMENT HANDLER
+// ============================================
+function handlePayment() {
+  // STRIPE INTEGRATION POINT
+  // Replace this function body with:
+  // const stripe = Stripe('YOUR_PUBLISHABLE_KEY');
+  // stripe.createPaymentMethod({...}).then(result => { ... });
+  alert('Stripe integration coming — this is where the $89/month subscription checkout fires.');
+}
+
+// ============================================
+// HIDE PREGNANT OPTION FOR MALE
+// ============================================
+document.querySelectorAll('.option[data-group="sex"]').forEach(opt => {
+  opt.addEventListener('click', () => {
+    const pregnantOpt = document.getElementById('pregnantOption');
+    if (opt.dataset.value === 'male') {
+      pregnantOpt.style.display = 'none';
+    } else {
+      pregnantOpt.style.display = 'flex';
+    }
+  });
+});
+
+// ============================================
+// INIT
+// ============================================
+updateProgress();
+</script>
+
+</body>
+</html>
