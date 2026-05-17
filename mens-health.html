@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Men's Health Programs | Sylven</title>
+<meta name="description" content="Physician-assessed treatments for erectile dysfunction and hair loss. Licensed Canadian physicians, Health Canada approved medications, delivered discreetly to your door.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --parchment: #F4EFE6;
+  --cream: #FAF8F3;
+  --mist: #EDE8DF;
+  --ink: #1A1714;
+  --ink-mid: #2D2825;
+  --dust: #8A8078;
+  --brass: #9C845A;
+  --brass-light: #B89D70;
+  --white: #FFFFFF;
+  --success: #3D6B4F;
+  --font-display: 'Newsreader', Georgia, serif;
+  --font-body: 'Jost', sans-serif;
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --max: 1200px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); background: var(--parchment); color: var(--ink); overflow-x: hidden; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.018; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E"); background-size: 180px; }
+
+.disclaimer-bar { background: var(--ink-mid); padding: 0.5rem 4rem; position: fixed; top: 0; left: 0; right: 0; z-index: 300; }
+.disclaimer-bar p { font-size: 0.68rem; font-weight: 300; color: rgba(244,239,230,0.45); line-height: 1.5; max-width: var(--max); margin: 0 auto; }
+.disclaimer-bar strong { font-weight: 500; color: rgba(244,239,230,0.7); }
+.disclaimer-bar a { color: var(--brass-light); text-decoration: none; }
+
+nav { position: fixed; top: var(--nav-top, 34px); left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 4rem; background: rgba(244,239,230,0.97); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(26,23,20,0.08); }
+nav.scrolled { box-shadow: 0 2px 20px rgba(26,23,20,0.06); }
+.nav-logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 400; color: var(--ink); text-decoration: none; letter-spacing: -0.01em; }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a { font-size: 0.8rem; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-mid); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--brass); }
+.nav-cta { font-family: var(--font-body); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--parchment); background: var(--ink); border: none; padding: 0.65rem 1.5rem; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.25s; }
+.nav-cta:hover { background: var(--brass); }
+.hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+.hamburger span { display: block; width: 22px; height: 1.5px; background: var(--ink); transition: transform 0.3s, opacity 0.3s; }
+.hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+.mobile-menu { display: none; position: fixed; inset: 0; background: var(--parchment); z-index: 190; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
+.mobile-menu.open { display: flex; }
+.mobile-menu a { font-family: var(--font-display); font-size: 2.2rem; font-weight: 400; color: var(--ink); text-decoration: none; transition: color 0.2s; }
+.mobile-menu a:hover { color: var(--brass); }
+.mobile-menu .m-cta { font-family: var(--font-body); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--parchment); background: var(--ink); padding: 0.875rem 2rem; margin-top: 1rem; text-decoration: none; }
+
+section { padding: 7rem 4rem; position: relative; }
+.container { max-width: var(--max); margin: 0 auto; }
+.section-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brass); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.75rem; }
+.section-label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--brass); }
+h2 { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 3.25rem); font-weight: 300; line-height: 1.1; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 1.5rem; }
+h2 em { font-style: italic; }
+p.lead { font-size: 1.05rem; font-weight: 400; color: var(--dust); line-height: 1.85; max-width: 52ch; }
+.btn-primary { font-family: var(--font-body); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--parchment); background: var(--ink); padding: 0.95rem 2.25rem; border: none; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.25s; }
+.btn-primary:hover { background: var(--brass); }
+
+/* PAGE HERO */
+.page-hero { background: var(--ink); padding: 9rem 4rem 6rem; position: relative; overflow: hidden; }
+.page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 50%, rgba(156,132,90,0.08) 0%, transparent 65%); pointer-events: none; }
+.breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-size: 0.72rem; color: rgba(244,239,230,0.3); margin-bottom: 2rem; position: relative; z-index: 1; }
+.breadcrumb a { color: rgba(244,239,230,0.3); text-decoration: none; transition: color 0.2s; }
+.breadcrumb a:hover { color: rgba(244,239,230,0.7); }
+.breadcrumb span { color: rgba(244,239,230,0.15); }
+.page-hero-inner { max-width: var(--max); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; position: relative; z-index: 1; }
+.page-hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(156,132,90,0.15); border: 1px solid rgba(156,132,90,0.3); color: var(--brass-light); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.35rem 0.875rem; margin-bottom: 1.5rem; width: fit-content; }
+.page-hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--brass); flex-shrink: 0; }
+.page-hero h1 { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 300; line-height: 1.06; letter-spacing: -0.025em; color: var(--white); margin-bottom: 1.5rem; }
+.page-hero h1 em { font-style: italic; color: var(--brass-light); }
+.page-hero-sub { font-size: 1rem; font-weight: 300; color: rgba(244,239,230,0.5); line-height: 1.85; margin-bottom: 2.5rem; }
+.hero-actions { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
+.btn-hero { font-family: var(--font-body); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); background: var(--parchment); padding: 0.95rem 2.25rem; border: none; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.25s; }
+.btn-hero:hover { background: var(--brass-light); color: var(--parchment); }
+.btn-hero-ghost { font-size: 0.78rem; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(244,239,230,0.5); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: color 0.2s; }
+.btn-hero-ghost::after { content: '→'; }
+.btn-hero-ghost:hover { color: var(--parchment); }
+.hero-stats { border-left: 1px solid rgba(244,239,230,0.1); padding-left: 5rem; display: flex; flex-direction: column; justify-content: center; gap: 0; align-self: stretch; }
+.hero-stat { padding: 2rem 0; border-bottom: 1px solid rgba(244,239,230,0.07); }
+.hero-stat:first-child { padding-top: 0; }
+.hero-stat:last-child { border-bottom: none; padding-bottom: 0; }
+.hero-stat-num { font-family: var(--font-display); font-size: clamp(1.75rem, 3vw, 2.75rem); font-weight: 300; color: var(--white); line-height: 1; letter-spacing: -0.03em; margin-bottom: 0.45rem; display: block; }
+.hero-stat-num em { font-style: italic; color: var(--brass-light); }
+.hero-stat-label { font-size: 0.7rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(244,239,230,0.35); display: block; line-height: 1.5; }
+
+/* CONDITION TABS */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+.condition-nav { display: flex; gap: 0; border-bottom: 1px solid rgba(26,23,20,0.1); margin-bottom: 3rem; }
+.condition-tab { font-family: var(--font-body); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--dust); background: none; border: none; padding: 0.875rem 2rem 0.875rem 0; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color 0.2s, border-color 0.2s; }
+.condition-tab.active { color: var(--ink); border-bottom-color: var(--brass); }
+.condition-tab:hover { color: var(--ink); }
+.condition-panel { display: none; }
+.condition-panel.active { display: block; }
+
+/* INCLUDES GRID */
+.includes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 4rem; border-top: 1px solid rgba(26,23,20,0.1); }
+.include-item { padding: 2.5rem 2.5rem 2.5rem 0; border-right: 1px solid rgba(26,23,20,0.1); }
+.include-item:last-child { border-right: none; }
+.include-item:not(:first-child) { padding-left: 2.5rem; }
+.include-num { font-family: var(--font-display); font-size: 0.75rem; font-weight: 300; color: var(--dust); letter-spacing: 0.08em; margin-bottom: 1rem; display: block; }
+.include-item h3 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 400; color: var(--ink); margin-bottom: 0.6rem; letter-spacing: -0.01em; line-height: 1.25; }
+.include-item p { font-size: 0.9rem; font-weight: 400; color: var(--dust); line-height: 1.75; }
+
+/* PRICING */
+.pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+.price-card { background: var(--white); border: 1px solid rgba(26,23,20,0.1); padding: 2rem; }
+.price-card.featured { border-color: var(--brass); }
+.price-card-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brass); margin-bottom: 1rem; display: block; }
+.price-condition { font-family: var(--font-display); font-size: 1.1rem; font-weight: 400; color: var(--ink); margin-bottom: 0.25rem; letter-spacing: -0.01em; }
+.price-med { font-size: 0.78rem; font-weight: 300; color: var(--dust); margin-bottom: 1.25rem; }
+.price-divider { border: none; border-top: 1px solid rgba(26,23,20,0.07); margin: 1.25rem 0; }
+.price-list { list-style: none; margin-bottom: 1.5rem; }
+.price-list li { font-size: 0.85rem; font-weight: 400; color: var(--dust); padding: 0.4rem 0; border-bottom: 1px solid rgba(26,23,20,0.04); display: flex; align-items: flex-start; gap: 0.75rem; line-height: 1.5; }
+.price-list li:last-child { border-bottom: none; }
+.price-list li::before { content: '—'; color: var(--brass); flex-shrink: 0; font-size: 0.8rem; margin-top: 0.05rem; }
+.price-from { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dust); margin-bottom: 0.25rem; display: block; }
+.price-amount { font-family: var(--font-display); font-size: 2rem; font-weight: 300; color: var(--ink); line-height: 1; }
+.price-amount span { font-size: 0.9rem; font-weight: 300; color: var(--dust); }
+
+/* DISCREET NOTE */
+.discreet-note { background: var(--mist); border: 1px solid rgba(26,23,20,0.06); padding: 1.5rem 2rem; margin-top: 2rem; display: flex; align-items: flex-start; gap: 1rem; }
+.discreet-note p { font-size: 0.85rem; font-weight: 400; color: var(--dust); line-height: 1.7; }
+.discreet-note strong { font-weight: 500; color: var(--ink); }
+
+/* ELIGIBILITY */
+.eligibility-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3.5rem; border-top: 1px solid rgba(26,23,20,0.1); padding-top: 3rem; }
+.eligibility-col h3 { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; color: var(--ink); margin-bottom: 1.5rem; letter-spacing: -0.01em; }
+.eligibility-list { list-style: none; }
+.eligibility-list li { font-size: 0.9rem; font-weight: 400; color: var(--dust); padding: 0.6rem 0; border-bottom: 1px solid rgba(26,23,20,0.06); display: flex; align-items: flex-start; gap: 0.75rem; line-height: 1.55; }
+.eligibility-list li:last-child { border-bottom: none; }
+.eligibility-list li.qualify::before { content: '✓'; color: var(--success); font-size: 0.75rem; margin-top: 0.1rem; flex-shrink: 0; font-weight: 600; }
+.eligibility-list li.caution::before { content: '—'; color: var(--brass); font-size: 0.8rem; flex-shrink: 0; }
+
+/* FAQ */
+.faq-layout { display: grid; grid-template-columns: 1fr 1.5fr; gap: 6rem; }
+.faq-item { border-bottom: 1px solid rgba(26,23,20,0.1); }
+.faq-item:first-child { border-top: 1px solid rgba(26,23,20,0.1); }
+.faq-question { width: 100%; background: none; border: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 1.2rem 0; font-family: var(--font-body); font-size: 0.92rem; font-weight: 400; color: var(--ink); text-align: left; line-height: 1.45; transition: color 0.25s; }
+.faq-question:hover, .faq-question.open { color: var(--brass); }
+.faq-icon { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; border: 1px solid rgba(26,23,20,0.2); display: flex; align-items: center; justify-content: center; transition: background 0.25s, transform 0.35s; }
+.faq-question.open .faq-icon { background: var(--brass); border-color: var(--brass); transform: rotate(45deg); }
+.faq-icon svg { width: 10px; height: 10px; stroke: var(--dust); transition: stroke 0.25s; }
+.faq-question.open .faq-icon svg { stroke: white; }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s var(--ease), padding 0.3s; }
+.faq-answer.open { max-height: 500px; padding-bottom: 1.1rem; }
+.faq-answer p { font-size: 0.9rem; color: var(--dust); line-height: 1.8; font-weight: 400; }
+
+/* TESTIMONIAL */
+.testimonial-single { max-width: 700px; margin: 4rem auto 0; padding-top: 3rem; border-top: 1px solid rgba(26,23,20,0.1); text-align: center; position: relative; }
+.testimonial-single::before { content: '\201C'; font-family: var(--font-display); font-size: 5rem; font-weight: 300; color: rgba(26,23,20,0.06); line-height: 1; position: absolute; top: 1.5rem; left: 50%; transform: translateX(-50%); pointer-events: none; }
+.testimonial-single blockquote { font-family: var(--font-display); font-size: 1.15rem; font-weight: 300; font-style: italic; color: var(--ink-mid); line-height: 1.75; margin-bottom: 1.5rem; position: relative; z-index: 1; }
+.t-name { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); display: block; margin-bottom: 0.15rem; }
+.t-loc { font-size: 0.72rem; font-weight: 300; color: var(--dust); }
+
+/* CTA */
+.cta-banner { background: var(--ink); padding: 7rem 4rem; text-align: center; }
+.cta-banner h2 { color: var(--white); font-size: clamp(2.25rem, 4vw, 3.5rem); max-width: 18ch; margin: 0 auto 1.5rem; }
+.cta-banner h2 em { color: var(--brass-light); }
+.cta-banner p { font-size: 0.95rem; font-weight: 300; color: rgba(244,239,230,0.4); max-width: 44ch; margin: 0 auto 3rem; line-height: 1.8; }
+.cta-banner .section-label { color: var(--brass-light); justify-content: center; margin-bottom: 1.5rem; }
+.cta-banner .section-label::before { background: var(--brass-light); }
+.btn-cta { font-family: var(--font-body); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); background: var(--parchment); padding: 0.95rem 2.5rem; border: none; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.25s, color 0.25s; }
+.btn-cta:hover { background: var(--brass-light); color: var(--parchment); }
+
+/* FOOTER */
+footer { background: var(--ink-mid); padding: 4rem 4rem 2.5rem; }
+.footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; max-width: var(--max); margin: 0 auto 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(244,239,230,0.07); }
+.footer-brand { font-family: var(--font-display); font-size: 1.35rem; font-weight: 400; color: var(--white); letter-spacing: -0.01em; margin-bottom: 1rem; display: block; }
+.footer-desc { font-size: 0.82rem; font-weight: 300; color: rgba(244,239,230,0.3); line-height: 1.75; max-width: 260px; }
+.footer-col h4 { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(244,239,230,0.25); margin-bottom: 1.25rem; }
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 0.6rem; }
+.footer-col ul li a { font-size: 0.82rem; font-weight: 300; color: rgba(244,239,230,0.4); text-decoration: none; transition: color 0.2s; }
+.footer-col ul li a:hover { color: rgba(244,239,230,0.75); }
+.footer-bottom { max-width: var(--max); margin: 0 auto; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+.footer-bottom p { font-size: 0.72rem; font-weight: 300; color: rgba(244,239,230,0.2); line-height: 1.7; max-width: 600px; }
+.footer-legal-links { display: flex; gap: 1.5rem; flex-wrap: wrap; flex-shrink: 0; }
+.footer-legal-links a { font-size: 0.72rem; color: rgba(244,239,230,0.25); text-decoration: none; transition: color 0.2s; white-space: nowrap; }
+.footer-legal-links a:hover { color: rgba(244,239,230,0.6); }
+
+.fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
+.fade-up.visible { opacity: 1; transform: none; }
+.fd1 { transition-delay: 0.1s; } .fd2 { transition-delay: 0.2s; } .fd3 { transition-delay: 0.3s; }
+
+@media (max-width: 1024px) {
+  .disclaimer-bar { padding: 0.5rem 1.5rem; }
+  nav { padding: 1.25rem 1.5rem; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .nav-cta { display: none; }
+  section { padding: 4.5rem 1.5rem; }
+  .page-hero { padding: 8rem 1.5rem 4rem; }
+  .page-hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .hero-stats { border-left: none; border-top: 1px solid rgba(244,239,230,0.1); padding-left: 0; padding-top: 2rem; flex-direction: row; flex-wrap: wrap; }
+  .hero-stat { flex: 1; min-width: 140px; padding: 1.25rem 1.5rem 1.25rem 0; border-bottom: none; border-right: 1px solid rgba(244,239,230,0.07); }
+  .hero-stat:last-child { border-right: none; }
+  .two-col { grid-template-columns: 1fr; gap: 3rem; }
+  .includes-grid { grid-template-columns: 1fr; }
+  .include-item { padding: 2rem 0 !important; border-right: none; border-bottom: 1px solid rgba(26,23,20,0.08); }
+  .include-item:last-child { border-bottom: none; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .eligibility-cols { grid-template-columns: 1fr; gap: 2.5rem; }
+  .faq-layout { grid-template-columns: 1fr; gap: 3rem; }
+  .cta-banner { padding: 4.5rem 1.5rem; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  footer { padding: 3rem 1.5rem 2rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="disclaimer-bar">
+  <p><strong>Medical Information Only.</strong> This platform facilitates access to independent licensed Canadian physicians. All treatment decisions are made solely by your treating physician following individual consultation. <a href="medical-consent.html">Learn more →</a></p>
+</div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Sylven</a>
+  <ul class="nav-links">
+    <li><a href="weight-loss.html">Weight Loss</a></li>
+    <li><a href="mens-health.html" class="active">Men's Health</a></li>
+    <li><a href="womens-health.html">Women's Health</a></li>
+    <li><a href="index.html#how-it-works">How It Works</a></li>
+  </ul>
+  <a href="quiz.html" class="nav-cta">Begin Assessment</a>
+  <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="weight-loss.html" onclick="closeMobileMenu()">Weight Loss</a>
+  <a href="mens-health.html" onclick="closeMobileMenu()">Men's Health</a>
+  <a href="womens-health.html" onclick="closeMobileMenu()">Women's Health</a>
+  <a href="quiz.html" class="m-cta" onclick="closeMobileMenu()">Begin Assessment</a>
+</div>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div>
+      <div class="breadcrumb">
+        <a href="index.html">Sylven</a>
+        <span>/</span>
+        <span>Men's Health</span>
+      </div>
+      <div class="page-hero-badge">Discreet. Physician-assessed. Delivered.</div>
+      <h1>Men's health,<br>addressed <em>properly.</em></h1>
+      <p class="page-hero-sub">Erectile dysfunction and hair loss are medical conditions, not character flaws. Sylven connects you with a licensed Canadian physician for a private, clinical assessment and a prescription delivered to your door.</p>
+      <div class="hero-actions fade-up">
+        <a href="quiz.html" class="btn-hero">Begin Your Assessment</a>
+        <a href="#conditions" class="btn-hero-ghost">See conditions</a>
+      </div>
+    </div>
+    <div class="hero-stats fade-up fd1">
+      <div class="hero-stat">
+        <span class="hero-stat-num"><em>52%</em></span>
+        <span class="hero-stat-label">Of Canadian men experience<br>ED at some point in their lives</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">1 in <em>2</em></span>
+        <span class="hero-stat-label">Men experience significant<br>hair loss by age 50</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num"><em>Few</em></span>
+        <span class="hero-stat-label">Ever speak to a physician<br>about either</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONDITIONS -->
+<section style="background: var(--parchment);" id="conditions">
+  <div class="container">
+    <p class="section-label fade-up">What we treat</p>
+    <h2 class="fade-up fd1">Two conditions.<br><em>Both treatable.</em></h2>
+
+    <div style="margin-top: 3rem;">
+      <div class="condition-nav">
+        <button class="condition-tab active" onclick="showCondition('ed', this)">Erectile Dysfunction</button>
+        <button class="condition-tab" onclick="showCondition('hair', this)">Hair Loss</button>
+      </div>
+
+      <!-- ED PANEL -->
+      <div class="condition-panel active" id="panel-ed">
+        <div class="two-col">
+          <div class="fade-up">
+            <h3 style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 400; color: var(--ink); margin-bottom: 1rem; letter-spacing: -0.015em;">Erectile dysfunction<br>is more common than<br><em>you probably think.</em></h3>
+          </div>
+          <div class="fade-up fd1">
+            <p class="lead" style="margin-bottom: 1.25rem;">Erectile dysfunction affects roughly half of all men at some point. It becomes more common with age, stress, cardiovascular conditions, and metabolic factors. It is not a reflection of masculinity. It is a physiological response to identifiable causes.</p>
+            <p class="lead" style="margin-bottom: 1.25rem;">PDE5 inhibitors such as sildenafil (Viagra) and tadalafil (Cialis) are among the most studied and effective medications in modern medicine. They work by increasing blood flow to the penis during sexual stimulation. For most men with ED, they are highly effective.</p>
+            <p class="lead">Your physician will assess your cardiovascular health, current medications, and the underlying cause before prescribing. ED can occasionally indicate an underlying condition that warrants attention on its own.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- HAIR PANEL -->
+      <div class="condition-panel" id="panel-hair">
+        <div class="two-col">
+          <div class="fade-up">
+            <h3 style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 400; color: var(--ink); margin-bottom: 1rem; letter-spacing: -0.015em;">Male pattern hair loss<br>is hormonal, not<br><em>inevitable.</em></h3>
+          </div>
+          <div class="fade-up fd1">
+            <p class="lead" style="margin-bottom: 1.25rem;">Male pattern baldness is caused by the conversion of testosterone to dihydrotestosterone (DHT), which miniaturises hair follicles over time. It is genetic and hormonal. It is also, in many cases, stoppable.</p>
+            <p class="lead" style="margin-bottom: 1.25rem;">Finasteride blocks the enzyme that converts testosterone to DHT, slowing or stopping hair loss in the majority of men who use it. Minoxidil increases blood flow to follicles and prolongs the growth phase of hair. Both have decades of clinical evidence behind them.</p>
+            <p class="lead">The earlier treatment begins, the more effective it is. Your physician will assess your health history and current medications before determining whether either medication is appropriate for you.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S INCLUDED -->
+<section style="background: var(--cream);" id="how-it-works">
+  <div class="container">
+    <div style="max-width: 600px;" class="fade-up">
+      <p class="section-label">What's included</p>
+      <h2>Everything in<br>your <em>program.</em></h2>
+      <p class="lead">A single program membership covers the full clinical support layer. Medication is dispensed by our pharmacy partner at cost, with no markup.</p>
+    </div>
+    <div class="includes-grid">
+      <div class="include-item fade-up">
+        <span class="include-num">01</span>
+        <h3>Independent Physician Assessment</h3>
+        <p>A licensed Canadian physician, independent of Sylven, reviews your health file and determines whether treatment is clinically appropriate. No awkward in-person appointment. No referral required.</p>
+      </div>
+      <div class="include-item fade-up fd1">
+        <span class="include-num">02</span>
+        <h3>Ongoing Check-ins</h3>
+        <p>Regular physician reviews to assess how treatment is working, adjust dosage if needed, and monitor for any side effects. Clinical oversight throughout your program, not just at the start.</p>
+      </div>
+      <div class="include-item fade-up fd2">
+        <span class="include-num">03</span>
+        <h3>Secure Messaging</h3>
+        <p>Questions at any point? Message your care team directly through your patient portal. Responses from a real person, not a chatbot. Day or night.</p>
+      </div>
+    </div>
+
+    <div class="discreet-note fade-up" style="margin-top: 3rem;">
+      <p><strong>A note on discretion.</strong> Your assessment is conducted entirely online, without a physical examination. Medication arrives in plain, unmarked packaging. Your pharmacy receipt shows only our partner pharmacy's name. Nothing about the contents is visible on the outside.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section style="background: var(--mist);">
+  <div class="container">
+    <div class="two-col">
+      <div class="fade-up">
+        <p class="section-label">Transparent pricing</p>
+        <h2>Simple,<br><em>honest</em> costs.</h2>
+        <p class="lead" style="margin-bottom: 1.5rem;">Program membership covers the clinical support layer. Medication is paid directly to our pharmacy partner at their standard cost.</p>
+        <p class="lead">Generic medications are available for both conditions at a fraction of the brand-name price. Your physician determines which medication and dose is appropriate for you.</p>
+      </div>
+      <div class="fade-up fd1">
+        <div class="pricing-grid">
+          <div class="price-card">
+            <span class="price-card-label">Program membership</span>
+            <span class="price-condition">Both conditions</span>
+            <p class="price-med">Covers all clinical support services</p>
+            <hr class="price-divider">
+            <ul class="price-list">
+              <li>Physician assessment</li>
+              <li>Ongoing check-ins</li>
+              <li>Secure messaging</li>
+              <li>Prescription coordination</li>
+              <li>Cancel anytime</li>
+            </ul>
+            <hr class="price-divider">
+            <span class="price-from">Program fee</span>
+            <div class="price-amount">$49<span>/month</span></div>
+          </div>
+          <div class="price-card featured">
+            <span class="price-card-label">Medication via pharmacy</span>
+            <span class="price-condition">Erectile Dysfunction</span>
+            <p class="price-med">Sildenafil or tadalafil, generic available</p>
+            <hr class="price-divider">
+            <ul class="price-list">
+              <li>Sildenafil (generic Viagra) from ~$1–3 per dose</li>
+              <li>Tadalafil (generic Cialis) from ~$1–4 per dose</li>
+              <li>Daily or as-needed dosing options</li>
+            </ul>
+            <hr class="price-divider">
+            <span class="price-condition" style="font-size: 1rem; margin-bottom: 0.25rem; display: block;">Hair Loss</span>
+            <p class="price-med">Finasteride and minoxidil, generic available</p>
+            <hr class="price-divider">
+            <ul class="price-list">
+              <li>Finasteride (generic Propecia) from ~$30–50/month</li>
+              <li>Minoxidil from ~$15–30/month</li>
+              <li>Combination therapy also available</li>
+            </ul>
+          </div>
+        </div>
+        <a href="quiz.html" class="btn-primary" style="display: block; text-align: center; margin-top: 1rem;">Begin Your Assessment</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ELIGIBILITY -->
+<section style="background: var(--parchment);">
+  <div class="container">
+    <div class="two-col">
+      <div class="fade-up">
+        <p class="section-label">Who qualifies</p>
+        <h2>Straightforward<br><em>eligibility.</em></h2>
+        <p class="lead" style="margin-bottom: 1.5rem;">Most healthy adult men qualify for ED or hair loss treatment. Your physician reviews your health history to confirm it is safe and appropriate for you specifically.</p>
+        <p class="lead">The assessment is free. If your physician determines treatment is not appropriate, you receive a full refund of your program fee.</p>
+        <a href="quiz.html" class="btn-primary" style="margin-top: 2rem; display: inline-block;">Check Your Eligibility</a>
+      </div>
+      <div class="fade-up fd1">
+        <div class="eligibility-cols" style="margin-top: 0; border-top: none; padding-top: 0;">
+          <div class="eligibility-col">
+            <h3>Erectile Dysfunction</h3>
+            <ul class="eligibility-list">
+              <li class="qualify">Adult men 18 and over</li>
+              <li class="qualify">No active nitrate medication use</li>
+              <li class="qualify">No recent major cardiac event</li>
+              <li class="caution">Cardiovascular conditions reviewed individually</li>
+              <li class="caution">Severe liver or kidney disease reviewed individually</li>
+            </ul>
+          </div>
+          <div class="eligibility-col">
+            <h3>Hair Loss</h3>
+            <ul class="eligibility-list">
+              <li class="qualify">Adult men 18 and over</li>
+              <li class="qualify">Male pattern baldness (androgenic alopecia)</li>
+              <li class="caution">Liver conditions reviewed individually</li>
+              <li class="caution">Finasteride not suitable for men planning to father children imminently</li>
+              <li class="caution">Hair loss from other causes may need specialist referral</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section style="background: var(--cream);">
+  <div class="container">
+    <p class="section-label fade-up" style="justify-content: center;">A patient's experience</p>
+    <div class="testimonial-single fade-up fd1">
+      <blockquote>"I had been putting it off for two years. The idea of bringing it up with my GP felt impossible. This took fifteen minutes online and the prescription arrived three days later. I genuinely wish I had done it sooner."</blockquote>
+      <span class="t-name">Robert P.</span>
+      <span class="t-loc">Edmonton, AB · Men's Health Program</span>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section style="background: var(--parchment);">
+  <div class="container">
+    <div class="faq-layout">
+      <div class="fade-up">
+        <p class="section-label">Common questions</p>
+        <h2>Men's health<br><em>FAQ.</em></h2>
+        <p class="lead" style="margin-bottom: 2rem;">Questions about treatment, discretion, or the assessment process? Your care team is available around the clock.</p>
+        <a href="quiz.html" class="btn-primary">Begin Assessment</a>
+      </div>
+      <div class="fade-up fd1">
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false"><span>Do I need a referral or an in-person appointment?</span><div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div></button>
+          <div class="faq-answer"><p>No referral and no in-person visit required. Your assessment is completed entirely online through a secure questionnaire. A licensed Canadian physician reviews your responses and either approves a prescription or follows up with questions. The entire process typically takes less than 24 hours.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false"><span>Is sildenafil (generic Viagra) as effective as the brand?</span><div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div></button>
+          <div class="faq-answer"><p>Yes. Health Canada requires generic medications to contain the same active ingredient at the same dose, with equivalent absorption and effect. Sildenafil is the same molecule as Viagra. The only difference is cost. Both are manufactured under Health Canada approved quality standards.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false"><span>How long does finasteride take to work for hair loss?</span><div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div></button>
+          <div class="faq-answer"><p>Finasteride typically takes three to six months before visible results appear. It works by preventing further hair loss first, then gradually allowing follicles to recover. Most men see meaningful improvement at twelve months. Stopping treatment reverses the effect, so it is generally continued long-term if it is working.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false"><span>Will anyone know what I ordered?</span><div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div></button>
+          <div class="faq-answer"><p>No. Medication arrives in plain, unmarked packaging with no indication of the contents on the outside. Your billing statement shows the name of our pharmacy partner only. Your health information is protected under PIPEDA and is not shared with anyone outside of your treating physician and dispensing pharmacist.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false"><span>What if ED is a sign of something more serious?</span><div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div></button>
+          <div class="faq-answer"><p>This is a legitimate concern. ED can be an early indicator of cardiovascular disease, diabetes, or hormonal issues. Your physician reviews your full health history as part of the assessment and will flag anything that warrants further investigation. If a referral to another specialist is appropriate, they will advise you accordingly.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-banner">
+  <p class="section-label">Ready when you are</p>
+  <h2>Private. Clinical.<br><em>Delivered.</em></h2>
+  <p>A five-minute assessment. A licensed Canadian physician reviews your file within 24 hours. Medication at your door within the week.</p>
+  <a href="quiz.html" class="btn-cta">Begin Your Assessment</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <span class="footer-brand">Sylven</span>
+      <p class="footer-desc">Connecting Canadians with independent licensed physicians and Health Canada registered pharmacies. Serving all provinces.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Programs</h4>
+      <ul>
+        <li><a href="weight-loss.html">Weight Loss</a></li>
+        <li><a href="mens-health.html">Men's Health</a></li>
+        <li><a href="womens-health.html">Women's Health</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="physicians.html">Our Physicians</a></li>
+        <li><a href="pharmacies.html">Partner Pharmacies</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="terms.html">Terms of Service</a></li>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="medical-consent.html">Medical Consent</a></li>
+        <li><a href="refund.html">Refund Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Corbin Care Health Inc. All rights reserved. Sylven is a health coordination platform, not a medical clinic. All treatment decisions are made solely by independent licensed Canadian physicians following individual consultation. All medications dispensed by Health Canada registered pharmacies. Results may vary. PIPEDA compliant.</p>
+    <div class="footer-legal-links">
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="medical-consent.html">Medical Consent</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function positionHeader() {
+  const bar = document.querySelector('.disclaimer-bar');
+  const nav = document.getElementById('navbar');
+  const hero = document.querySelector('.page-hero');
+  if (!bar || !nav) return;
+  const h = bar.offsetHeight;
+  document.documentElement.style.setProperty('--nav-top', h + 'px');
+  if (hero) hero.style.paddingTop = (h + nav.offsetHeight + 40) + 'px';
+}
+positionHeader();
+window.addEventListener('resize', positionHeader);
+
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 40));
+
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+function closeMobileMenu() { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); document.body.style.overflow = ''; }
+hamburger.addEventListener('click', () => { const o = mobileMenu.classList.toggle('open'); hamburger.classList.toggle('open', o); document.body.style.overflow = o ? 'hidden' : ''; });
+
+const io = new IntersectionObserver(e => e.forEach(x => { if (x.isIntersecting) x.target.classList.add('visible'); }), { threshold: 0.08 });
+document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const open = btn.classList.contains('open');
+    document.querySelectorAll('.faq-question.open').forEach(b => { b.classList.remove('open'); b.setAttribute('aria-expanded','false'); b.nextElementSibling.classList.remove('open'); });
+    if (!open) { btn.classList.add('open'); btn.setAttribute('aria-expanded','true'); btn.nextElementSibling.classList.add('open'); }
+  });
+});
+
+function showCondition(id, tab) {
+  document.querySelectorAll('.condition-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.condition-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  tab.classList.add('active');
+}
+</script>
+</body>
+</html>
