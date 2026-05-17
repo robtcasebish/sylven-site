@@ -1173,7 +1173,29 @@ nav {
           <span class="cost-reframe-vs">vs. $260–$570 for branded Ozempic or Wegovy alone</span>
         </div>
 
-        <!-- 3. TESTIMONIAL PULL QUOTE -->
+        <!-- PERSONAL DETAILS -->
+        <div style="margin-bottom: 1.25rem;">
+          <span class="section-title" style="display:block; margin-bottom: 0.875rem;">Your details</span>
+          <div class="field-row" style="margin-bottom: 0.625rem;">
+            <div class="field-group" style="margin-bottom: 0;">
+              <label class="field-label" for="firstName">First name</label>
+              <input class="field-input" type="text" id="firstName" placeholder="e.g. Karen" autocomplete="given-name">
+            </div>
+            <div class="field-group" style="margin-bottom: 0;">
+              <label class="field-label" for="lastName">Last name</label>
+              <input class="field-input" type="text" id="lastName" placeholder="e.g. Larson" autocomplete="family-name">
+            </div>
+          </div>
+          <div class="field-group" style="margin-bottom: 0.625rem;">
+            <label class="field-label" for="email">Email address</label>
+            <input class="field-input" type="email" id="email" placeholder="you@example.com" autocomplete="email">
+            <p style="font-size: 0.68rem; color: var(--dust); margin-top: 0.35rem; font-weight: 300;">Your physician will use this to communicate their assessment decision.</p>
+          </div>
+          <div class="field-group" style="margin-bottom: 0;">
+            <label class="field-label" for="phone">Phone number <span style="font-weight:300; text-transform:none; letter-spacing:0;">(optional)</span></label>
+            <input class="field-input" type="tel" id="phone" placeholder="e.g. 604-555-0182" autocomplete="tel">
+          </div>
+        </div>
         <div class="conversion-quote">
           <blockquote>"Approved in 18 hours. Medication arrived four days later. For the first time I actually feel like someone took my weight seriously."</blockquote>
           <cite>Karen L. &nbsp;·&nbsp; Ottawa, ON &nbsp;·&nbsp; Weight Loss Program</cite>
@@ -1452,10 +1474,20 @@ function submitAssessment() {
 // PAYMENT HANDLER
 // ============================================
 function handlePayment() {
+  const firstName = document.getElementById('firstName').value.trim();
+  const lastName = document.getElementById('lastName').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  if (!firstName) { alert('Please enter your first name.'); document.getElementById('firstName').focus(); return; }
+  if (!lastName) { alert('Please enter your last name.'); document.getElementById('lastName').focus(); return; }
+  if (!email || !emailValid) { alert('Please enter a valid email address.'); document.getElementById('email').focus(); return; }
+
   // STRIPE INTEGRATION POINT
   // Replace this function body with:
   // const stripe = Stripe('YOUR_PUBLISHABLE_KEY');
   // stripe.createPaymentMethod({...}).then(result => { ... });
+  // Pass email to stripe.customers.create({ email }) for subscription billing
   alert('Stripe integration coming — this is where the $89/month subscription checkout fires.');
 }
 
