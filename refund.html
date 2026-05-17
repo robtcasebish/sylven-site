@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Refund Policy | Sylven</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--parchment:#F4EFE6;--cream:#FAF8F3;--mist:#EDE8DF;--ink:#1A1714;--ink-mid:#2D2825;--dust:#8A8078;--brass:#9C845A;--brass-light:#B89D70;--white:#FFFFFF;--font-display:'Newsreader',Georgia,serif;--font-body:'Jost',sans-serif;--max:1200px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-body);background:var(--parchment);color:var(--ink);-webkit-font-smoothing:antialiased;}
+.disclaimer-bar{background:var(--ink-mid);padding:0.5rem 4rem;position:fixed;top:0;left:0;right:0;z-index:300;}
+.disclaimer-bar p{font-size:0.68rem;font-weight:300;color:rgba(244,239,230,0.45);max-width:var(--max);margin:0 auto;}
+.disclaimer-bar strong{font-weight:500;color:rgba(244,239,230,0.7);}
+nav{position:fixed;top:var(--nav-top,34px);left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1.25rem 4rem;background:rgba(244,239,230,0.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(26,23,20,0.08);}
+.nav-logo{font-family:var(--font-display);font-size:1.5rem;font-weight:400;color:var(--ink);text-decoration:none;}
+.nav-back{font-size:0.75rem;font-weight:400;letter-spacing:0.06em;text-transform:uppercase;color:var(--dust);text-decoration:none;display:flex;align-items:center;gap:0.4rem;}
+.nav-back::before{content:'←';}
+.nav-back:hover{color:var(--ink);}
+.legal-wrap{max-width:800px;margin:0 auto;padding:9rem 4rem 8rem;}
+.legal-header{margin-bottom:4rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(26,23,20,0.1);}
+.legal-header .eyebrow{font-size:0.7rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--brass);margin-bottom:1rem;display:flex;align-items:center;gap:0.75rem;}
+.legal-header .eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--brass);}
+.legal-header h1{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:300;color:var(--ink);letter-spacing:-0.02em;line-height:1.1;margin-bottom:1rem;}
+.legal-header .meta{font-size:0.8rem;font-weight:300;color:var(--dust);}
+.refund-summary{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:rgba(26,23,20,0.1);margin-bottom:3.5rem;border:1px solid rgba(26,23,20,0.1);}
+.refund-cell{background:var(--white);padding:1.5rem;}
+.refund-cell-label{font-size:0.65rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--dust);margin-bottom:0.5rem;display:block;}
+.refund-cell-status{font-family:var(--font-display);font-size:1rem;font-weight:400;color:var(--ink);margin-bottom:0.35rem;}
+.refund-cell-desc{font-size:0.78rem;font-weight:300;color:var(--dust);line-height:1.55;}
+.refund-cell.yes .refund-cell-status{color:var(--success);}
+.refund-cell.no .refund-cell-status{color:#8B2E2E;}
+.refund-cell.partial .refund-cell-status{color:var(--brass);}
+.legal-section{margin-bottom:3rem;}
+.legal-section h2{font-family:var(--font-display);font-size:1.15rem;font-weight:400;color:var(--ink);letter-spacing:-0.01em;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(26,23,20,0.08);}
+.legal-section p{font-size:0.9rem;font-weight:400;color:var(--dust);line-height:1.85;margin-bottom:0.875rem;}
+.legal-section p:last-child{margin-bottom:0;}
+.legal-section ul{list-style:none;margin:0.5rem 0 0.875rem 0;}
+.legal-section ul li{font-size:0.9rem;font-weight:400;color:var(--dust);line-height:1.75;padding:0.2rem 0 0.2rem 1.25rem;position:relative;}
+.legal-section ul li::before{content:'—';position:absolute;left:0;color:var(--brass);font-size:0.8rem;}
+.legal-section strong{font-weight:500;color:var(--ink);}
+.legal-section a{color:var(--brass);text-decoration:none;border-bottom:1px solid rgba(156,132,90,0.3);}
+footer{background:var(--ink-mid);padding:3rem 4rem 2rem;}
+.footer-bottom{max-width:var(--max);margin:0 auto;display:flex;align-items:flex-start;justify-content:space-between;gap:2rem;flex-wrap:wrap;}
+.footer-bottom p{font-size:0.72rem;font-weight:300;color:rgba(244,239,230,0.2);line-height:1.7;max-width:600px;}
+.footer-legal-links{display:flex;gap:1.5rem;flex-wrap:wrap;}
+.footer-legal-links a{font-size:0.72rem;color:rgba(244,239,230,0.25);text-decoration:none;transition:color 0.2s;white-space:nowrap;}
+.footer-legal-links a:hover{color:rgba(244,239,230,0.6);}
+@media(max-width:768px){nav{padding:1.25rem 1.5rem;}.disclaimer-bar{padding:0.5rem 1.5rem;}.legal-wrap{padding:8rem 1.5rem 5rem;}.refund-summary{grid-template-columns:1fr;}footer{padding:2.5rem 1.5rem 2rem;}}
+</style>
+</head>
+<body>
+<div class="disclaimer-bar"><p><strong>Medical Information Only.</strong> This platform facilitates access to independent licensed Canadian physicians. All treatment decisions are made solely by your treating physician.</p></div>
+<nav>
+  <a href="index.html" class="nav-logo">Sylven</a>
+  <a href="index.html" class="nav-back">Back to site</a>
+</nav>
+<div class="legal-wrap">
+  <div class="legal-header">
+    <p class="eyebrow">Legal</p>
+    <h1>Refund Policy</h1>
+    <p class="meta">Last updated: May 2026 · Corbin Care Health Inc.</p>
+  </div>
+
+  <div class="refund-summary">
+    <div class="refund-cell yes">
+      <span class="refund-cell-label">If physician declines</span>
+      <p class="refund-cell-status">Full refund</p>
+      <p class="refund-cell-desc">Program membership fee refunded in full. No questions asked.</p>
+    </div>
+    <div class="refund-cell no">
+      <span class="refund-cell-label">Voluntary cancellation</span>
+      <p class="refund-cell-status">No refund</p>
+      <p class="refund-cell-desc">Fees for commenced billing periods are non-refundable. Cancel anytime going forward.</p>
+    </div>
+    <div class="refund-cell no">
+      <span class="refund-cell-label">Medication</span>
+      <p class="refund-cell-status">Non-refundable</p>
+      <p class="refund-cell-desc">Dispensed prescription medication cannot be returned or refunded. Contact pharmacy for dispensing errors.</p>
+    </div>
+  </div>
+
+  <div class="legal-section">
+    <h2>1. Physician Non-Approval Refund</h2>
+    <p>If the independent physician reviewing your assessment determines that the requested treatment is not clinically appropriate for you, your program membership fee for that billing period will be refunded in full.</p>
+    <p>This refund is automatic. You do not need to request it. It will be issued to the payment method on file within 5 to 10 business days of the physician's decision being recorded.</p>
+    <p>This refund policy applies regardless of the reason for non-approval, whether the physician determines you do not meet eligibility criteria, have a contraindication, or for any other clinical reason.</p>
+    <p>A non-approval refund covers the program membership fee only. It does not cover any medication costs, as medication is not dispensed unless treatment is approved.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>2. Voluntary Cancellation</h2>
+    <p>You may cancel your program membership at any time with no cancellation fee and no required notice period. Cancellation takes effect at the end of the current billing period.</p>
+    <p>Program membership fees for billing periods that have already commenced are non-refundable upon voluntary cancellation. For example, if you are billed on the 1st of the month and cancel on the 15th, you will continue to have access to the platform until the end of that billing period but will not receive a refund for the remainder of that period.</p>
+    <p>To cancel your membership:</p>
+    <ul>
+      <li>Log in to your patient portal and navigate to Account Settings</li>
+      <li>Message your care team directly through the patient portal</li>
+      <li>Email support@corbincare.com from your registered email address</li>
+    </ul>
+    <p>Cancellation confirmations are sent by email within one business day.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>3. Medication</h2>
+    <p>Prescription medication dispensed by our pharmacy partner is non-refundable once dispensed. This is consistent with standard pharmacy practice across Canada and applicable provincial pharmacy regulations, which prohibit the acceptance of returns of dispensed prescription medications for safety reasons.</p>
+    <p>If your medication arrives damaged, is incorrectly dispensed (wrong medication, wrong dose, wrong quantity), or is subject to a manufacturer recall, please contact our pharmacy partner directly. Contact details are included on your pharmacy receipt and in your patient portal.</p>
+    <p>If your medication is lost or significantly delayed in transit, please contact our care team and we will coordinate with the pharmacy partner to resolve the issue.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>4. Platform or Service Issues</h2>
+    <p>If a technical failure of the Sylven platform prevents you from accessing services you are entitled to — such as a prolonged inability to access your patient portal or communicate with your care team — please contact us at support@corbincare.com. We will assess the situation and determine an appropriate remedy, which may include a pro-rated credit or partial refund at our discretion.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>5. Chargebacks</h2>
+    <p>We encourage you to contact us directly before initiating a chargeback with your card issuer. Most billing issues can be resolved quickly and directly. Chargebacks initiated without first contacting us may result in suspension of your account while the dispute is under review.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>6. How to Request a Refund</h2>
+    <p>For any refund request not covered by the automatic physician non-approval refund:</p>
+    <ul>
+      <li>Email support@corbincare.com from your registered email address</li>
+      <li>Include your full name, the email address associated with your account, and a brief description of your refund request</li>
+    </ul>
+    <p>We respond to all refund inquiries within two business days. Approved refunds are processed within 5 to 10 business days and will appear on your statement within one to two billing cycles depending on your card issuer.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>7. Contact</h2>
+    <p>For billing and refund questions, contact us at:</p>
+    <p><strong>Email:</strong> support@corbincare.com<br><strong>Website:</strong> sylven.ca</p>
+    <p>Corbin Care Health Inc. · Ontario, Canada</p>
+  </div>
+</div>
+<footer>
+  <div class="footer-bottom">
+    <p>© 2026 Corbin Care Health Inc. All rights reserved. Sylven is a health coordination platform, not a medical clinic. PIPEDA compliant.</p>
+    <div class="footer-legal-links">
+      <a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="medical-consent.html">Medical Consent</a><a href="refund.html">Refund Policy</a>
+    </div>
+  </div>
+</footer>
+<script>
+function positionHeader(){const b=document.querySelector('.disclaimer-bar');if(!b)return;document.documentElement.style.setProperty('--nav-top',b.offsetHeight+'px');}
+positionHeader();window.addEventListener('resize',positionHeader);
+</script>
+</body>
+</html>

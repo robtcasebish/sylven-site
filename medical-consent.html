@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medical Consent | Sylven</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--parchment:#F4EFE6;--cream:#FAF8F3;--mist:#EDE8DF;--ink:#1A1714;--ink-mid:#2D2825;--dust:#8A8078;--brass:#9C845A;--brass-light:#B89D70;--white:#FFFFFF;--font-display:'Newsreader',Georgia,serif;--font-body:'Jost',sans-serif;--max:1200px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-body);background:var(--parchment);color:var(--ink);-webkit-font-smoothing:antialiased;}
+.disclaimer-bar{background:var(--ink-mid);padding:0.5rem 4rem;position:fixed;top:0;left:0;right:0;z-index:300;}
+.disclaimer-bar p{font-size:0.68rem;font-weight:300;color:rgba(244,239,230,0.45);max-width:var(--max);margin:0 auto;}
+.disclaimer-bar strong{font-weight:500;color:rgba(244,239,230,0.7);}
+nav{position:fixed;top:var(--nav-top,34px);left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1.25rem 4rem;background:rgba(244,239,230,0.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(26,23,20,0.08);}
+.nav-logo{font-family:var(--font-display);font-size:1.5rem;font-weight:400;color:var(--ink);text-decoration:none;}
+.nav-back{font-size:0.75rem;font-weight:400;letter-spacing:0.06em;text-transform:uppercase;color:var(--dust);text-decoration:none;display:flex;align-items:center;gap:0.4rem;}
+.nav-back::before{content:'←';}
+.nav-back:hover{color:var(--ink);}
+.legal-wrap{max-width:800px;margin:0 auto;padding:9rem 4rem 8rem;}
+.legal-header{margin-bottom:4rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(26,23,20,0.1);}
+.legal-header .eyebrow{font-size:0.7rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--brass);margin-bottom:1rem;display:flex;align-items:center;gap:0.75rem;}
+.legal-header .eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--brass);}
+.legal-header h1{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:300;color:var(--ink);letter-spacing:-0.02em;line-height:1.1;margin-bottom:1rem;}
+.legal-header .meta{font-size:0.8rem;font-weight:300;color:var(--dust);}
+.legal-notice{background:var(--mist);border:1px solid rgba(26,23,20,0.08);padding:1.25rem 1.5rem;margin-bottom:3rem;}
+.legal-notice p{font-size:0.85rem;font-weight:400;color:var(--dust);line-height:1.7;}
+.legal-notice strong{font-weight:500;color:var(--ink);}
+.legal-section{margin-bottom:3rem;}
+.legal-section h2{font-family:var(--font-display);font-size:1.15rem;font-weight:400;color:var(--ink);letter-spacing:-0.01em;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(26,23,20,0.08);}
+.legal-section h3{font-family:var(--font-display);font-size:1rem;font-weight:400;color:var(--ink);margin:1.25rem 0 0.5rem;}
+.legal-section p{font-size:0.9rem;font-weight:400;color:var(--dust);line-height:1.85;margin-bottom:0.875rem;}
+.legal-section p:last-child{margin-bottom:0;}
+.legal-section ul{list-style:none;margin:0.5rem 0 0.875rem 0;}
+.legal-section ul li{font-size:0.9rem;font-weight:400;color:var(--dust);line-height:1.75;padding:0.2rem 0 0.2rem 1.25rem;position:relative;}
+.legal-section ul li::before{content:'—';position:absolute;left:0;color:var(--brass);font-size:0.8rem;}
+.legal-section strong{font-weight:500;color:var(--ink);}
+.legal-section a{color:var(--brass);text-decoration:none;border-bottom:1px solid rgba(156,132,90,0.3);}
+.consent-block{background:var(--white);border:1px solid rgba(26,23,20,0.1);padding:2rem;margin-top:3rem;}
+.consent-block h3{font-family:var(--font-display);font-size:1.1rem;font-weight:400;color:var(--ink);margin-bottom:1rem;}
+.consent-block p{font-size:0.88rem;font-weight:400;color:var(--dust);line-height:1.8;margin-bottom:0.75rem;}
+.consent-block p:last-child{margin-bottom:0;}
+footer{background:var(--ink-mid);padding:3rem 4rem 2rem;}
+.footer-bottom{max-width:var(--max);margin:0 auto;display:flex;align-items:flex-start;justify-content:space-between;gap:2rem;flex-wrap:wrap;}
+.footer-bottom p{font-size:0.72rem;font-weight:300;color:rgba(244,239,230,0.2);line-height:1.7;max-width:600px;}
+.footer-legal-links{display:flex;gap:1.5rem;flex-wrap:wrap;}
+.footer-legal-links a{font-size:0.72rem;color:rgba(244,239,230,0.25);text-decoration:none;transition:color 0.2s;white-space:nowrap;}
+.footer-legal-links a:hover{color:rgba(244,239,230,0.6);}
+@media(max-width:768px){nav{padding:1.25rem 1.5rem;}.disclaimer-bar{padding:0.5rem 1.5rem;}.legal-wrap{padding:8rem 1.5rem 5rem;}footer{padding:2.5rem 1.5rem 2rem;}}
+</style>
+</head>
+<body>
+<div class="disclaimer-bar"><p><strong>Medical Information Only.</strong> This platform facilitates access to independent licensed Canadian physicians. All treatment decisions are made solely by your treating physician.</p></div>
+<nav>
+  <a href="index.html" class="nav-logo">Sylven</a>
+  <a href="index.html" class="nav-back">Back to site</a>
+</nav>
+<div class="legal-wrap">
+  <div class="legal-header">
+    <p class="eyebrow">Legal</p>
+    <h1>Medical Consent and<br>Platform Disclosure</h1>
+    <p class="meta">Last updated: May 2026 · Corbin Care Health Inc.</p>
+  </div>
+  <div class="legal-notice">
+    <p><strong>This document is important.</strong> Please read it carefully before completing your health assessment. By proceeding with an assessment on Sylven, you confirm that you have read, understood, and agree to the disclosures in this document.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>1. Nature of the Sylven Platform</h2>
+    <p>Sylven is a health coordination platform, not a medical clinic. Sylven is operated by Corbin Care Health Inc., a technology and coordination company. Sylven does not provide medical care, does not diagnose conditions, and does not prescribe treatment.</p>
+    <p>The clinical assessment you complete on Sylven is a structured intake questionnaire. It is reviewed by an independent licensed Canadian physician who is not employed by Sylven. The physician makes all clinical determinations independently.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>2. Asynchronous Assessment — What This Means</h2>
+    <p>Your assessment on Sylven is asynchronous. This means your physician reviews your submitted information and responds at a later time, rather than consulting with you live in real time. This approach is well-established in Canadian telehealth and appropriate for the conditions treated on this platform, but it has limitations you should understand:</p>
+    <ul>
+      <li>Your physician cannot perform a physical examination</li>
+      <li>Diagnosis relies on the information you provide in your assessment</li>
+      <li>Your physician may request additional information before making a decision, which may extend the review timeline</li>
+      <li>If your physician determines that an in-person examination is necessary, they will advise you accordingly</li>
+      <li>Asynchronous care is not appropriate for urgent or emergency conditions</li>
+    </ul>
+    <p>The accuracy and completeness of the information you provide directly affects the quality of the physician's assessment. Providing incomplete or inaccurate information may result in an inappropriate clinical decision and could cause harm.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>3. Physician Independence and Decision-Making</h2>
+    <p>The physician who reviews your assessment is an independent licensed Canadian physician. They are not an employee or agent of Sylven. They exercise full clinical independence in making decisions about your care.</p>
+    <p>Your physician may:</p>
+    <ul>
+      <li>Approve your requested treatment and issue a prescription</li>
+      <li>Decline to approve treatment and explain their reasoning</li>
+      <li>Request additional information before making a decision</li>
+      <li>Recommend a different treatment approach than requested</li>
+      <li>Recommend that you consult with your primary care physician or a specialist in person</li>
+    </ul>
+    <p>Sylven cannot override, appeal, or influence physician decisions. If you disagree with a physician's decision, you are free to seek a second opinion from any physician outside the platform. This will not affect your right to a refund if treatment was not approved.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>4. No Emergency Care</h2>
+    <p><strong>Sylven cannot provide emergency medical care.</strong> The platform is not monitored continuously. If you are experiencing a medical emergency, including severe chest pain, difficulty breathing, sudden neurological symptoms, severe allergic reaction, or any other acute life-threatening condition, call 911 or go to your nearest emergency department immediately.</p>
+    <p>Do not use Sylven for urgent symptoms that require immediate medical attention. If you experience new or worsening symptoms after starting treatment, contact your physician through the patient portal for non-urgent matters, or seek in-person care immediately for urgent concerns.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>5. Treatment Risks — By Program</h2>
+
+    <h3>Weight Loss (Semaglutide / GLP-1 Therapy)</h3>
+    <p>GLP-1 receptor agonists including semaglutide are generally well-tolerated but carry risks that your physician will discuss with you. Common side effects include nausea, vomiting, diarrhea, constipation, and fatigue, particularly during dose escalation. Serious but less common risks include acute pancreatitis, gallbladder disease, acute kidney injury, and in animal studies (but not confirmed in humans), thyroid C-cell tumours. Semaglutide is contraindicated in patients with a personal or family history of medullary thyroid carcinoma or Multiple Endocrine Neoplasia syndrome type 2, and in pregnancy. Your physician will assess your individual risk profile before prescribing.</p>
+
+    <h3>Men's Health (Erectile Dysfunction)</h3>
+    <p>PDE5 inhibitors including sildenafil and tadalafil are contraindicated with nitrate medications and may cause a serious, potentially life-threatening drop in blood pressure when combined. Common side effects include headache, facial flushing, nasal congestion, and visual disturbances. Rare but serious risks include priapism (prolonged erection requiring immediate treatment) and sudden vision or hearing loss. Your physician will assess your cardiovascular health and current medications before prescribing.</p>
+
+    <h3>Men's Health (Hair Loss)</h3>
+    <p>Finasteride may cause sexual side effects in some men, including decreased libido, erectile dysfunction, and ejaculatory disorders. A small number of men report persistent sexual side effects after discontinuing the medication. Finasteride is contraindicated in men planning to father children imminently due to potential effects on sperm and fetal development. Minoxidil may cause scalp irritation and, rarely, systemic effects including low blood pressure. Your physician will assess your individual situation before prescribing.</p>
+
+    <h3>Women's Health (HRT)</h3>
+    <p>Hormone replacement therapy carries risks that must be weighed against its benefits on an individual basis. Risks vary significantly depending on formulation (oral vs transdermal), whether progesterone is included, your age, time since menopause, and your personal health history. Relevant risks may include an increased risk of certain types of breast cancer with long-term combined HRT use, venous thromboembolism (particularly with oral estrogen), and stroke. Transdermal estrogen carries a lower venous clot risk than oral tablets. Your physician will review your complete health history and discuss the relevant risks and benefits with you before prescribing. HRT is contraindicated in patients with active or recent hormone-sensitive cancers, unexplained vaginal bleeding, or recent arterial thromboembolism.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>6. Alternatives to Treatment</h2>
+    <p>Treatment through Sylven is not the only option available to you. Alternatives for each condition include:</p>
+    <ul>
+      <li>Consulting your primary care physician for an in-person assessment and prescription</li>
+      <li>Referral to a specialist (obesity medicine, endocrinology, urology, gynaecology, dermatology)</li>
+      <li>Lifestyle interventions, behavioural therapy, or other non-pharmaceutical approaches</li>
+      <li>Attending a publicly funded clinic or specialist when available</li>
+    </ul>
+    <p>You are not required to use Sylven and have the right to seek care through any available pathway.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>7. Your Right to Withdraw Consent</h2>
+    <p>You may withdraw consent to treatment at any time by messaging your care team through the patient portal. Withdrawal of consent to treatment does not affect your right to a refund if your physician has not yet approved or declined your assessment.</p>
+    <p>If you have already begun treatment and wish to stop, your physician will advise on how to discontinue medication safely. Stopping certain medications abruptly may not be advisable depending on the medication and duration of use.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>8. Consent to Sharing Health Information</h2>
+    <p>By completing a health assessment on Sylven, you consent to your health information being shared with:</p>
+    <ul>
+      <li>The independent physician assigned to review your assessment</li>
+      <li>Our Health Canada registered pharmacy partner, if a prescription is issued</li>
+      <li>Our registered dietitian partner, for Weight Loss program participants</li>
+    </ul>
+    <p>This sharing is necessary to facilitate your care. For full details on how your information is collected, used, and protected, see our <a href="privacy.html">Privacy Policy</a>.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>9. Limitations of Virtual Care</h2>
+    <p>Virtual and asynchronous care is appropriate for many common conditions and has been widely adopted across Canada. However, you should be aware that:</p>
+    <ul>
+      <li>A physical examination is not possible through this platform</li>
+      <li>Certain diagnoses may not be reliably made without in-person assessment, bloodwork, or imaging</li>
+      <li>Your physician may determine that the information available is insufficient to make a safe prescribing decision and may decline to prescribe or request that you attend an in-person visit</li>
+      <li>Response times are not immediate; the platform is not suitable for urgent care needs</li>
+    </ul>
+  </div>
+
+  <div class="consent-block">
+    <h3>Summary of Your Consent</h3>
+    <p>By completing an assessment and enrolling in a Sylven program, you confirm that you:</p>
+    <p>— Understand that Sylven is a coordination platform, not a medical clinic, and does not provide medical care directly</p>
+    <p>— Understand that the physician reviewing your assessment is independent of Sylven and makes all clinical decisions autonomously</p>
+    <p>— Have read the treatment risks relevant to your program and understand they are not exhaustive</p>
+    <p>— Have provided accurate and complete information in your assessment to the best of your knowledge</p>
+    <p>— Understand that this platform is not suitable for emergency or urgent care</p>
+    <p>— Consent to your health information being shared with the treating physician and, if prescribed, the dispensing pharmacy</p>
+    <p>— Understand that you may withdraw consent to treatment at any time</p>
+  </div>
+</div>
+<footer>
+  <div class="footer-bottom">
+    <p>© 2026 Corbin Care Health Inc. All rights reserved. Sylven is a health coordination platform, not a medical clinic. PIPEDA compliant.</p>
+    <div class="footer-legal-links">
+      <a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="medical-consent.html">Medical Consent</a><a href="refund.html">Refund Policy</a>
+    </div>
+  </div>
+</footer>
+<script>
+function positionHeader(){const b=document.querySelector('.disclaimer-bar');if(!b)return;document.documentElement.style.setProperty('--nav-top',b.offsetHeight+'px');}
+positionHeader();window.addEventListener('resize',positionHeader);
+</script>
+</body>
+</html>

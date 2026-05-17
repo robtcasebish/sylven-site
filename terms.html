@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service | Sylven</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root { --parchment:#F4EFE6;--cream:#FAF8F3;--mist:#EDE8DF;--ink:#1A1714;--ink-mid:#2D2825;--dust:#8A8078;--brass:#9C845A;--brass-light:#B89D70;--white:#FFFFFF;--font-display:'Newsreader',Georgia,serif;--font-body:'Jost',sans-serif;--max:1200px; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-body);background:var(--parchment);color:var(--ink);-webkit-font-smoothing:antialiased;}
+.disclaimer-bar{background:var(--ink-mid);padding:0.5rem 4rem;position:fixed;top:0;left:0;right:0;z-index:300;}
+.disclaimer-bar p{font-size:0.68rem;font-weight:300;color:rgba(244,239,230,0.45);max-width:var(--max);margin:0 auto;}
+.disclaimer-bar strong{font-weight:500;color:rgba(244,239,230,0.7);}
+.disclaimer-bar a{color:var(--brass-light);text-decoration:none;}
+nav{position:fixed;top:var(--nav-top,34px);left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1.25rem 4rem;background:rgba(244,239,230,0.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(26,23,20,0.08);}
+.nav-logo{font-family:var(--font-display);font-size:1.5rem;font-weight:400;color:var(--ink);text-decoration:none;}
+.nav-back{font-size:0.75rem;font-weight:400;letter-spacing:0.06em;text-transform:uppercase;color:var(--dust);text-decoration:none;display:flex;align-items:center;gap:0.4rem;transition:color 0.2s;}
+.nav-back::before{content:'←';}
+.nav-back:hover{color:var(--ink);}
+.legal-wrap{max-width:800px;margin:0 auto;padding:9rem 4rem 8rem;}
+.legal-header{margin-bottom:4rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(26,23,20,0.1);}
+.legal-header .eyebrow{font-size:0.7rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--brass);margin-bottom:1rem;display:flex;align-items:center;gap:0.75rem;}
+.legal-header .eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--brass);}
+.legal-header h1{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:300;color:var(--ink);letter-spacing:-0.02em;line-height:1.1;margin-bottom:1rem;}
+.legal-header .meta{font-size:0.8rem;font-weight:300;color:var(--dust);}
+.legal-notice{background:var(--mist);border:1px solid rgba(26,23,20,0.08);padding:1.25rem 1.5rem;margin-bottom:3rem;}
+.legal-notice p{font-size:0.85rem;font-weight:400;color:var(--dust);line-height:1.7;}
+.legal-notice strong{font-weight:500;color:var(--ink);}
+.legal-section{margin-bottom:3rem;}
+.legal-section h2{font-family:var(--font-display);font-size:1.15rem;font-weight:400;color:var(--ink);letter-spacing:-0.01em;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(26,23,20,0.08);}
+.legal-section p{font-size:0.9rem;font-weight:400;color:var(--dust);line-height:1.85;margin-bottom:0.875rem;}
+.legal-section p:last-child{margin-bottom:0;}
+.legal-section ul{list-style:none;margin:0.5rem 0 0.875rem 0;}
+.legal-section ul li{font-size:0.9rem;font-weight:400;color:var(--dust);line-height:1.75;padding:0.2rem 0 0.2rem 1.25rem;position:relative;}
+.legal-section ul li::before{content:'—';position:absolute;left:0;color:var(--brass);font-size:0.8rem;}
+.legal-section strong{font-weight:500;color:var(--ink);}
+.legal-section a{color:var(--brass);text-decoration:none;border-bottom:1px solid rgba(156,132,90,0.3);}
+.legal-section a:hover{border-color:var(--brass);}
+footer{background:var(--ink-mid);padding:3rem 4rem 2rem;}
+.footer-bottom{max-width:var(--max);margin:0 auto;display:flex;align-items:flex-start;justify-content:space-between;gap:2rem;flex-wrap:wrap;}
+.footer-bottom p{font-size:0.72rem;font-weight:300;color:rgba(244,239,230,0.2);line-height:1.7;max-width:600px;}
+.footer-legal-links{display:flex;gap:1.5rem;flex-wrap:wrap;}
+.footer-legal-links a{font-size:0.72rem;color:rgba(244,239,230,0.25);text-decoration:none;transition:color 0.2s;white-space:nowrap;}
+.footer-legal-links a:hover{color:rgba(244,239,230,0.6);}
+@media(max-width:768px){nav{padding:1.25rem 1.5rem;}.disclaimer-bar{padding:0.5rem 1.5rem;}.legal-wrap{padding:8rem 1.5rem 5rem;}footer{padding:2.5rem 1.5rem 2rem;}}
+</style>
+</head>
+<body>
+<div class="disclaimer-bar"><p><strong>Medical Information Only.</strong> This platform facilitates access to independent licensed Canadian physicians. All treatment decisions are made solely by your treating physician. <a href="medical-consent.html">Learn more →</a></p></div>
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Sylven</a>
+  <a href="index.html" class="nav-back">Back to site</a>
+</nav>
+<div class="legal-wrap">
+  <div class="legal-header">
+    <p class="eyebrow">Legal</p>
+    <h1>Terms of Service</h1>
+    <p class="meta">Last updated: May 2026 · Corbin Care Health Inc.</p>
+  </div>
+  <div class="legal-notice">
+    <p><strong>Please read these terms carefully before using Sylven.</strong> By accessing or using the Sylven platform, you agree to be bound by these Terms of Service. If you do not agree, do not use this platform.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>1. About Sylven and Corbin Care Health Inc.</h2>
+    <p>Sylven is a health coordination platform operated by Corbin Care Health Inc., a corporation incorporated under the laws of Ontario, Canada. Sylven connects patients with independent licensed Canadian physicians and Health Canada registered pharmacies. <strong>Sylven is not a medical clinic, hospital, or healthcare provider.</strong> Sylven does not provide medical care, diagnosis, or treatment. All medical decisions are made solely by the independent physicians on the platform, and all medications are dispensed solely by our independent pharmacy partner.</p>
+    <p>Nothing on this platform constitutes medical advice. The information provided is for general informational purposes only. Always consult a qualified healthcare professional for medical decisions.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>2. Eligibility</h2>
+    <p>To use Sylven, you must:</p>
+    <ul>
+      <li>Be at least 18 years of age</li>
+      <li>Be a resident of Canada and physically located in Canada when accessing the platform</li>
+      <li>Have the legal capacity to enter into a binding contract</li>
+      <li>Not be prohibited from receiving the services under applicable law</li>
+    </ul>
+    <p>By using the platform, you represent and warrant that you meet all eligibility requirements. Sylven reserves the right to terminate access for any user who does not meet these requirements.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>3. Nature of Services</h2>
+    <p>Sylven provides a health coordination platform that includes:</p>
+    <ul>
+      <li>An online clinical intake assessment tool</li>
+      <li>Access to a network of independent licensed Canadian physicians for asynchronous health assessments</li>
+      <li>A secure patient portal for communication and health tracking</li>
+      <li>Prescription coordination and referral to our pharmacy partner</li>
+      <li>Care team support and messaging</li>
+      <li>For weight loss programs: coordination of registered dietitian consultations</li>
+    </ul>
+    <p>Sylven does not employ physicians. Physicians on the platform are independent practitioners who have agreed to provide services through the Sylven platform. Sylven does not direct, supervise, or control the clinical decisions of physicians on the platform. All treatment decisions are theirs alone.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>4. Physician Independence</h2>
+    <p>The physicians accessible through Sylven are independent licensed Canadian physicians, not employees or agents of Corbin Care Health Inc. Sylven acts solely as a facilitator of the patient-physician relationship.</p>
+    <p>Your physician may decline to prescribe treatment for any reason. Sylven cannot override, influence, or appeal a physician's clinical decision. If your physician determines that a particular treatment is not appropriate for you, that decision is final from the platform's perspective, though you are free to seek a second opinion from any physician of your choice outside the platform.</p>
+    <p>The physician-patient relationship is formed directly between you and the independent physician. Sylven is not a party to that relationship.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>5. Program Membership and Fees</h2>
+    <p>Sylven charges a monthly program membership fee for access to its coordination services. Current fees are:</p>
+    <ul>
+      <li>Weight Loss program: $89 CAD per month</li>
+      <li>Men's Health program: $49 CAD per month</li>
+      <li>Women's Health program: $69 CAD per month</li>
+    </ul>
+    <p>Program membership fees cover non-insured support services only, including physician assessment coordination, patient portal access, care team messaging, and prescription renewal coordination. The Weight Loss program also includes registered dietitian coordination. These fees do not cover medication costs.</p>
+    <p>Medication costs are separate and paid directly to our pharmacy partner. Sylven does not collect, hold, or mark up medication payments.</p>
+    <p>All fees are in Canadian dollars and are subject to applicable taxes.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>6. Billing and Cancellation</h2>
+    <p>Your program membership is billed on a monthly recurring basis beginning on the date you complete your assessment and payment. Billing continues until you cancel your membership.</p>
+    <p>You may cancel your membership at any time through your patient portal or by contacting your care team. Cancellation takes effect at the end of the current billing period. No partial-month refunds are issued for voluntary cancellation.</p>
+    <p>Sylven reserves the right to modify program fees with 30 days written notice. Continued use of the platform after the effective date of a fee change constitutes acceptance of the new fee.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>7. Refunds</h2>
+    <p><strong>Physician non-approval:</strong> If the independent physician determines that the requested treatment is not clinically appropriate for you, your program membership fee for that billing period will be refunded in full. This refund is issued automatically within 5 to 10 business days.</p>
+    <p><strong>Voluntary cancellation:</strong> Program membership fees are non-refundable for voluntary cancellations once a billing period has commenced.</p>
+    <p><strong>Medication:</strong> Prescription medication dispensed by the pharmacy partner is non-refundable once dispensed, consistent with standard pharmacy practice and applicable provincial regulations. If medication is damaged, incorrectly dispensed, or subject to a manufacturer recall, please contact the pharmacy partner directly.</p>
+    <p>For full details see our <a href="refund.html">Refund Policy</a>.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>8. No Emergency Services</h2>
+    <p><strong>Sylven is not an emergency service.</strong> If you are experiencing a medical emergency, call 911 or go to your nearest emergency department immediately. Do not use this platform for emergency medical situations. The platform is not monitored in real time and cannot provide emergency assistance.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>9. Accuracy of Information</h2>
+    <p>You agree to provide accurate, complete, and truthful information in your health assessment and all subsequent communications on the platform. Providing false or misleading health information may result in inappropriate treatment recommendations and could cause serious harm. Sylven and the independent physicians on the platform rely on the information you provide.</p>
+    <p>Providing materially false health information may result in termination of your account and forfeiture of any refund rights.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>10. Provincial Coverage</h2>
+    <p>Sylven serves patients in all Canadian provinces and territories. However, physician availability may vary by province depending on the composition of the physician network at any given time. Sylven does not guarantee physician availability in any specific province at any specific time. If a physician licensed in your province is not available to review your assessment, you will be notified and offered a full refund of your program membership fee.</p>
+    <p>Physician coverage in Quebec is subject to additional regulatory requirements. Availability in Quebec may be more limited during the early phase of platform operations.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>11. Intellectual Property</h2>
+    <p>All content on the Sylven platform, including text, design, graphics, logos, and software, is the property of Corbin Care Health Inc. or its licensors and is protected by applicable intellectual property laws. You may not reproduce, distribute, modify, or create derivative works from any platform content without our express written permission.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>12. Privacy</h2>
+    <p>Your privacy is important to us. Our collection, use, and disclosure of personal information, including health information, is governed by our <a href="privacy.html">Privacy Policy</a>, which is incorporated into these Terms by reference. By using the platform, you consent to our collection and use of your information as described in the Privacy Policy.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>13. Disclaimers</h2>
+    <p>The Sylven platform is provided "as is" and "as available" without warranty of any kind. Corbin Care Health Inc. makes no representations or warranties regarding the accuracy, completeness, or reliability of any content on the platform, the availability of the platform, or the outcome of any physician assessment.</p>
+    <p>Sylven does not warrant that treatment will be approved, that any particular medication will be prescribed, or that any particular health outcome will be achieved.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>14. Limitation of Liability</h2>
+    <p>To the maximum extent permitted by applicable law, Corbin Care Health Inc. shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising out of or relating to your use of the platform or any services provided through it, including damages arising from physician decisions, medication effects, or platform unavailability.</p>
+    <p>Our total liability to you for any claim arising out of or relating to these Terms or the platform shall not exceed the total amount of program membership fees paid by you in the three months preceding the claim.</p>
+    <p>Nothing in these Terms limits liability for death or personal injury caused by negligence, fraud, or any other liability that cannot be excluded by law.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>15. Governing Law and Dispute Resolution</h2>
+    <p>These Terms are governed by and construed in accordance with the laws of the Province of Ontario and the federal laws of Canada applicable therein, without regard to conflict of law principles.</p>
+    <p>Any dispute arising out of or relating to these Terms or your use of the platform shall be resolved by binding arbitration in Toronto, Ontario, in accordance with the Arbitration Act, 1991 (Ontario), except that either party may seek injunctive or other equitable relief in any court of competent jurisdiction.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>16. Changes to These Terms</h2>
+    <p>Corbin Care Health Inc. reserves the right to modify these Terms at any time. We will provide notice of material changes by posting updated Terms on the platform and, where required, by sending an email notification to registered users. Continued use of the platform following notice of changes constitutes acceptance of the revised Terms.</p>
+  </div>
+
+  <div class="legal-section">
+    <h2>17. Contact</h2>
+    <p>For questions about these Terms, please contact us at:</p>
+    <p>Corbin Care Health Inc.<br>Email: legal@corbincare.com<br>Website: sylven.ca</p>
+  </div>
+</div>
+<footer>
+  <div class="footer-bottom">
+    <p>© 2026 Corbin Care Health Inc. All rights reserved. Sylven is a health coordination platform, not a medical clinic. PIPEDA compliant.</p>
+    <div class="footer-legal-links">
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="medical-consent.html">Medical Consent</a>
+      <a href="refund.html">Refund Policy</a>
+    </div>
+  </div>
+</footer>
+<script>
+function positionHeader(){const b=document.querySelector('.disclaimer-bar');if(!b)return;document.documentElement.style.setProperty('--nav-top',b.offsetHeight+'px');}
+positionHeader();window.addEventListener('resize',positionHeader);
+</script>
+</body>
+</html>
