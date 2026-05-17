@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sylven — Physician-Guided Health Programs for Canadians</title>
+<meta name="description" content="Sylven connects Canadians with independent licensed physicians and Health Canada registered pharmacies. Weight loss, men's health, and women's health programs — delivered to your door.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --parchment: #F4EFE6;
+  --cream: #FAF8F3;
+  --mist: #EDE8DF;
+  --ink: #1A1714;
+  --ink-mid: #2D2825;
+  --dust: #8A8078;
+  --brass: #9C845A;
+  --brass-light: #B89D70;
+  --white: #FFFFFF;
+  --font-display: 'Newsreader', Georgia, serif;
+  --font-body: 'Jost', sans-serif;
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --max: 1200px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--parchment);
+  color: var(--ink);
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Grain overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.018;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 180px;
+}
+
+/* DISCLAIMER BAR */
+.disclaimer-bar {
+  background: var(--ink-mid);
+  padding: 0.5rem 4rem;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 300;
+}
+.disclaimer-bar p {
+  font-size: 0.68rem;
+  font-weight: 300;
+  color: rgba(244,239,230,0.45);
+  line-height: 1.5;
+  max-width: var(--max);
+  margin: 0 auto;
+  letter-spacing: 0.01em;
+}
+.disclaimer-bar strong {
+  font-weight: 500;
+  color: rgba(244,239,230,0.7);
+}
+.disclaimer-bar a {
+  color: var(--brass-light);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.disclaimer-bar a:hover { color: var(--parchment); }
+
+/* NAV */
+nav {
+  position: fixed;
+  top: var(--nav-top, 34px); left: 0; right: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 4rem;
+  background: rgba(244, 239, 230, 0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(26,23,20,0.08);
+}
+nav.scrolled {
+  box-shadow: 0 2px 20px rgba(26,23,20,0.06);
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+.nav-links {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--brass); }
+.nav-cta {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--parchment);
+  background: var(--ink);
+  border: none;
+  padding: 0.65rem 1.5rem;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.25s, color 0.25s;
+}
+.nav-cta:hover { background: var(--brass); }
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--ink);
+  transition: transform 0.3s, opacity 0.3s;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--parchment);
+  z-index: 190;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 400;
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  transition: color 0.2s;
+}
+.mobile-menu a:hover { color: var(--brass); }
+.mobile-menu .mobile-cta {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--parchment);
+  background: var(--ink);
+  padding: 0.875rem 2rem;
+  margin-top: 1rem;
+  text-decoration: none;
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  background: var(--parchment);
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 10rem 4rem 6rem;
+}
+
+.hero-lines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.06;
+}
+
+.hero-content {
+  max-width: var(--max);
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.hero-label::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--brass);
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6.5vw, 6.5rem);
+  font-weight: 300;
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  max-width: 14ch;
+  margin-bottom: 2.5rem;
+}
+.hero h1 em {
+  font-style: italic;
+  font-weight: 300;
+}
+
+.hero-sub {
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--dust);
+  line-height: 1.8;
+  max-width: 42ch;
+  margin-bottom: 3rem;
+  letter-spacing: 0.01em;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--parchment);
+  background: var(--ink);
+  padding: 0.95rem 2.25rem;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.25s;
+}
+.btn-primary:hover { background: var(--brass); }
+
+.btn-text {
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dust);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.2s;
+}
+.btn-text::after { content: '→'; transition: transform 0.2s; }
+.btn-text:hover { color: var(--ink); }
+.btn-text:hover::after { transform: translateX(3px); }
+
+/* ANNOUNCEMENT BAR */
+.announcement {
+  background: var(--ink);
+  padding: 1rem 4rem;
+}
+.announcement-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.announcement p {
+  font-size: 0.78rem;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: rgba(244,239,230,0.65);
+  line-height: 1.6;
+}
+.announcement strong {
+  color: var(--parchment);
+  font-weight: 500;
+}
+.announcement a {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brass-light);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* TRUST PILLARS */
+.trust {
+  background: var(--mist);
+  padding: 2.5rem 4rem;
+  border-top: 1px solid rgba(26,23,20,0.06);
+  border-bottom: 1px solid rgba(26,23,20,0.06);
+}
+.trust-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+.trust-item {
+  text-align: center;
+}
+.trust-item p {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dust);
+  line-height: 1.5;
+}
+.trust-item span {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 0.2rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* SECTIONS */
+section {
+  padding: 7rem 4rem;
+  position: relative;
+}
+.container {
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.section-label::before {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--brass);
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 3.25rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+}
+h2 em { font-style: italic; }
+
+p.lead {
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--dust);
+  line-height: 1.85;
+  max-width: 52ch;
+}
+
+/* CONDITIONS */
+.conditions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin-top: 5rem;
+  border-top: 1px solid rgba(26,23,20,0.1);
+}
+.condition-item {
+  padding: 3rem 3rem 3rem 0;
+  border-right: 1px solid rgba(26,23,20,0.1);
+  text-decoration: none;
+  display: block;
+  transition: background 0.3s;
+}
+.condition-item:last-child { border-right: none; padding-right: 0; }
+.condition-item:not(:first-child) { padding-left: 3rem; }
+.condition-item:hover { background: rgba(26,23,20,0.02); }
+
+.condition-num {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: var(--dust);
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5rem;
+  display: block;
+}
+.condition-item h3 {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+.condition-item h3 em { font-style: italic; font-weight: 300; }
+.condition-item p {
+  font-size: 0.88rem;
+  font-weight: 300;
+  color: var(--dust);
+  line-height: 1.8;
+  margin-bottom: 1.75rem;
+}
+.condition-link {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: gap 0.2s, color 0.2s;
+}
+.condition-link::after { content: '→'; }
+.condition-item:hover .condition-link { gap: 0.75rem; color: var(--brass); }
+
+/* HOW IT WORKS */
+.steps {
+  margin-top: 5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid rgba(26,23,20,0.1);
+}
+.step {
+  padding: 3rem 3rem 3rem 0;
+  border-right: 1px solid rgba(26,23,20,0.1);
+}
+.step:last-child { border-right: none; }
+.step:not(:first-child) { padding-left: 3rem; }
+
+.step-num {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  font-weight: 300;
+  color: rgba(26,23,20,0.08);
+  line-height: 1;
+  margin-bottom: 1.25rem;
+  display: block;
+  letter-spacing: -0.03em;
+}
+.step h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
+}
+.step p {
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: var(--dust);
+  line-height: 1.8;
+}
+
+/* MANIFESTO */
+.manifesto {
+  background: var(--ink);
+}
+.manifesto .section-label { color: var(--brass-light); }
+.manifesto .section-label::before { background: var(--brass-light); }
+.manifesto-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 6rem;
+  align-items: center;
+}
+.manifesto h2 {
+  color: var(--parchment);
+  font-size: clamp(2rem, 3vw, 2.75rem);
+}
+.manifesto h2 em { color: var(--brass-light); }
+.manifesto-text p {
+  font-size: 1rem;
+  font-weight: 300;
+  color: rgba(244,239,230,0.55);
+  line-height: 1.9;
+  margin-bottom: 1.25rem;
+  letter-spacing: 0.01em;
+}
+.manifesto-text p:last-child { margin-bottom: 0; }
+.manifesto-text strong {
+  color: rgba(244,239,230,0.8);
+  font-weight: 400;
+}
+
+/* TESTIMONIALS */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  margin-top: 5rem;
+  padding-top: 3.5rem;
+  border-top: 1px solid rgba(26,23,20,0.1);
+}
+.testimonial {
+  position: relative;
+}
+.testimonial::before {
+  content: '\201C';
+  font-family: var(--font-display);
+  font-size: 7rem;
+  font-weight: 300;
+  color: rgba(26,23,20,0.06);
+  line-height: 1;
+  position: absolute;
+  top: -1.5rem;
+  left: -0.5rem;
+  pointer-events: none;
+}
+.testimonial blockquote {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ink-mid);
+  line-height: 1.8;
+  margin-bottom: 1.75rem;
+  position: relative;
+  z-index: 1;
+}
+.testimonial-author {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.testimonial-name {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.testimonial-loc {
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: var(--dust);
+  letter-spacing: 0.04em;
+}
+
+/* GENERIC MOMENT */
+.moment {
+  background: var(--mist);
+  border-top: 1px solid rgba(26,23,20,0.06);
+  border-bottom: 1px solid rgba(26,23,20,0.06);
+}
+.moment-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 6rem;
+  align-items: center;
+}
+.moment-stat {
+  text-align: center;
+}
+.moment-stat .big {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 8vw, 7rem);
+  font-weight: 300;
+  color: var(--ink);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.moment-stat .big em {
+  font-style: italic;
+  color: var(--brass);
+}
+.moment-stat p {
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dust);
+}
+
+/* CTA BANNER */
+.cta-banner {
+  background: var(--ink);
+  padding: 7rem 4rem;
+  text-align: center;
+}
+.cta-banner h2 {
+  color: var(--parchment);
+  font-size: clamp(2.25rem, 4vw, 3.75rem);
+  max-width: 18ch;
+  margin: 0 auto 1.5rem;
+}
+.cta-banner h2 em { color: var(--brass-light); }
+.cta-banner p {
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: rgba(244,239,230,0.45);
+  max-width: 42ch;
+  margin: 0 auto 3rem;
+  line-height: 1.8;
+  letter-spacing: 0.01em;
+}
+.btn-primary-light {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--parchment);
+  padding: 0.95rem 2.5rem;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.25s, color 0.25s;
+}
+.btn-primary-light:hover { background: var(--brass-light); color: var(--parchment); }
+
+/* FOOTER */
+footer {
+  background: var(--ink-mid);
+  padding: 4rem 4rem 2.5rem;
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 3rem;
+  max-width: var(--max);
+  margin: 0 auto 3rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid rgba(244,239,230,0.07);
+}
+.footer-brand {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 400;
+  color: var(--parchment);
+  letter-spacing: -0.01em;
+  margin-bottom: 1rem;
+  display: block;
+}
+.footer-desc {
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: rgba(244,239,230,0.3);
+  line-height: 1.75;
+  max-width: 260px;
+}
+.footer-col h4 {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(244,239,230,0.25);
+  margin-bottom: 1.25rem;
+}
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 0.6rem; }
+.footer-col ul li a {
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: rgba(244,239,230,0.4);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-col ul li a:hover { color: rgba(244,239,230,0.75); }
+
+.footer-bottom {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.footer-bottom p {
+  font-size: 0.72rem;
+  font-weight: 300;
+  color: rgba(244,239,230,0.2);
+  line-height: 1.7;
+  max-width: 600px;
+}
+.footer-legal-links {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+.footer-legal-links a {
+  font-size: 0.72rem;
+  color: rgba(244,239,230,0.25);
+  text-decoration: none;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+.footer-legal-links a:hover { color: rgba(244,239,230,0.6); }
+
+/* ANIMATIONS */
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+.fade-up.visible { opacity: 1; transform: none; }
+.fd1 { transition-delay: 0.1s; }
+.fd2 { transition-delay: 0.2s; }
+.fd3 { transition-delay: 0.3s; }
+.fd4 { transition-delay: 0.4s; }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .disclaimer-bar { padding: 0.5rem 1.5rem; }
+  nav { padding: 1.25rem 1.5rem; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .nav-cta { display: none; }
+  section { padding: 4.5rem 1.5rem; }
+  .hero { padding: 7rem 1.5rem 4.5rem; }
+  .announcement { padding: 1rem 1.5rem; }
+  .trust { padding: 2rem 1.5rem; }
+  .trust-inner { grid-template-columns: repeat(2, 1fr); }
+  .conditions-grid { grid-template-columns: 1fr; }
+  .condition-item { padding: 2.5rem 0 !important; border-right: none; border-bottom: 1px solid rgba(26,23,20,0.1); }
+  .condition-item:last-child { border-bottom: none; }
+  .steps { grid-template-columns: 1fr; }
+  .step { padding: 2.5rem 0 !important; border-right: none; border-bottom: 1px solid rgba(26,23,20,0.1); }
+  .step:last-child { border-bottom: none; }
+  .manifesto-layout { grid-template-columns: 1fr; gap: 3rem; }
+  .testimonials-grid { grid-template-columns: 1fr; gap: 3.5rem; }
+  .moment-layout { grid-template-columns: 1fr; gap: 3rem; }
+  .cta-banner { padding: 4.5rem 1.5rem; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .footer { padding: 3rem 1.5rem 2rem; }
+}
+
+@media (min-width: 640px) and (max-width: 1024px) {
+  .conditions-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="disclaimer-bar">
+  <p><strong>Medical Information Only.</strong> This platform facilitates access to independent licensed Canadian physicians. It does not constitute medical advice, diagnosis, or a recommendation for any specific treatment or medication. All treatment decisions are made solely by your treating physician following individual consultation. <a href="medical-consent.html">Learn more →</a></p>
+</div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Sylven</a>
+  <ul class="nav-links">
+    <li><a href="weight-loss.html">Weight Loss</a></li>
+    <li><a href="mens-health.html">Men's Health</a></li>
+    <li><a href="womens-health.html">Women's Health</a></li>
+    <li><a href="#how-it-works">How It Works</a></li>
+  </ul>
+  <a href="quiz.html" class="nav-cta">Begin Assessment</a>
+  <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="weight-loss.html" onclick="closeMobileMenu()">Weight Loss</a>
+  <a href="mens-health.html" onclick="closeMobileMenu()">Men's Health</a>
+  <a href="womens-health.html" onclick="closeMobileMenu()">Women's Health</a>
+  <a href="#how-it-works" onclick="closeMobileMenu()">How It Works</a>
+  <a href="quiz.html" class="mobile-cta" onclick="closeMobileMenu()">Begin Assessment</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <svg class="hero-lines" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M-100,600 Q300,480 600,520 Q900,560 1200,440 Q1400,380 1600,420" stroke="#1A1714" stroke-width="0.8" fill="none"/>
+    <path d="M-100,650 Q250,530 580,570 Q880,610 1180,490 Q1380,430 1600,470" stroke="#1A1714" stroke-width="0.8" fill="none"/>
+    <path d="M-100,700 Q200,580 560,620 Q860,660 1160,540 Q1360,480 1600,520" stroke="#1A1714" stroke-width="0.8" fill="none"/>
+    <path d="M-100,750 Q180,630 540,670 Q840,710 1140,590 Q1340,530 1600,570" stroke="#1A1714" stroke-width="0.8" fill="none"/>
+    <path d="M-100,800 Q160,680 520,720 Q820,760 1120,640 Q1320,580 1600,620" stroke="#1A1714" stroke-width="0.8" fill="none"/>
+  </svg>
+  <div class="hero-content">
+    <p class="hero-label fade-up">Physician-guided health programs</p>
+    <h1 class="fade-up fd1">Medicine<br>the way it<br><em>should feel.</em></h1>
+    <p class="hero-sub fade-up fd2">Sylven connects Canadians with independent licensed physicians who assess each patient individually, and with Health Canada registered pharmacies that dispense only approved medications — for weight loss, men's health, and women's health programs delivered to your door.</p>
+    <div class="hero-actions fade-up fd3">
+      <a href="quiz.html" class="btn-primary">Begin Your Assessment</a>
+      <a href="#how-it-works" class="btn-text">How it works</a>
+    </div>
+  </div>
+</section>
+
+<!-- ANNOUNCEMENT -->
+<div class="announcement">
+  <div class="announcement-inner">
+    <p><strong>Canada is now the first G7 country with approved generic semaglutide.</strong> We built Sylven to help Canadians access it affordably, safely, and with proper physician oversight.</p>
+    <a href="weight-loss.html">Learn about GLP-1 programs →</a>
+  </div>
+</div>
+
+<!-- TRUST PILLARS -->
+<div class="trust">
+  <div class="trust-inner">
+    <div class="trust-item">
+      <p><span>Independent Physicians</span>Licensed in the province you reside</p>
+    </div>
+    <div class="trust-item">
+      <p><span>Individual Assessment</span>Every patient reviewed clinically</p>
+    </div>
+    <div class="trust-item">
+      <p><span>Health Canada Registered</span>Approved medications only</p>
+    </div>
+    <div class="trust-item">
+      <p><span>PIPEDA Compliant</span>Your health data protected</p>
+    </div>
+  </div>
+</div>
+
+<!-- CONDITIONS -->
+<section style="background: var(--parchment);">
+  <div class="container">
+    <p class="section-label fade-up">What we treat</p>
+    <h2 class="fade-up fd1">Care for the things<br>that <em>matter most.</em></h2>
+    <div class="conditions-grid">
+      <a href="weight-loss.html" class="condition-item fade-up">
+        <span class="condition-num">01</span>
+        <h3>Weight<br><em>Loss</em></h3>
+        <p>Physician-supervised GLP-1 programs using generic and branded semaglutide — now available in Canada at a fraction of the previous cost. Includes registered dietitian support and ongoing care.</p>
+        <span class="condition-link">Explore weight loss</span>
+      </a>
+      <a href="mens-health.html" class="condition-item fade-up fd1">
+        <span class="condition-num">02</span>
+        <h3>Men's<br><em>Health</em></h3>
+        <p>Erectile dysfunction, hair loss, and hormonal balance — addressed privately, assessed by a licensed physician, and delivered discreetly. No waiting rooms. No awkward conversations.</p>
+        <span class="condition-link">Explore men's health</span>
+      </a>
+      <a href="womens-health.html" class="condition-item fade-up fd2">
+        <span class="condition-num">03</span>
+        <h3>Women's<br><em>Health</em></h3>
+        <p>Menopause, perimenopause, and hormonal support — specialist care that the public system routinely fails to provide. One in three Canadian women wait more than two years. You shouldn't have to.</p>
+        <span class="condition-link">Explore women's health</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section style="background: var(--cream);" id="how-it-works">
+  <div class="container">
+    <p class="section-label fade-up">The process</p>
+    <h2 class="fade-up fd1">Simple by design.<br><em>Serious</em> by nature.</h2>
+    <div class="steps">
+      <div class="step fade-up">
+        <span class="step-num">01</span>
+        <h3>Complete your health assessment</h3>
+        <p>A thorough intake questionnaire covering your medical history, current medications, and health goals. Takes five minutes. No appointment needed.</p>
+      </div>
+      <div class="step fade-up fd1">
+        <span class="step-num">02</span>
+        <h3>Your physician reviews your case</h3>
+        <p>A licensed Canadian physician — independent of Sylven — reviews your assessment and determines whether treatment is clinically appropriate. All decisions are theirs alone.</p>
+      </div>
+      <div class="step fade-up fd2">
+        <span class="step-num">03</span>
+        <h3>Medication arrives at your door</h3>
+        <p>If prescribed, your medication is dispensed by our Health Canada registered pharmacy partner and shipped nationwide in discreet packaging within three to five business days.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="manifesto">
+  <div class="container">
+    <div class="manifesto-layout">
+      <div class="fade-up">
+        <p class="section-label">Why Sylven</p>
+        <h2>We built this<br>because the<br>system <em>didn't.</em></h2>
+      </div>
+      <div class="manifesto-text fade-up fd1">
+        <p>The Canadian public health system does extraordinary work under extraordinary pressure. It was not, however, designed for the pace at which medicine is now capable of helping people — or for the millions of Canadians managing chronic conditions, hormonal changes, and metabolic health that require more than a ten-minute appointment and a referral to a specialist with an eighteen-month waitlist.</p>
+        <p>When access to care is the barrier, outcomes suffer for reasons that have nothing to do with the quality of medicine available. <strong>Sylven exists to close that gap</strong> — by connecting patients with independent Canadian physicians who have the time to assess them properly, and with licensed pharmacies that can reach them wherever they live in Canada.</p>
+        <p>Every prescription on this platform is issued by a physician acting independently, following an individual clinical assessment. Every medication is dispensed by a Health Canada registered pharmacy. Nothing less is acceptable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section style="background: var(--parchment);">
+  <div class="container">
+    <p class="section-label fade-up">Patient stories</p>
+    <h2 class="fade-up fd1">Real results from<br>real <em>Canadians.</em></h2>
+    <div class="testimonials-grid">
+      <div class="testimonial fade-up">
+        <blockquote>Down 28 pounds in four months. The physician was thorough and the dietitian sessions changed how I think about food entirely. For the first time I have a program that works with my life, not against it.</blockquote>
+        <div class="testimonial-author">
+          <span class="testimonial-name">Karen L.</span>
+          <span class="testimonial-loc">Ottawa, ON · Weight Loss</span>
+        </div>
+      </div>
+      <div class="testimonial fade-up fd1">
+        <blockquote>Living in northern Ontario I had no realistic access to an obesity medicine specialist — the nearest one had an eighteen-month waitlist. Sylven gave me the same quality of care I would have driven four hours for.</blockquote>
+        <div class="testimonial-author">
+          <span class="testimonial-name">Sandra M.</span>
+          <span class="testimonial-loc">Sudbury, ON · Weight Loss</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GENERIC SEMAGLUTIDE MOMENT -->
+<section class="moment">
+  <div class="container">
+    <div class="moment-layout">
+      <div class="moment-stat fade-up">
+        <span class="big"><em>60%</em></span>
+        <p>Lower cost than branded<br>Ozempic or Wegovy</p>
+      </div>
+      <div class="fade-up fd1">
+        <p class="section-label">A significant moment</p>
+        <h2>Canada leads the world<br>in <em>generic semaglutide.</em></h2>
+        <p class="lead">In April 2026, Canada became the first G7 country to approve generic semaglutide — after Novo Nordisk's Canadian patent lapsed. At 60% lower cost than branded versions, effective GLP-1 therapy is now within reach for millions of Canadians who couldn't previously afford it.</p>
+        <p class="lead" style="margin-top: 1rem;">We built Sylven to be the most trustworthy way to access it.</p>
+        <a href="weight-loss.html" class="btn-primary" style="margin-top: 2.5rem; display: inline-block;">Learn about GLP-1 programs</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-banner">
+  <p class="section-label" style="color: var(--brass-light); justify-content: center; margin-bottom: 1.5rem;">Ready to begin</p>
+  <h2>Your physician<br>is <em>waiting.</em></h2>
+  <p>A five-minute assessment connects you with a licensed Canadian physician within 24 hours. No referral. No waiting room. No unnecessary delay.</p>
+  <a href="quiz.html" class="btn-primary-light">Begin Your Assessment</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <span class="footer-brand">Sylven</span>
+      <p class="footer-desc">Connecting Canadians with independent licensed physicians and Health Canada registered pharmacies. Serving all provinces.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Programs</h4>
+      <ul>
+        <li><a href="weight-loss.html">Weight Loss</a></li>
+        <li><a href="mens-health.html">Men's Health</a></li>
+        <li><a href="womens-health.html">Women's Health</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="physicians.html">Our Physicians</a></li>
+        <li><a href="pharmacies.html">Partner Pharmacies</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="terms.html">Terms of Service</a></li>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="medical-consent.html">Medical Consent</a></li>
+        <li><a href="refund.html">Refund Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Corbin Care Health Inc. All rights reserved. Sylven is a health coordination platform, not a medical clinic. All treatment decisions are made solely by independent licensed Canadian physicians following individual consultation. All medications dispensed by Health Canada registered pharmacies. Results may vary. PIPEDA compliant.</p>
+    <div class="footer-legal-links">
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="medical-consent.html">Medical Consent</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function positionHeader() {
+  const bar = document.querySelector('.disclaimer-bar');
+  const nav = document.getElementById('navbar');
+  const hero = document.querySelector('.hero');
+  if (!bar || !nav) return;
+  const barH = bar.offsetHeight;
+  document.documentElement.style.setProperty('--nav-top', barH + 'px');
+  if (hero) {
+    const navH = nav.offsetHeight;
+    hero.style.paddingTop = (barH + navH + 40) + 'px';
+  }
+}
+positionHeader();
+window.addEventListener('resize', positionHeader);
+
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+function closeMobileMenu() {
+  hamburger.classList.remove('open');
+  mobileMenu.classList.remove('open');
+  document.body.style.overflow = '';
+}
+hamburger.addEventListener('click', () => {
+  const isOpen = mobileMenu.classList.toggle('open');
+  hamburger.classList.toggle('open', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+});
+
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
