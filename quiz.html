@@ -575,6 +575,177 @@ nav {
   text-align: center;
 }
 
+/* TIMELINE */
+.timeline-strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0;
+  margin: 1.75rem 0 0;
+  border-top: 1px solid rgba(26,23,20,0.08);
+  border-bottom: 1px solid rgba(26,23,20,0.08);
+}
+.timeline-item {
+  padding: 1.25rem 1rem;
+  border-right: 1px solid rgba(26,23,20,0.08);
+  text-align: center;
+}
+.timeline-item:last-child { border-right: none; }
+.timeline-num {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: var(--brass);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+.timeline-action {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--ink);
+  display: block;
+  margin-bottom: 0.2rem;
+  line-height: 1.3;
+}
+.timeline-when {
+  font-size: 0.68rem;
+  font-weight: 300;
+  color: var(--dust);
+  display: block;
+}
+
+/* TESTIMONIAL PULL QUOTE */
+.conversion-quote {
+  padding: 1.5rem 0 1.25rem;
+  border-bottom: 1px solid rgba(26,23,20,0.08);
+  margin-bottom: 1.25rem;
+  position: relative;
+}
+.conversion-quote::before {
+  content: '\201C';
+  font-family: var(--font-display);
+  font-size: 4rem;
+  font-weight: 300;
+  color: rgba(26,23,20,0.07);
+  line-height: 1;
+  position: absolute;
+  top: 0.75rem;
+  left: -0.25rem;
+  pointer-events: none;
+}
+.conversion-quote blockquote {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ink-mid);
+  line-height: 1.7;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 0.75rem;
+}
+.conversion-quote cite {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dust);
+  font-style: normal;
+  display: block;
+}
+
+/* COST REFRAME */
+.cost-reframe {
+  background: rgba(156,132,90,0.07);
+  border: 1px solid rgba(156,132,90,0.18);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.cost-reframe-label {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin-bottom: 0.2rem;
+  display: block;
+}
+.cost-reframe p {
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: var(--ink-mid);
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+.cost-reframe p strong { font-weight: 500; }
+.cost-reframe-vs {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: var(--dust);
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-style: italic;
+}
+
+/* TRUST MARKS */
+.trust-marks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 0.875rem 0;
+  margin-bottom: 0.875rem;
+  border-top: 1px solid rgba(26,23,20,0.06);
+  border-bottom: 1px solid rgba(26,23,20,0.06);
+  flex-wrap: wrap;
+}
+.trust-mark {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--dust);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.trust-mark::before {
+  content: '✓';
+  color: var(--success);
+  font-size: 0.7rem;
+}
+
+/* GUARANTEE BLOCK */
+.guarantee-block {
+  background: rgba(61,107,79,0.06);
+  border: 1px solid rgba(61,107,79,0.18);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.875rem;
+}
+.guarantee-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+.guarantee-block p {
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: var(--ink-mid);
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+.guarantee-block strong { font-weight: 600; color: var(--success); }
+
 /* DECLINE SCREEN */
 .result-decline {
   padding: 2.5rem;
@@ -647,6 +818,11 @@ nav {
   .payment-section { padding: 1.5rem 1.5rem 2rem; }
   .result-eligible { padding: 1.75rem 1.5rem 0; }
   .result-decline { padding: 1.75rem 1.5rem; }
+  .timeline-strip { grid-template-columns: 1fr; }
+  .timeline-item { border-right: none; border-bottom: 1px solid rgba(26,23,20,0.08); text-align: left; padding: 0.875rem 1rem; }
+  .timeline-item:last-child { border-bottom: none; }
+  .cost-reframe { flex-direction: column; gap: 0.5rem; }
+  .trust-marks { gap: 0.875rem; }
 }
 </style>
 </head>
@@ -950,10 +1126,27 @@ nav {
         <div class="result-badge"><span>Assessment complete</span></div>
         <h2>You appear to be a<br>strong <em>candidate.</em></h2>
         <p>Based on your responses, you meet the clinical criteria for a GLP-1 therapy assessment. An independent Canadian physician — licensed in your province — will review your full file and respond within 24 hours.</p>
-        <div class="what-next">
-          <p><strong>What happens next:</strong> Once you complete your program membership below, your assessment enters the physician review queue. If approved, a prescription is sent to our pharmacy partner and your medication ships within 3–5 business days. If the physician determines GLP-1 therapy is not appropriate for you, <strong>you receive a full refund</strong>.</p>
+
+        <!-- 2. TIMELINE STRIP -->
+        <div class="timeline-strip">
+          <div class="timeline-item">
+            <span class="timeline-num">Step 1</span>
+            <span class="timeline-action">Physician review</span>
+            <span class="timeline-when">Within 24 hours</span>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-num">Step 2</span>
+            <span class="timeline-action">Prescription issued</span>
+            <span class="timeline-when">If approved</span>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-num">Step 3</span>
+            <span class="timeline-action">Medication delivered</span>
+            <span class="timeline-when">3–5 business days</span>
+          </div>
         </div>
       </div>
+
       <div class="payment-section">
         <div class="payment-header">
           <span class="payment-title">Program membership</span>
@@ -961,6 +1154,7 @@ nav {
             <div class="payment-amount">$89<span>/month</span></div>
           </div>
         </div>
+
         <ul class="payment-includes">
           <li>Physician assessment and ongoing check-ins</li>
           <li>Registered dietitian consultations</li>
@@ -969,6 +1163,29 @@ nav {
           <li>Prescription renewal coordination</li>
           <li>Cancel anytime — no long-term commitment</li>
         </ul>
+
+        <!-- 4. COST REFRAME -->
+        <div class="cost-reframe">
+          <div>
+            <span class="cost-reframe-label">What you'll actually pay</span>
+            <p>Program fee + generic semaglutide = <strong>approx. $190–$240/month total.</strong></p>
+          </div>
+          <span class="cost-reframe-vs">vs. $260–$570 for branded Ozempic or Wegovy alone</span>
+        </div>
+
+        <!-- 3. TESTIMONIAL PULL QUOTE -->
+        <div class="conversion-quote">
+          <blockquote>"Approved in 18 hours. Medication arrived four days later. For the first time I actually feel like someone took my weight seriously."</blockquote>
+          <cite>Karen L. &nbsp;·&nbsp; Ottawa, ON &nbsp;·&nbsp; Weight Loss Program</cite>
+        </div>
+
+        <!-- 5. TRUST MARKS -->
+        <div class="trust-marks">
+          <span class="trust-mark">Independent Canadian Physicians</span>
+          <span class="trust-mark">Health Canada Registered</span>
+          <span class="trust-mark">Cancel Anytime</span>
+        </div>
+
         <!-- STRIPE INTEGRATION POINT -->
         <!-- Replace this block with Stripe.js Elements when Stripe account is set up -->
         <!-- stripe.elements() → cardElement.mount('#card-element') -->
@@ -990,8 +1207,15 @@ nav {
           </div>
         </div>
         <!-- END STRIPE BLOCK -->
+
+        <!-- 1. GUARANTEE BLOCK -->
+        <div class="guarantee-block">
+          <span class="guarantee-icon">🛡</span>
+          <p><strong>Full refund if not approved.</strong> If your independent physician determines that GLP-1 therapy is not clinically appropriate for you, your $89 is refunded in full. No questions asked. You pay for care — not for a chance at it.</p>
+        </div>
+
         <button class="btn-pay" onclick="handlePayment()">Begin My Program — $89/month</button>
-        <p class="payment-legal">Your membership begins today. Cancel anytime via your patient portal or by messaging your care team. Medication costs are separate and paid directly to our pharmacy partner. Full refund if physician determines GLP-1 therapy is not appropriate for you. © Corbin Care Health Inc.</p>
+        <p class="payment-legal">Your membership begins today. Cancel anytime via your patient portal or by messaging your care team. Medication costs are separate and paid directly to our pharmacy partner. © Corbin Care Health Inc.</p>
       </div>
     </div>
 
