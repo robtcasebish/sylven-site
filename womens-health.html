@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Women's Health Programs | Sylven</title>
+<meta name="description" content="Physician-assessed menopause and HRT programs for Canadian women. Independent physicians, Health Canada approved medications, delivered to your door. No eighteen-month waitlist.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400;1,6..72,500&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --parchment: #F4EFE6;
+  --cream: #FAF8F3;
+  --mist: #EDE8DF;
+  --ink: #1A1714;
+  --ink-mid: #2D2825;
+  --dust: #8A8078;
+  --brass: #9C845A;
+  --brass-light: #B89D70;
+  --white: #FFFFFF;
+  --success: #3D6B4F;
+  --font-display: 'Newsreader', Georgia, serif;
+  --font-body: 'Jost', sans-serif;
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --max: 1200px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); background: var(--parchment); color: var(--ink); overflow-x: hidden; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.018; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E"); background-size: 180px; }
+
+.disclaimer-bar { background: var(--ink-mid); padding: 0.5rem 4rem; position: fixed; top: 0; left: 0; right: 0; z-index: 300; }
+.disclaimer-bar p { font-size: 0.68rem; font-weight: 300; color: rgba(244,239,230,0.45); line-height: 1.5; max-width: var(--max); margin: 0 auto; }
+.disclaimer-bar strong { font-weight: 500; color: rgba(244,239,230,0.7); }
+.disclaimer-bar a { color: var(--brass-light); text-decoration: none; }
+
+nav { position: fixed; top: var(--nav-top, 34px); left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 4rem; background: rgba(244,239,230,0.97); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(26,23,20,0.08); }
+nav.scrolled { box-shadow: 0 2px 20px rgba(26,23,20,0.06); }
+.nav-logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 400; color: var(--ink); text-decoration: none; letter-spacing: -0.01em; }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a { font-size: 0.8rem; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-mid); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--brass); }
+.nav-cta { font-family: var(--font-body); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--parchment); background: var(--ink); border: none; padding: 0.65rem 1.5rem; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.25s; }
+.nav-cta:hover { background: var(--brass); }
+.hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+.hamburger span { display: block; width: 22px; height: 1.5px; background: var(--ink); transition: transform 0.3s, opacity 0.3s; }
+.hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+.mobile-menu { display: none; position: fixed; inset: 0; background: var(--parchment); z-index: 190; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
+.mobile-menu.open { display: flex; }
+.mobile-menu a { font-family: var(--font-display); font-size: 2.2rem; font-weight: 400; color: var(--ink); text-decoration: none; }
+.mobile-menu .m-cta { font-family: var(--font-body); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--parchment); background: var(--ink); padding: 0.875rem 2rem; margin-top: 1rem; text-decoration: none; }
+
+section { padding: 7rem 4rem; position: relative; }
+.container { max-width: var(--max); margin: 0 auto; }
+.section-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brass); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.75rem; }
+.section-label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--brass); }
+h2 { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 3.25rem); font-weight: 300; line-height: 1.1; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 1.5rem; }
+h2 em { font-style: italic; }
+p.lead { font-size: 1.05rem; font-weight: 400; color: var(--dust); line-height: 1.85; max-width: 52ch; }
+.btn-primary { font-family: var(--font-body); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--parchment); background: var(--ink); padding: 0.95rem 2.25rem; border: none; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.25s; }
+.btn-primary:hover { background: var(--brass); }
+
+/* HERO */
+.page-hero { background: var(--ink); padding: 9rem 4rem 6rem; position: relative; overflow: hidden; }
+.page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 50%, rgba(156,132,90,0.08) 0%, transparent 65%); pointer-events: none; }
+.breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-size: 0.72rem; color: rgba(244,239,230,0.3); margin-bottom: 2rem; position: relative; z-index: 1; }
+.breadcrumb a { color: rgba(244,239,230,0.3); text-decoration: none; transition: color 0.2s; }
+.breadcrumb a:hover { color: rgba(244,239,230,0.7); }
+.breadcrumb span { color: rgba(244,239,230,0.15); }
+.page-hero-inner { max-width: var(--max); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; position: relative; z-index: 1; }
+.page-hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(156,132,90,0.15); border: 1px solid rgba(156,132,90,0.3); color: var(--brass-light); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.35rem 0.875rem; margin-bottom: 1.5rem; width: fit-content; }
+.page-hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--brass); flex-shrink: 0; }
+.page-hero h1 { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 300; line-height: 1.06; letter-spacing: -0.025em; color: var(--white); margin-bottom: 1.5rem; }
+.page-hero h1 em { font-style: italic; color: var(--brass-light); }
+.page-hero-sub { font-size: 1rem; font-weight: 300; color: rgba(244,239,230,0.5); line-height: 1.85; margin-bottom: 2.5rem; }
+.hero-actions { display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
+.btn-hero { font-family: var(--font-body); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); background: var(--parchment); padding: 0.95rem 2.25rem; border: none; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.25s; }
+.btn-hero:hover { background: var(--brass-light); color: var(--parchment); }
+.btn-hero-ghost { font-size: 0.78rem; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(244,239,230,0.5); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: color 0.2s; }
+.btn-hero-ghost::after { content: '→'; }
+.btn-hero-ghost:hover { color: var(--parchment); }
+.hero-stats { border-left: 1px solid rgba(244,239,230,0.1); padding-left: 5rem; display: flex; flex-direction: column; justify-content: center; gap: 0; align-self: stretch; }
+.hero-stat { padding: 2rem 0; border-bottom: 1px solid rgba(244,239,230,0.07); }
+.hero-stat:first-child { padding-top: 0; }
+.hero-stat:last-child { border-bottom: none; padding-bottom: 0; }
+.hero-stat-num { font-family: var(--font-display); font-size: clamp(1.75rem, 3vw, 2.75rem); font-weight: 300; color: var(--white); line-height: 1; letter-spacing: -0.03em; margin-bottom: 0.45rem; display: block; }
+.hero-stat-num em { font-style: italic; color: var(--brass-light); }
+.hero-stat-label { font-size: 0.7rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(244,239,230,0.35); display: block; line-height: 1.5; }
+
+/* TWO COL */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+
+/* SYMPTOMS GRID */
+.symptoms-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 3.5rem; border-top: 1px solid rgba(26,23,20,0.1); }
+.symptom-item { padding: 1.5rem 2rem 1.5rem 0; border-bottom: 1px solid rgba(26,23,20,0.07); border-right: 1px solid rgba(26,23,20,0.07); }
+.symptom-item:nth-child(even) { padding-left: 2rem; padding-right: 0; border-right: none; }
+.symptom-item:nth-last-child(-n+2) { border-bottom: none; }
+.symptom-name { font-family: var(--font-display); font-size: 1rem; font-weight: 400; color: var(--ink); margin-bottom: 0.3rem; }
+.symptom-desc { font-size: 0.82rem; font-weight: 400; color: var(--dust); line-height: 1.6; }
+
+/* HRT EXPLANATION */
+.hrt-note { background: var(--white); border: 1px solid rgba(26,23,20,0.08); padding: 2rem; margin-top: 3rem; }
+.hrt-note-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.75rem; display: block; }
+.hrt-note p { font-size: 0.9rem; font-weight: 400; color: var(--dust); line-height: 1.8; }
+.hrt-note p + p { margin-top: 0.75rem; }
+
+/* INCLUDES */
+.includes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 4rem; border-top: 1px solid rgba(26,23,20,0.1); }
+.include-item { padding: 2.5rem 2.5rem 2.5rem 0; border-right: 1px solid rgba(26,23,20,0.1); }
+.include-item:last-child { border-right: none; }
+.include-item:not(:first-child) { padding-left: 2.5rem; }
+.include-num { font-family: var(--font-display); font-size: 0.75rem; font-weight: 300; color: var(--dust); letter-spacing: 0.08em; margin-bottom: 1rem; display: block; }
+.include-item h3 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 400; color: var(--ink); margin-bottom: 0.6rem; letter-spacing: -0.01em; line-height: 1.25; }
+.include-item p { font-size: 0.9rem; font-weight: 400; color: var(--dust); line-height: 1.75; }
+
+/* PRICING */
+.pricing-layout { display: grid; grid-template-columns: 1fr 1.4fr; gap: 6rem; align-items: start; }
+.price-card { background: var(--white); border: 1px solid rgba(26,23,20,0.1); padding: 2.5rem; }
+.price-card-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brass); margin-bottom: 1rem; display: block; }
+.price-main { font-family: var(--font-display); font-size: 3rem; font-weight: 300; color: var(--ink); line-height: 1; margin-bottom: 0.25rem; }
+.price-main span { font-size: 1rem; font-weight: 300; color: var(--dust); }
+.price-desc { font-size: 0.8rem; font-weight: 300; color: var(--dust); margin-bottom: 1.5rem; line-height: 1.6; }
+.price-divider { border: none; border-top: 1px solid rgba(26,23,20,0.08); margin: 1.5rem 0; }
+.price-list { list-style: none; margin-bottom: 0; }
+.price-list li { font-size: 0.85rem; font-weight: 400; color: var(--dust); padding: 0.45rem 0; border-bottom: 1px solid rgba(26,23,20,0.05); display: flex; align-items: flex-start; gap: 0.75rem; line-height: 1.5; }
+.price-list li:last-child { border-bottom: none; }
+.price-list li::before { content: '—'; color: var(--brass); flex-shrink: 0; font-size: 0.8rem; margin-top: 0.05rem; }
+.price-med-section { margin-top: 2rem; }
+.price-med-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dust); margin-bottom: 0.875rem; display: block; }
+.price-med-item { padding: 0.875rem 0; border-bottom: 1px solid rgba(26,23,20,0.07); }
+.price-med-item:last-child { border-bottom: none; }
+.price-med-name { font-size: 0.88rem; font-weight: 500; color: var(--ink); margin-bottom: 0.2rem; }
+.price-med-desc { font-size: 0.78rem; font-weight: 300; color: var(--dust); line-height: 1.5; }
+.price-note { font-size: 0.72rem; font-weight: 300; color: var(--dust); line-height: 1.6; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(26,23,20,0.07); }
+
+/* ELIGIBILITY */
+.eligibility-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+.eligibility-list { list-style: none; border-top: 1px solid rgba(26,23,20,0.1); }
+.eligibility-list li { font-size: 0.9rem; font-weight: 400; color: var(--dust); padding: 0.875rem 0; border-bottom: 1px solid rgba(26,23,20,0.07); display: flex; align-items: flex-start; gap: 0.875rem; line-height: 1.55; }
+.eligibility-list li:last-child { border-bottom: none; }
+.eligibility-list li.qualify::before { content: '✓'; color: var(--success); font-size: 0.75rem; margin-top: 0.15rem; flex-shrink: 0; font-weight: 600; }
+.eligibility-list li.caution::before { content: '—'; color: var(--brass); flex-shrink: 0; }
+.eligibility-list li.stop::before { content: '×'; color: #8B2E2E; font-size: 0.8rem; flex-shrink: 0; font-weight: 600; margin-top: 0.1rem; }
+
+/* TESTIMONIALS */
+.testimonials-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 4rem; padding-top: 3rem; border-top: 1px solid rgba(26,23,20,0.1); }
+.testimonial { position: relative; }
+.testimonial::before { content: '\201C'; font-family: var(--font-display); font-size: 6rem; font-weight: 300; color: rgba(26,23,20,0.05); line-height: 1; position: absolute; top: -1.25rem; left: -0.5rem; pointer-events: none; }
+.testimonial blockquote { font-family: var(--font-display); font-size: 1rem; font-weight: 300; font-style: italic; color: var(--ink-mid); line-height: 1.8; margin-bottom: 1.5rem; position: relative; z-index: 1; }
+.t-name { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); display: block; margin-bottom: 0.15rem; }
+.t-loc { font-size: 0.72rem; font-weight: 300; color: var(--dust); }
+
+/* FAQ */
+.faq-layout { display: grid; grid-template-columns: 1fr 1.5fr; gap: 6rem; }
+.faq-item { border-bottom: 1px solid rgba(26,23,20,0.1); }
+.faq-item:first-child { border-top: 1px solid rgba(26,23,20,0.1); }
+.faq-question { width: 100%; background: none; border: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 1.2rem 0; font-family: var(--font-body); font-size: 0.92rem; font-weight: 400; color: var(--ink); text-align: left; line-height: 1.45; transition: color 0.25s; }
+.faq-question:hover, .faq-question.open { color: var(--brass); }
+.faq-icon { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; border: 1px solid rgba(26,23,20,0.2); display: flex; align-items: center; justify-content: center; transition: background 0.25s, transform 0.35s; }
+.faq-question.open .faq-icon { background: var(--brass); border-color: var(--brass); transform: rotate(45deg); }
+.faq-icon svg { width: 10px; height: 10px; stroke: var(--dust); transition: stroke 0.25s; }
+.faq-question.open .faq-icon svg { stroke: white; }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s var(--ease), padding 0.3s; }
+.faq-answer.open { max-height: 600px; padding-bottom: 1.1rem; }
+.faq-answer p { font-size: 0.9rem; color: var(--dust); line-height: 1.8; font-weight: 400; }
+
+/* CTA */
+.cta-banner { background: var(--ink); padding: 7rem 4rem; text-align: center; }
+.cta-banner h2 { color: var(--white); font-size: clamp(2.25rem, 4vw, 3.5rem); max-width: 20ch; margin: 0 auto 1.5rem; }
+.cta-banner h2 em { color: var(--brass-light); }
+.cta-banner p { font-size: 0.95rem; font-weight: 300; color: rgba(244,239,230,0.4); max-width: 44ch; margin: 0 auto 3rem; line-height: 1.8; }
+.cta-banner .section-label { color: var(--brass-light); justify-content: center; margin-bottom: 1.5rem; }
+.cta-banner .section-label::before { background: var(--brass-light); }
+.btn-cta { font-family: var(--font-body); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); background: var(--parchment); padding: 0.95rem 2.5rem; border: none; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.25s, color 0.25s; }
+.btn-cta:hover { background: var(--brass-light); color: var(--parchment); }
+
+/* FOOTER */
+footer { background: var(--ink-mid); padding: 4rem 4rem 2.5rem; }
+.footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; max-width: var(--max); margin: 0 auto 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(244,239,230,0.07); }
+.footer-brand { font-family: var(--font-display); font-size: 1.35rem; font-weight: 400; color: var(--white); letter-spacing: -0.01em; margin-bottom: 1rem; display: block; }
+.footer-desc { font-size: 0.82rem; font-weight: 300; color: rgba(244,239,230,0.3); line-height: 1.75; max-width: 260px; }
+.footer-col h4 { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(244,239,230,0.25); margin-bottom: 1.25rem; }
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 0.6rem; }
+.footer-col ul li a { font-size: 0.82rem; font-weight: 300; color: rgba(244,239,230,0.4); text-decoration: none; transition: color 0.2s; }
+.footer-col ul li a:hover { color: rgba(244,239,230,0.75); }
+.footer-bottom { max-width: var(--max); margin: 0 auto; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+.footer-bottom p { font-size: 0.72rem; font-weight: 300; color: rgba(244,239,230,0.2); line-height: 1.7; max-width: 600px; }
+.footer-legal-links { display: flex; gap: 1.5rem; flex-wrap: wrap; flex-shrink: 0; }
+.footer-legal-links a { font-size: 0.72rem; color: rgba(244,239,230,0.25); text-decoration: none; transition: color 0.2s; white-space: nowrap; }
+.footer-legal-links a:hover { color: rgba(244,239,230,0.6); }
+
+.fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
+.fade-up.visible { opacity: 1; transform: none; }
+.fd1 { transition-delay: 0.1s; } .fd2 { transition-delay: 0.2s; } .fd3 { transition-delay: 0.3s; }
+
+@media (max-width: 1024px) {
+  .disclaimer-bar { padding: 0.5rem 1.5rem; }
+  nav { padding: 1.25rem 1.5rem; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .nav-cta { display: none; }
+  section { padding: 4.5rem 1.5rem; }
+  .page-hero { padding: 8rem 1.5rem 4rem; }
+  .page-hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .hero-stats { border-left: none; border-top: 1px solid rgba(244,239,230,0.1); padding-left: 0; padding-top: 2rem; flex-direction: row; flex-wrap: wrap; }
+  .hero-stat { flex: 1; min-width: 140px; padding: 1.25rem 1.5rem 1.25rem 0; border-bottom: none; border-right: 1px solid rgba(244,239,230,0.07); }
+  .hero-stat:last-child { border-right: none; }
+  .two-col { grid-template-columns: 1fr; gap: 3rem; }
+  .symptoms-grid { grid-template-columns: 1fr; }
+  .symptom-item { border-right: none; padding-right: 0; }
+  .symptom-item:nth-child(even) { padding-left: 0; }
+  .symptom-item:nth-last-child(-n+2) { border-bottom: 1px solid rgba(26,23,20,0.07); }
+  .symptom-item:last-child { border-bottom: none; }
+  .includes-grid { grid-template-columns: 1fr; }
+  .include-item { padding: 2rem 0 !important; border-right: none; border-bottom: 1px solid rgba(26,23,20,0.08); }
+  .include-item:last-child { border-bottom: none; }
+  .pricing-layout { grid-template-columns: 1fr; gap: 3rem; }
+  .eligibility-layout { grid-template-columns: 1fr; gap: 3rem; }
+  .testimonials-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .faq-layout { grid-template-columns: 1fr; gap: 3rem; }
+  .cta-banner { padding: 4.5rem 1.5rem; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  footer { padding: 3rem 1.5rem 2rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="disclaimer-bar">
+  <p><strong>Medical Information Only.</strong> This platform facilitates access to independent licensed Canadian physicians. All treatment decisions are made solely by your treating physician following individual consultation. <a href="medical-consent.html">Learn more →</a></p>
+</div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Sylven</a>
+  <ul class="nav-links">
+    <li><a href="weight-loss.html">Weight Loss</a></li>
+    <li><a href="mens-health.html">Men's Health</a></li>
+    <li><a href="womens-health.html" class="active">Women's Health</a></li>
+    <li><a href="index.html#how-it-works">How It Works</a></li>
+  </ul>
+  <a href="womens-quiz.html" class="nav-cta">Begin Assessment</a>
+  <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="weight-loss.html" onclick="closeMobileMenu()">Weight Loss</a>
+  <a href="mens-health.html" onclick="closeMobileMenu()">Men's Health</a>
+  <a href="womens-health.html" onclick="closeMobileMenu()">Women's Health</a>
+  <a href="womens-quiz.html" class="m-cta" onclick="closeMobileMenu()">Begin Assessment</a>
+</div>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div>
+      <div class="breadcrumb">
+        <a href="index.html">Sylven</a>
+        <span>/</span>
+        <span>Women's Health</span>
+      </div>
+      <div class="page-hero-badge">Menopause and HRT programs</div>
+      <h1>Your symptoms<br>are <em>real.</em><br>So is the help.</h1>
+      <p class="page-hero-sub">Menopause is a medical transition, not a personal failing. Sylven connects you with a licensed Canadian physician for a proper clinical assessment and a treatment plan that takes you seriously.</p>
+      <div class="hero-actions fade-up">
+        <a href="womens-quiz.html" class="btn-hero">Begin Your Assessment</a>
+        <a href="#what-we-treat" class="btn-hero-ghost">What we treat</a>
+      </div>
+    </div>
+    <div class="hero-stats fade-up fd1">
+      <div class="hero-stat">
+        <span class="hero-stat-num">1 in <em>3</em></span>
+        <span class="hero-stat-label">Canadian women wait more than<br>two years for menopause care</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num"><em>10</em> years</span>
+        <span class="hero-stat-label">Perimenopause can begin up to<br>a decade before menopause</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">24 <em>hrs</em></span>
+        <span class="hero-stat-label">From assessment<br>to physician response</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT WE TREAT -->
+<section style="background: var(--parchment);" id="what-we-treat">
+  <div class="container">
+    <div class="two-col">
+      <div class="fade-up">
+        <p class="section-label">What we treat</p>
+        <h2>Symptoms that<br>deserve proper <em>attention.</em></h2>
+        <p class="lead" style="margin-bottom: 1.5rem;">Perimenopause and menopause produce a range of symptoms that are frequently dismissed or undertreated in the Canadian healthcare system. They should not be.</p>
+        <p class="lead">Sylven connects you with a physician who has the time to review your situation properly and who is up to date on current evidence-based guidance from the Canadian Menopause Society.</p>
+      </div>
+      <div class="fade-up fd1">
+        <div class="symptoms-grid">
+          <div class="symptom-item">
+            <p class="symptom-name">Hot flashes and night sweats</p>
+            <p class="symptom-desc">Vasomotor symptoms affect up to 80% of women in the menopausal transition and can significantly disrupt daily life and sleep.</p>
+          </div>
+          <div class="symptom-item">
+            <p class="symptom-name">Sleep disruption</p>
+            <p class="symptom-desc">Often caused by night sweats and hormonal changes. Chronic sleep deprivation compounds mood and cognitive symptoms.</p>
+          </div>
+          <div class="symptom-item">
+            <p class="symptom-name">Vaginal dryness and discomfort</p>
+            <p class="symptom-desc">Caused by declining estrogen. Affects intimacy, comfort, and urinary health. Highly treatable with targeted therapy.</p>
+          </div>
+          <div class="symptom-item">
+            <p class="symptom-name">Mood changes and anxiety</p>
+            <p class="symptom-desc">Hormonal fluctuations affect neurotransmitter activity. Irritability, low mood, and anxiety are physiological responses, not psychological weakness.</p>
+          </div>
+          <div class="symptom-item">
+            <p class="symptom-name">Brain fog and concentration</p>
+            <p class="symptom-desc">Difficulty with memory and focus is widely reported during perimenopause. Estrogen has documented effects on cognitive function.</p>
+          </div>
+          <div class="symptom-item">
+            <p class="symptom-name">Joint pain and fatigue</p>
+            <p class="symptom-desc">Estrogen has anti-inflammatory properties. Its decline can cause musculoskeletal discomfort and persistent fatigue that is not explained by other causes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hrt-note fade-up" style="margin-top: 4rem;">
+      <span class="hrt-note-label">A note on the evidence for HRT</span>
+      <p>Hormone replacement therapy was the subject of significant controversy following the 2002 Women's Health Initiative study, which led many physicians to stop prescribing it. Subsequent re-analysis of that data, and twenty years of follow-up research, has substantially revised the picture. For most healthy women in their 40s and 50s who begin HRT within ten years of menopause onset, the benefits for symptom management, bone health, and cardiovascular protection outweigh the risks.</p>
+      <p>The Canadian Menopause Society and the Menopause Society now support HRT as appropriate first-line treatment for symptomatic women without contraindications. Your physician will review your individual health history and help you make an informed decision.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S INCLUDED -->
+<section style="background: var(--cream);" id="how-it-works">
+  <div class="container">
+    <div style="max-width: 600px;" class="fade-up">
+      <p class="section-label">What's included</p>
+      <h2>A program built<br>around <em>you.</em></h2>
+      <p class="lead">One program membership covers the full clinical support layer. Medication is dispensed by our pharmacy partner at cost, with no markup.</p>
+    </div>
+    <div class="includes-grid">
+      <div class="include-item fade-up">
+        <span class="include-num">01</span>
+        <h3>Independent Physician Assessment</h3>
+        <p>A licensed Canadian physician, independent of Sylven, reviews your complete symptom history and health profile. They determine whether HRT is appropriate and which formulation is right for you specifically.</p>
+      </div>
+      <div class="include-item fade-up fd1">
+        <span class="include-num">02</span>
+        <h3>Ongoing Monitoring and Adjustment</h3>
+        <p>HRT is not one-size-fits-all. Your physician conducts regular reviews to assess how treatment is working, adjust formulation or dose as needed, and monitor your response over time.</p>
+      </div>
+      <div class="include-item fade-up fd2">
+        <span class="include-num">03</span>
+        <h3>Secure Patient Portal and Messaging</h3>
+        <p>Manage your prescriptions, review physician notes, track your symptom progress, and message your care team directly. Everything in one place, available on any device.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section style="background: var(--mist);">
+  <div class="container">
+    <div class="pricing-layout">
+      <div class="fade-up">
+        <p class="section-label">Transparent pricing</p>
+        <h2>Two components.<br><em>No surprises.</em></h2>
+        <p class="lead" style="margin-bottom: 2rem;">Program membership covers the clinical support layer. Medication is paid directly to our pharmacy partner at their standard cost, with no markup from Sylven.</p>
+        <p class="lead">The right HRT formulation varies by individual. Your physician will discuss options with you and prescribe based on your symptoms, health history, and preferences.</p>
+      </div>
+      <div class="fade-up fd1">
+        <div class="price-card">
+          <span class="price-card-label">Program membership</span>
+          <div class="price-main">$69<span>/month</span></div>
+          <p class="price-desc">Covers all clinical support services. Cancel anytime.</p>
+          <hr class="price-divider">
+          <ul class="price-list">
+            <li>Independent physician assessment</li>
+            <li>Ongoing monitoring and dose adjustments</li>
+            <li>Patient portal and symptom tracking</li>
+            <li>24/7 care team messaging</li>
+            <li>Prescription renewal coordination</li>
+          </ul>
+          <hr class="price-divider">
+          <div class="price-med-section">
+            <span class="price-med-label">Common HRT medications via pharmacy</span>
+            <div class="price-med-item">
+              <p class="price-med-name">Estrogen therapy</p>
+              <p class="price-med-desc">Patches, gels, and pills. Approx. $25–60/month. For women without a uterus, estrogen alone is typically prescribed.</p>
+            </div>
+            <div class="price-med-item">
+              <p class="price-med-name">Combined estrogen and progesterone</p>
+              <p class="price-med-desc">For women with an intact uterus, progesterone protects the endometrium. Approx. $40–90/month depending on formulation.</p>
+            </div>
+            <div class="price-med-item">
+              <p class="price-med-name">Local vaginal estrogen</p>
+              <p class="price-med-desc">Creams or rings for vaginal symptoms only. Very low systemic absorption. Approx. $20–45/month.</p>
+            </div>
+            <p class="price-note">Medication costs are estimates and vary by formulation, dose, and pharmacy. Your physician determines which medication is appropriate based on your individual assessment. All prices paid directly to our pharmacy partner.</p>
+          </div>
+        </div>
+        <a href="womens-quiz.html" class="btn-primary" style="display: block; text-align: center; margin-top: 1rem;">Begin Your Assessment</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ELIGIBILITY -->
+<section style="background: var(--parchment);">
+  <div class="container">
+    <div class="eligibility-layout">
+      <div class="fade-up">
+        <p class="section-label">Who qualifies</p>
+        <h2>Eligibility for<br><em>HRT programs.</em></h2>
+        <p class="lead" style="margin-bottom: 2rem;">Most women experiencing perimenopause or menopause symptoms are candidates for HRT. Your physician reviews your individual health history to confirm it is safe and appropriate.</p>
+        <p class="lead">The assessment is free. If your physician determines HRT is not appropriate for you, you receive a full refund of your program fee.</p>
+        <a href="womens-quiz.html" class="btn-primary" style="margin-top: 2rem; display: inline-block;">Check Your Eligibility</a>
+      </div>
+      <div class="fade-up fd1">
+        <ul class="eligibility-list">
+          <li class="qualify">Women experiencing perimenopause or menopause symptoms</li>
+          <li class="qualify">Women who have had a surgical menopause (oophorectomy)</li>
+          <li class="qualify">Women 40 and older with qualifying symptoms</li>
+          <li class="qualify">No personal history of hormone-sensitive cancer (breast, endometrial)</li>
+          <li class="qualify">No active or recent blood clot (DVT or pulmonary embolism)</li>
+          <li class="caution">History of DVT or PE: individual physician risk-benefit review</li>
+          <li class="caution">Migraines with aura: transdermal estrogen often appropriate, oral may not be</li>
+          <li class="caution">Cardiovascular disease history: individual review required</li>
+          <li class="stop">Active or recent breast cancer or endometrial cancer: not eligible</li>
+          <li class="stop">Unexplained vaginal bleeding: requires investigation before treatment</li>
+          <li class="stop">Known or suspected pregnancy</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section style="background: var(--cream);">
+  <div class="container">
+    <p class="section-label fade-up">Patient stories</p>
+    <h2 class="fade-up fd1">Women who stopped<br><em>waiting.</em></h2>
+    <div class="testimonials-grid">
+      <div class="testimonial fade-up">
+        <blockquote>"My GP told me hot flashes were normal and I should just manage them. I had been managing them for three years. Within six weeks of starting HRT I felt like myself again. I only wish someone had taken me seriously sooner."</blockquote>
+        <div>
+          <span class="t-name">Patricia W.</span>
+          <span class="t-loc">Vancouver, BC · Women's Health Program</span>
+        </div>
+      </div>
+      <div class="testimonial fade-up fd1">
+        <blockquote>"I didn't even know what perimenopause was until I started researching why I couldn't sleep and couldn't think straight. The physician spent real time reviewing my history and explained everything clearly. The difference in three months has been significant."</blockquote>
+        <div>
+          <span class="t-name">Michelle D.</span>
+          <span class="t-loc">Calgary, AB · Women's Health Program</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section style="background: var(--parchment);">
+  <div class="container">
+    <div class="faq-layout">
+      <div class="fade-up">
+        <p class="section-label">Common questions</p>
+        <h2>Women's health<br><em>FAQ.</em></h2>
+        <p class="lead" style="margin-bottom: 2rem;">Questions about HRT, eligibility, or what to expect? Your care team is available around the clock.</p>
+        <a href="womens-quiz.html" class="btn-primary">Begin Assessment</a>
+      </div>
+      <div class="fade-up fd1">
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false"><span>Is HRT safe? I thought it caused cancer.</span><div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div></button>
+          <div class="faq-answer"><p>The concern comes from a 2002 study that has since been substantially revised. That study used older oral synthetic hormones in older women, many of whom already had cardiovascular risk factors. For healthy women in their 40s and 50s starting treatment within ten years of menopause onset, current evidence shows that the benefits of HRT generally outweigh the risks. The Canadian Menopause Society supports HRT as appropriate first-line treatment for symptomatic women without contraindications. Your physician will review your individual situation.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false"><span>How do I know if I'm in perimenopause or menopause?</span><div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div></button>
+          <div class="faq-answer"><p>Perimenopause is the transition phase, typically beginning in the mid-40s, during which hormone levels become irregular. Symptoms can begin years before periods stop. Menopause is defined as twelve consecutive months without a period, with an average age of 51 in Canada. You do not need to wait for periods to stop to seek help. If you are experiencing symptoms, a physician can assess you regardless of where you are in the transition.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false"><span>What is the difference between estrogen and combined HRT?</span><div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div></button>
+          <div class="faq-answer"><p>Women with an intact uterus require progesterone alongside estrogen to protect the uterine lining from overgrowth. This is called combined HRT. Women who have had a hysterectomy can take estrogen alone. Your physician determines which is appropriate based on your history. Formulations vary too: patches and gels deliver estrogen through the skin, which avoids first-pass liver metabolism and may carry a lower clot risk than oral tablets.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false"><span>How long will it take to feel a difference?</span><div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div></button>
+          <div class="faq-answer"><p>Many women notice improvement in vasomotor symptoms such as hot flashes and night sweats within two to four weeks. Sleep often improves soon after. Mood and cognitive symptoms may take six to eight weeks. Vaginal symptoms typically respond within one to three months. Full response to HRT is usually assessed at three months, at which point your physician may adjust formulation or dose.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false"><span>How long can I stay on HRT?</span><div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div></button>
+          <div class="faq-answer"><p>There is no fixed maximum duration. The Canadian Menopause Society recommends that decisions about duration be made individually, balancing ongoing benefits against any risks, and reviewed regularly with your physician. Many women continue HRT for years. The old guideline of stopping at five years has been largely replaced by an individualised approach based on current evidence.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-banner">
+  <p class="section-label">Ready to begin</p>
+  <h2>You have waited<br>long <em>enough.</em></h2>
+  <p>A five-minute assessment connects you with a licensed Canadian physician within 24 hours. No referral. No eighteen-month waitlist.</p>
+  <a href="womens-quiz.html" class="btn-cta">Begin Your Assessment</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <span class="footer-brand">Sylven</span>
+      <p class="footer-desc">Connecting Canadians with independent licensed physicians and Health Canada registered pharmacies. Serving all provinces.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Programs</h4>
+      <ul>
+        <li><a href="weight-loss.html">Weight Loss</a></li>
+        <li><a href="mens-health.html">Men's Health</a></li>
+        <li><a href="womens-health.html">Women's Health</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="physicians.html">Our Physicians</a></li>
+        <li><a href="pharmacies.html">Partner Pharmacies</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="terms.html">Terms of Service</a></li>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="medical-consent.html">Medical Consent</a></li>
+        <li><a href="refund.html">Refund Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Corbin Care Health Inc. All rights reserved. Sylven is a health coordination platform, not a medical clinic. All treatment decisions are made solely by independent licensed Canadian physicians following individual consultation. All medications dispensed by Health Canada registered pharmacies. Results may vary. PIPEDA compliant.</p>
+    <div class="footer-legal-links">
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="medical-consent.html">Medical Consent</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function positionHeader() {
+  const bar = document.querySelector('.disclaimer-bar');
+  const nav = document.getElementById('navbar');
+  const hero = document.querySelector('.page-hero');
+  if (!bar || !nav) return;
+  const h = bar.offsetHeight;
+  document.documentElement.style.setProperty('--nav-top', h + 'px');
+  if (hero) hero.style.paddingTop = (h + nav.offsetHeight + 40) + 'px';
+}
+positionHeader();
+window.addEventListener('resize', positionHeader);
+
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 40));
+
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+function closeMobileMenu() { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); document.body.style.overflow = ''; }
+hamburger.addEventListener('click', () => { const o = mobileMenu.classList.toggle('open'); hamburger.classList.toggle('open', o); document.body.style.overflow = o ? 'hidden' : ''; });
+
+const io = new IntersectionObserver(e => e.forEach(x => { if (x.isIntersecting) x.target.classList.add('visible'); }), { threshold: 0.08 });
+document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const open = btn.classList.contains('open');
+    document.querySelectorAll('.faq-question.open').forEach(b => { b.classList.remove('open'); b.setAttribute('aria-expanded','false'); b.nextElementSibling.classList.remove('open'); });
+    if (!open) { btn.classList.add('open'); btn.setAttribute('aria-expanded','true'); btn.nextElementSibling.classList.add('open'); }
+  });
+});
+</script>
+</body>
+</html>

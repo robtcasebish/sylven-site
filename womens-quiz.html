@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Women's Health Assessment — Sylven</title>
+<meta name="description" content="Begin your Sylven women's health assessment. A licensed Canadian physician will review your information within 24 hours.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --parchment: #F4EFE6; --cream: #FAF8F3; --mist: #EDE8DF;
+  --ink: #1A1714; --ink-mid: #2D2825; --dust: #8A8078;
+  --brass: #9C845A; --brass-light: #B89D70; --white: #FFFFFF;
+  --success: #3D6B4F; --error: #8B2E2E;
+  --font-display: 'Newsreader', Georgia, serif;
+  --font-body: 'Jost', sans-serif;
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); background: var(--parchment); color: var(--ink); min-height: 100vh; -webkit-font-smoothing: antialiased; }
+
+.disclaimer-bar { background: var(--ink-mid); padding: 0.5rem 2rem; position: fixed; top: 0; left: 0; right: 0; z-index: 300; }
+.disclaimer-bar p { font-size: 0.68rem; font-weight: 300; color: rgba(244,239,230,0.45); line-height: 1.5; max-width: 1200px; margin: 0 auto; }
+.disclaimer-bar strong { font-weight: 500; color: rgba(244,239,230,0.7); }
+.disclaimer-bar a { color: var(--brass-light); text-decoration: none; }
+
+nav { position: fixed; top: var(--nav-top, 34px); left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 4rem; background: rgba(244,239,230,0.97); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(26,23,20,0.08); }
+.nav-logo { font-family: var(--font-display); font-size: 1.4rem; font-weight: 400; color: var(--ink); text-decoration: none; }
+.nav-back { font-size: 0.75rem; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; color: var(--dust); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s; }
+.nav-back::before { content: '←'; }
+.nav-back:hover { color: var(--ink); }
+
+.quiz-wrap { min-height: 100vh; display: flex; align-items: flex-start; justify-content: center; padding: 10rem 1.5rem 4rem; }
+.quiz-card { background: var(--white); width: 100%; max-width: 680px; border: 1px solid rgba(26,23,20,0.08); }
+
+.quiz-progress { padding: 1.75rem 2.5rem 0; }
+.progress-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; }
+.progress-step { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brass); }
+.progress-fraction { font-size: 0.68rem; font-weight: 400; color: var(--dust); }
+.progress-bar { height: 1px; background: rgba(26,23,20,0.08); position: relative; overflow: hidden; }
+.progress-fill { position: absolute; left: 0; top: 0; bottom: 0; background: var(--brass); transition: width 0.5s var(--ease); }
+
+.quiz-body { padding: 2.5rem 2.5rem 2rem; }
+.step { display: none; }
+.step.active { display: block; animation: stepIn 0.35s var(--ease); }
+@keyframes stepIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+.step-eyebrow { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dust); margin-bottom: 0.6rem; display: block; }
+.step h2 { font-family: var(--font-display); font-size: clamp(1.4rem, 3vw, 1.85rem); font-weight: 400; color: var(--ink); line-height: 1.2; letter-spacing: -0.015em; margin-bottom: 0.5rem; }
+.step h2 em { font-style: italic; }
+.step-desc { font-size: 0.85rem; font-weight: 300; color: var(--dust); line-height: 1.7; margin-bottom: 1.75rem; }
+
+.options-grid { display: grid; gap: 0.5rem; margin-bottom: 1.5rem; }
+.options-grid.two-col { grid-template-columns: 1fr 1fr; }
+.option { display: flex; align-items: center; gap: 0.875rem; padding: 0.95rem 1.1rem; border: 1px solid rgba(26,23,20,0.12); cursor: pointer; transition: border-color 0.2s, background 0.2s; user-select: none; background: var(--white); }
+.option:hover { border-color: rgba(26,23,20,0.3); background: rgba(26,23,20,0.015); }
+.option.selected { border-color: var(--ink); background: rgba(26,23,20,0.03); }
+.option.selected .option-indicator { background: var(--ink); border-color: var(--ink); }
+.option.selected .option-indicator::after { opacity: 1; }
+.option-indicator { width: 18px; height: 18px; border: 1.5px solid rgba(26,23,20,0.25); border-radius: 50%; flex-shrink: 0; position: relative; transition: background 0.15s, border-color 0.15s; }
+.option-indicator.sq { border-radius: 3px; }
+.option-indicator::after { content: ''; position: absolute; inset: 3px; background: var(--parchment); border-radius: 50%; opacity: 0; transition: opacity 0.15s; }
+.option-indicator.sq::after { border-radius: 1px; content: '✓'; background: none; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: white; font-weight: 600; }
+.option-text { font-size: 0.875rem; font-weight: 400; color: var(--ink); line-height: 1.4; }
+.option-sub { font-size: 0.75rem; font-weight: 300; color: var(--dust); margin-top: 0.1rem; display: block; }
+.option.danger.selected { border-color: var(--error); background: rgba(139,46,46,0.04); }
+.option.danger.selected .option-indicator { background: var(--error); border-color: var(--error); }
+
+.field-group { margin-bottom: 1.25rem; }
+.field-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dust); margin-bottom: 0.45rem; display: block; }
+.field-input { width: 100%; padding: 0.8rem 1rem; border: 1px solid rgba(26,23,20,0.15); font-family: var(--font-body); font-size: 0.9rem; font-weight: 400; color: var(--ink); background: var(--white); outline: none; transition: border-color 0.2s; -webkit-appearance: none; }
+.field-input:focus { border-color: var(--ink); }
+.field-input::placeholder { color: var(--dust); }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+.text-area { width: 100%; padding: 0.8rem 1rem; border: 1px solid rgba(26,23,20,0.15); font-family: var(--font-body); font-size: 0.875rem; font-weight: 300; color: var(--ink); background: var(--white); outline: none; resize: vertical; min-height: 80px; transition: border-color 0.2s; line-height: 1.6; }
+.text-area:focus { border-color: var(--ink); }
+.text-area::placeholder { color: var(--dust); }
+.section-divider { border: none; border-top: 1px solid rgba(26,23,20,0.08); margin: 1.5rem 0; }
+.section-title { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dust); margin-bottom: 0.875rem; display: block; }
+
+.quiz-nav { padding: 0 2.5rem 2.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.btn-continue { font-family: var(--font-body); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--parchment); background: var(--ink); padding: 0.9rem 2.25rem; border: none; cursor: pointer; transition: background 0.25s; }
+.btn-continue:hover { background: var(--brass); }
+.btn-back { font-family: var(--font-body); font-size: 0.78rem; font-weight: 400; color: var(--dust); background: none; border: none; cursor: pointer; padding: 0; transition: color 0.2s; display: flex; align-items: center; gap: 0.35rem; }
+.btn-back::before { content: '←'; }
+.btn-back:hover { color: var(--ink); }
+
+/* RESULTS */
+.result-screen { display: none; }
+.result-screen.active { display: block; }
+.result-eligible { padding: 2.5rem 2.5rem 0; }
+.result-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0.875rem; background: rgba(61,107,79,0.1); border: 1px solid rgba(61,107,79,0.2); margin-bottom: 1.5rem; }
+.result-badge span { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--success); }
+.result-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--success); flex-shrink: 0; }
+.result-eligible h2 { font-family: var(--font-display); font-size: clamp(1.4rem, 3vw, 1.85rem); font-weight: 400; color: var(--ink); line-height: 1.2; letter-spacing: -0.015em; margin-bottom: 0.75rem; }
+.result-eligible h2 em { font-style: italic; }
+.result-eligible p { font-size: 0.875rem; font-weight: 300; color: var(--dust); line-height: 1.75; margin-bottom: 1rem; }
+.timeline-strip { display: grid; grid-template-columns: 1fr 1fr 1fr; margin: 1.75rem 0 0; border-top: 1px solid rgba(26,23,20,0.08); border-bottom: 1px solid rgba(26,23,20,0.08); }
+.timeline-item { padding: 1.25rem 1rem; border-right: 1px solid rgba(26,23,20,0.08); text-align: center; }
+.timeline-item:last-child { border-right: none; }
+.timeline-num { font-family: var(--font-display); font-size: 0.7rem; color: var(--brass); letter-spacing: 0.08em; text-transform: uppercase; display: block; margin-bottom: 0.3rem; }
+.timeline-action { font-size: 0.78rem; font-weight: 500; color: var(--ink); display: block; margin-bottom: 0.2rem; line-height: 1.3; }
+.timeline-when { font-size: 0.68rem; font-weight: 300; color: var(--dust); display: block; }
+.payment-section { border-top: 1px solid rgba(26,23,20,0.08); padding: 2rem 2.5rem 2.5rem; }
+.payment-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 1.5rem; }
+.payment-title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 400; color: var(--ink); }
+.payment-amount { font-family: var(--font-display); font-size: 1.75rem; font-weight: 300; color: var(--ink); line-height: 1; }
+.payment-amount span { font-family: var(--font-body); font-size: 0.8rem; font-weight: 300; color: var(--dust); }
+.payment-includes { margin-bottom: 1.5rem; }
+.payment-includes li { font-size: 0.82rem; font-weight: 300; color: var(--dust); line-height: 1.6; padding: 0.3rem 0 0.3rem 1rem; position: relative; list-style: none; }
+.payment-includes li::before { content: '—'; position: absolute; left: 0; color: var(--brass); }
+.cost-reframe { background: rgba(156,132,90,0.07); border: 1px solid rgba(156,132,90,0.18); padding: 1rem 1.25rem; margin-bottom: 1.25rem; }
+.cost-reframe-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.2rem; display: block; }
+.cost-reframe p { font-size: 0.8rem; font-weight: 300; color: var(--ink-mid); line-height: 1.5; margin-bottom: 0; }
+.cost-reframe p strong { font-weight: 500; }
+.conversion-quote { padding: 1.5rem 0 1.25rem; border-bottom: 1px solid rgba(26,23,20,0.08); margin-bottom: 1.25rem; position: relative; }
+.conversion-quote::before { content: '\201C'; font-family: var(--font-display); font-size: 4rem; font-weight: 300; color: rgba(26,23,20,0.07); line-height: 1; position: absolute; top: 0.75rem; left: -0.25rem; pointer-events: none; }
+.conversion-quote blockquote { font-family: var(--font-display); font-size: 1rem; font-weight: 300; font-style: italic; color: var(--ink-mid); line-height: 1.7; position: relative; z-index: 1; margin-bottom: 0.75rem; }
+.conversion-quote cite { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dust); font-style: normal; display: block; }
+.trust-marks { display: flex; align-items: center; justify-content: center; gap: 1.5rem; padding: 0.875rem 0; margin-bottom: 0.875rem; border-top: 1px solid rgba(26,23,20,0.06); border-bottom: 1px solid rgba(26,23,20,0.06); flex-wrap: wrap; }
+.trust-mark { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.09em; text-transform: uppercase; color: var(--dust); display: flex; align-items: center; gap: 0.35rem; }
+.trust-mark::before { content: '✓'; color: var(--success); font-size: 0.7rem; }
+.stripe-placeholder { border: 1px solid rgba(26,23,20,0.12); padding: 1.25rem; margin-bottom: 1rem; background: var(--white); }
+.stripe-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 0.75rem; }
+.stripe-field { width: 100%; padding: 0.7rem 0.875rem; border: 1px solid rgba(26,23,20,0.12); font-family: var(--font-body); font-size: 0.875rem; color: var(--ink); background: var(--white); outline: none; }
+.stripe-field:focus { border-color: var(--ink); }
+.stripe-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dust); margin-bottom: 0.35rem; display: block; }
+.guarantee-block { background: rgba(61,107,79,0.06); border: 1px solid rgba(61,107,79,0.18); padding: 1rem 1.25rem; margin-bottom: 1rem; display: flex; align-items: flex-start; gap: 0.875rem; }
+.guarantee-block p { font-size: 0.82rem; font-weight: 300; color: var(--ink-mid); line-height: 1.6; margin-bottom: 0; }
+.guarantee-block strong { font-weight: 600; color: var(--success); }
+.btn-pay { width: 100%; padding: 1rem; font-family: var(--font-body); font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--parchment); background: var(--ink); border: none; cursor: pointer; transition: background 0.25s; margin-bottom: 0.875rem; }
+.btn-pay:hover { background: var(--brass); }
+.payment-legal { font-size: 0.68rem; font-weight: 300; color: var(--dust); line-height: 1.65; text-align: center; }
+.result-decline { padding: 2.5rem; }
+.decline-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0.875rem; background: rgba(26,23,20,0.05); border: 1px solid rgba(26,23,20,0.1); margin-bottom: 1.5rem; }
+.decline-badge span { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dust); }
+.result-decline h2 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 400; color: var(--ink); margin-bottom: 1rem; line-height: 1.2; }
+.result-decline p { font-size: 0.875rem; font-weight: 300; color: var(--dust); line-height: 1.75; margin-bottom: 1rem; }
+.result-decline a { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink); text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 0.5rem; }
+.result-decline a::after { content: '→'; }
+
+@media (max-width: 640px) {
+  nav { padding: 1rem 1.25rem; }
+  .quiz-body { padding: 1.75rem 1.5rem 1.25rem; }
+  .quiz-nav { padding: 0 1.5rem 2rem; }
+  .quiz-progress { padding: 1.5rem 1.5rem 0; }
+  .options-grid.two-col { grid-template-columns: 1fr; }
+  .field-row { grid-template-columns: 1fr; }
+  .payment-section { padding: 1.5rem 1.5rem 2rem; }
+  .result-eligible { padding: 1.75rem 1.5rem 0; }
+  .result-decline { padding: 1.75rem 1.5rem; }
+  .timeline-strip { grid-template-columns: 1fr; }
+  .timeline-item { border-right: none; border-bottom: 1px solid rgba(26,23,20,0.08); text-align: left; }
+  .timeline-item:last-child { border-bottom: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="disclaimer-bar">
+  <p><strong>Medical Information Only.</strong> This platform facilitates access to independent licensed Canadian physicians. All treatment decisions are made solely by your treating physician. <a href="medical-consent.html">Learn more →</a></p>
+</div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Sylven</a>
+  <a href="womens-health.html" class="nav-back">Back to Women's Health</a>
+</nav>
+
+<div class="quiz-wrap">
+  <div class="quiz-card">
+
+    <div class="quiz-progress" id="quizProgress">
+      <div class="progress-meta">
+        <span class="progress-step" id="stepLabel">Step 1 of 5</span>
+        <span class="progress-fraction" id="stepFraction">Women's health assessment</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width: 20%"></div>
+      </div>
+    </div>
+
+    <div class="quiz-body">
+
+      <!-- STEP 1: SYMPTOMS -->
+      <div class="step active" id="step-1">
+        <span class="step-eyebrow">Getting started</span>
+        <h2>What are you<br>experiencing?</h2>
+        <p class="step-desc">Select all that apply. There are no wrong answers — your physician will review everything.</p>
+        <div class="options-grid">
+          <div class="option" data-group="symptoms" data-value="hot-flashes" onclick="toggleOption(this)">
+            <div class="option-indicator sq"></div>
+            <div class="option-text">Hot flashes or night sweats</div>
+          </div>
+          <div class="option" data-group="symptoms" data-value="sleep" onclick="toggleOption(this)">
+            <div class="option-indicator sq"></div>
+            <div class="option-text">Sleep disruption</div>
+          </div>
+          <div class="option" data-group="symptoms" data-value="vaginal" onclick="toggleOption(this)">
+            <div class="option-indicator sq"></div>
+            <div class="option-text">Vaginal dryness or discomfort</div>
+          </div>
+          <div class="option" data-group="symptoms" data-value="mood" onclick="toggleOption(this)">
+            <div class="option-indicator sq"></div>
+            <div class="option-text">Mood changes, anxiety, or irritability</div>
+          </div>
+          <div class="option" data-group="symptoms" data-value="cognitive" onclick="toggleOption(this)">
+            <div class="option-indicator sq"></div>
+            <div class="option-text">Brain fog or difficulty concentrating</div>
+          </div>
+          <div class="option" data-group="symptoms" data-value="joint-fatigue" onclick="toggleOption(this)">
+            <div class="option-indicator sq"></div>
+            <div class="option-text">Joint pain or unexplained fatigue</div>
+          </div>
+          <div class="option" data-group="symptoms" data-value="libido" onclick="toggleOption(this)">
+            <div class="option-indicator sq"></div>
+            <div class="option-text">Low libido or changes in sexual response</div>
+          </div>
+          <div class="option" data-group="symptoms" data-value="other" onclick="toggleOption(this)">
+            <div class="option-indicator sq"></div>
+            <div class="option-text">Other symptoms not listed here</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2: ABOUT YOU -->
+      <div class="step" id="step-2">
+        <span class="step-eyebrow">About you</span>
+        <h2>A few details for<br>your <em>physician.</em></h2>
+        <p class="step-desc">Your province determines which physician is licensed to assess you.</p>
+        <div class="field-group">
+          <label class="field-label" for="province">Province of residence</label>
+          <select class="field-input" id="province">
+            <option value="">Select your province</option>
+            <option>Alberta</option><option>British Columbia</option><option>Manitoba</option>
+            <option>New Brunswick</option><option>Newfoundland and Labrador</option>
+            <option>Nova Scotia</option><option>Ontario</option><option>Prince Edward Island</option>
+            <option>Quebec</option><option>Saskatchewan</option>
+            <option>Northwest Territories</option><option>Nunavut</option><option>Yukon</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="age">Age</label>
+          <input class="field-input" type="number" id="age" placeholder="e.g. 48" min="18" max="100">
+        </div>
+        <div class="field-group" style="margin-bottom: 0;">
+          <label class="field-label">Current menstrual status</label>
+          <div class="options-grid" style="margin-bottom: 0;">
+            <div class="option" data-group="period-status" data-value="regular" onclick="selectSingle(this)">
+              <div class="option-indicator"></div>
+              <div class="option-text">Still having regular periods</div>
+            </div>
+            <div class="option" data-group="period-status" data-value="irregular" onclick="selectSingle(this)">
+              <div class="option-indicator"></div>
+              <div class="option-text">Periods are irregular or changing<span class="option-sub">Perimenopause</span></div>
+            </div>
+            <div class="option" data-group="period-status" data-value="stopped" onclick="selectSingle(this)">
+              <div class="option-indicator"></div>
+              <div class="option-text">Periods have stopped<span class="option-sub">12 or more months without a period</span></div>
+            </div>
+            <div class="option" data-group="period-status" data-value="surgical" onclick="selectSingle(this)">
+              <div class="option-indicator"></div>
+              <div class="option-text">Surgical menopause<span class="option-sub">Ovaries removed</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3: SYMPTOM CONTEXT -->
+      <div class="step" id="step-3">
+        <span class="step-eyebrow">Your experience</span>
+        <h2>A little more about<br>your <em>situation.</em></h2>
+        <p class="step-desc">This helps your physician understand the full picture before reviewing your file.</p>
+        <span class="section-title">How long have you been experiencing these symptoms?</span>
+        <div class="options-grid two-col" style="margin-bottom: 1.5rem;">
+          <div class="option" data-group="duration" data-value="under-6m" onclick="selectSingle(this)">
+            <div class="option-indicator"></div>
+            <div class="option-text">Less than 6 months</div>
+          </div>
+          <div class="option" data-group="duration" data-value="6m-2y" onclick="selectSingle(this)">
+            <div class="option-indicator"></div>
+            <div class="option-text">6 months to 2 years</div>
+          </div>
+          <div class="option" data-group="duration" data-value="2-5y" onclick="selectSingle(this)">
+            <div class="option-indicator"></div>
+            <div class="option-text">2 to 5 years</div>
+          </div>
+          <div class="option" data-group="duration" data-value="over-5y" onclick="selectSingle(this)">
+            <div class="option-indicator"></div>
+            <div class="option-text">More than 5 years</div>
+          </div>
+        </div>
+        <span class="section-title">How much are they affecting your daily life?</span>
+        <div class="options-grid" style="margin-bottom: 1.5rem;">
+          <div class="option" data-group="impact" data-value="mild" onclick="selectSingle(this)">
+            <div class="option-indicator"></div>
+            <div class="option-text">Mild — noticeable but manageable</div>
+          </div>
+          <div class="option" data-group="impact" data-value="moderate" onclick="selectSingle(this)">
+            <div class="option-indicator"></div>
+            <div class="option-text">Moderate — regularly disrupting sleep, work, or relationships</div>
+          </div>
+          <div class="option" data-group="impact" data-value="severe" onclick="selectSingle(this)">
+            <div class="option-indicator"></div>
+            <div class="option-text">Significant — substantially affecting quality of life</div>
+          </div>
+        </div>
+        <span class="section-title">Have you tried any previous treatment?</span>
+        <div class="options-grid">
+          <div class="option" data-group="prev-treatment" data-value="none" onclick="selectNone(this)">
+            <div class="option-indicator sq"></div>
+            <div class="option-text">No previous treatment</div>
+          </div>
+          <div class="option" data-group="prev-treatment" data-value="lifestyle" onclick="toggleOption(this)">
+            <div class="option-indicator sq"></div>
+            <div class="option-text">Lifestyle changes only</div>
+          </div>
+          <div class="option" data-group="prev-treatment" data-value="prev-hrt" onclick="toggleOption(this)">
+            <div class="option-indicator sq"></div>
+            <div class="option-text">Previous HRT (discontinued)</div>
+          </div>
+          <div class="option" data-group="prev-treatment" data-value="current-hrt" onclick="toggleOption(this)">
+            <div class="option-indicator sq"></div>
+            <div class="option-text">Currently on HRT (seeking adjustment or continuity)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4: MEDICAL HISTORY -->
+      <div class="step" id="step-4">
+        <span class="step-eyebrow">Medical history</span>
+        <h2>Important safety<br><em>questions.</em></h2>
+        <p class="step-desc">Some conditions affect whether HRT is safe. Your physician will review your answers individually. Please answer accurately.</p>
+
+        <span class="section-title">Have you ever been diagnosed with any of the following?</span>
+        <div class="options-grid" style="margin-bottom: 1.5rem;">
+          <div class="option danger" data-group="contraindications" data-value="breast-cancer" onclick="toggleOption(this)">
+            <div class="option-indicator sq"></div>
+            <div class="option-text">Breast cancer (current or history)</div>
+          </div>
+          <div class="option danger" data-group="contraindications" data-value="endometrial-cancer" onclick="toggleOption(this)">
+            <div class="option-indicator sq"></div>
+            <div class="option-text">Endometrial (uterine) cancer (current or history)</div>
+          </div>
+          <div class="option danger" data-group="contraindications" data-value="unexplained-bleeding" onclick="toggleOption(this)">
+            <div class="option-indicator sq"></div>
+            <div class="option-text">Unexplained vaginal bleeding<span class="option-sub">Not yet investigated by a physician</span></div>
+          </div>
+          <div class="option" data-group="contraindications" data-value="dvt" onclick="toggleOption(this)">
+            <div class="option-indicator sq"></div>
+            <div class="option-text">Blood clot (DVT or pulmonary embolism)</div>
+          </div>
+          <div class="option" data-group="contraindications" data-value="liver-disease" onclick="toggleOption(this)">
+            <div class="option-indicator sq"></div>
+            <div class="option-text">Severe liver disease</div>
+          </div>
+          <div class="option" data-group="contraindications" data-value="cardiovascular" onclick="toggleOption(this)">
+            <div class="option-indicator sq"></div>
+            <div class="option-text">Heart attack or stroke in the last 12 months</div>
+          </div>
+          <div class="option" data-group="contraindications" data-value="none" onclick="selectNone(this)">
+            <div class="option-indicator sq"></div>
+            <div class="option-text">None of the above</div>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">Do you have a uterus?</label>
+          <div class="options-grid two-col" style="margin-bottom: 0;">
+            <div class="option" data-group="uterus" data-value="yes" onclick="selectSingle(this)">
+              <div class="option-indicator"></div>
+              <div class="option-text">Yes</div>
+            </div>
+            <div class="option" data-group="uterus" data-value="no" onclick="selectSingle(this)">
+              <div class="option-indicator"></div>
+              <div class="option-text">No (hysterectomy)</div>
+            </div>
+          </div>
+          <p style="font-size: 0.72rem; color: var(--dust); margin-top: 0.5rem; font-weight: 300;">This determines whether progesterone is included in your prescription.</p>
+        </div>
+
+        <hr class="section-divider">
+        <div class="field-group">
+          <label class="field-label" for="currentMeds">Current medications and supplements</label>
+          <textarea class="text-area" id="currentMeds" placeholder="List all current medications, vitamins, or supplements. Your physician will review these."></textarea>
+        </div>
+        <div class="field-group" style="margin-bottom: 0;">
+          <label class="field-label" for="additionalInfo">Anything else your physician should know?</label>
+          <textarea class="text-area" id="additionalInfo" placeholder="Optional — family history, previous tests, specific concerns, or anything that would help your physician understand your situation."></textarea>
+        </div>
+      </div>
+
+      <!-- STEP 5: YOUR DETAILS -->
+      <div class="step" id="step-5">
+        <span class="step-eyebrow">Your details</span>
+        <h2>Almost there.<br><em>Last step.</em></h2>
+        <p class="step-desc">Your physician uses this to communicate their assessment decision. Protected under PIPEDA.</p>
+        <div class="field-row" style="margin-bottom: 0.625rem;">
+          <div class="field-group" style="margin-bottom: 0;">
+            <label class="field-label" for="firstName">First name</label>
+            <input class="field-input" type="text" id="firstName" placeholder="e.g. Patricia" autocomplete="given-name">
+          </div>
+          <div class="field-group" style="margin-bottom: 0;">
+            <label class="field-label" for="lastName">Last name</label>
+            <input class="field-input" type="text" id="lastName" placeholder="e.g. Walsh" autocomplete="family-name">
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="email">Email address</label>
+          <input class="field-input" type="email" id="email" placeholder="you@example.com" autocomplete="email">
+        </div>
+        <div class="field-group" style="margin-bottom: 0;">
+          <label class="field-label" for="phone">Phone <span style="font-weight:300; text-transform:none; letter-spacing:0;">(optional)</span></label>
+          <input class="field-input" type="tel" id="phone" placeholder="e.g. 604-555-0182" autocomplete="tel">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="quiz-nav" id="quizNav">
+      <button class="btn-back" id="btnBack" onclick="prevStep()" style="visibility:hidden;">Back</button>
+      <button class="btn-continue" id="btnContinue" onclick="nextStep()">Continue</button>
+    </div>
+
+    <!-- RESULT: ELIGIBLE -->
+    <div class="result-screen" id="resultEligible">
+      <div class="result-eligible">
+        <div class="result-badge"><span>Assessment complete</span></div>
+        <h2>You appear to be a<br>strong <em>candidate.</em></h2>
+        <p>Based on your responses, you appear to qualify for HRT assessment. A licensed Canadian physician, independent of Sylven and licensed in your province, will review your full file and respond within 24 hours.</p>
+        <div class="timeline-strip">
+          <div class="timeline-item">
+            <span class="timeline-num">Step 1</span>
+            <span class="timeline-action">Physician review</span>
+            <span class="timeline-when">Within 24 hours</span>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-num">Step 2</span>
+            <span class="timeline-action">Prescription issued</span>
+            <span class="timeline-when">If approved</span>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-num">Step 3</span>
+            <span class="timeline-action">Medication delivered</span>
+            <span class="timeline-when">3–5 business days</span>
+          </div>
+        </div>
+      </div>
+      <div class="payment-section">
+        <div class="payment-header">
+          <span class="payment-title">Program membership</span>
+          <div class="payment-amount">$69<span>/month</span></div>
+        </div>
+        <ul class="payment-includes">
+          <li>Independent physician assessment</li>
+          <li>Ongoing monitoring and dose adjustments</li>
+          <li>Patient portal and symptom tracking</li>
+          <li>24/7 care team messaging</li>
+          <li>Prescription renewal coordination</li>
+          <li>Cancel anytime</li>
+        </ul>
+        <div class="cost-reframe">
+          <span class="cost-reframe-label">What you'll actually pay</span>
+          <p>Program fee + HRT medication via pharmacy. Estrogen therapy from <strong>~$25–60/month.</strong> Combined HRT from <strong>~$40–90/month.</strong> No markups.</p>
+        </div>
+        <div class="conversion-quote">
+          <blockquote>"My GP told me hot flashes were normal and I should just manage them. I had been managing them for three years. Within six weeks of starting HRT I felt like myself again."</blockquote>
+          <cite>Patricia W. &nbsp;·&nbsp; Vancouver, BC &nbsp;·&nbsp; Women's Health Program</cite>
+        </div>
+        <div class="trust-marks">
+          <span class="trust-mark">Independent Canadian Physicians</span>
+          <span class="trust-mark">Evidence-Based Care</span>
+          <span class="trust-mark">Cancel Anytime</span>
+        </div>
+        <!-- STRIPE INTEGRATION POINT -->
+        <div class="stripe-placeholder">
+          <span class="stripe-label">Card number</span>
+          <input class="stripe-field" type="text" placeholder="1234 1234 1234 1234" style="width: 100%; margin-bottom: 0.75rem;">
+          <div class="stripe-row">
+            <div><span class="stripe-label">Expiry</span><input class="stripe-field" type="text" placeholder="MM / YY" style="width: 100%;"></div>
+            <div><span class="stripe-label">CVC</span><input class="stripe-field" type="text" placeholder="123" style="width: 100%;"></div>
+          </div>
+          <p style="font-size: 0.65rem; color: var(--dust); margin-top: 0.5rem;">Secured by Stripe · 256-bit encryption</p>
+        </div>
+        <!-- END STRIPE BLOCK -->
+        <div class="guarantee-block">
+          <span style="font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem;">🛡</span>
+          <p><strong>Full refund if not approved.</strong> If your physician determines HRT is not clinically appropriate for you, your $69 is refunded in full. No questions asked.</p>
+        </div>
+        <button class="btn-pay" onclick="handlePayment()">Begin My Program — $69/month</button>
+        <p class="payment-legal">Your membership begins today. Cancel anytime. Medication costs are separate and paid directly to our pharmacy partner. © Corbin Care Health Inc.</p>
+      </div>
+    </div>
+
+    <!-- RESULT: HARD STOP -->
+    <div class="result-screen" id="resultDecline">
+      <div class="result-decline">
+        <div class="decline-badge"><span>Assessment reviewed</span></div>
+        <h2>We can't process your<br>assessment right now.</h2>
+        <p>Based on one or more of your answers, HRT through Sylven may not be appropriate for you at this time. This is not a final medical determination.</p>
+        <p>A personal or recent history of hormone-sensitive cancer, unexplained vaginal bleeding, or certain cardiovascular conditions are contraindications that require a more detailed clinical assessment than our platform currently provides.</p>
+        <p>We strongly encourage you to speak with your GP or request a referral to a gynaecologist or menopause specialist. Your symptoms deserve attention, even if the path to treatment needs to go through a different route.</p>
+        <p>There is no charge. Your information will not be retained.</p>
+        <a href="womens-health.html">Return to Women's Health</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+let currentStep = 1;
+const totalSteps = 5;
+let hardStop = false;
+const stepLabels = ['Your symptoms', 'About you', 'Your experience', 'Medical history', 'Your details'];
+
+function positionHeader() {
+  const bar = document.querySelector('.disclaimer-bar');
+  if (!bar) return;
+  document.documentElement.style.setProperty('--nav-top', bar.offsetHeight + 'px');
+}
+positionHeader();
+window.addEventListener('resize', positionHeader);
+
+function toggleOption(el) {
+  el.classList.toggle('selected');
+  const group = el.dataset.group;
+  const noneOpt = document.querySelector(`.option[data-group="${group}"][data-value="none"]`);
+  if (el.dataset.value !== 'none' && noneOpt) noneOpt.classList.remove('selected');
+}
+function selectSingle(el) {
+  document.querySelectorAll(`.option[data-group="${el.dataset.group}"]`).forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+function selectNone(el) {
+  document.querySelectorAll(`.option[data-group="${el.dataset.group}"]`).forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function updateProgress() {
+  document.getElementById('progressFill').style.width = (currentStep / totalSteps * 100) + '%';
+  document.getElementById('stepLabel').textContent = `Step ${currentStep} of ${totalSteps}`;
+  document.getElementById('stepFraction').textContent = stepLabels[currentStep - 1];
+  document.getElementById('btnBack').style.visibility = currentStep > 1 ? 'visible' : 'hidden';
+  document.getElementById('btnContinue').textContent = currentStep === totalSteps ? 'Review & Pay' : 'Continue';
+}
+
+function showStep(n) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.getElementById(`step-${n}`).classList.add('active');
+  currentStep = n;
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function validateStep() {
+  if (currentStep === 1) {
+    if (!document.querySelector('.option[data-group="symptoms"].selected')) {
+      alert('Please select at least one symptom to continue.'); return false;
+    }
+  }
+  if (currentStep === 2) {
+    if (!document.getElementById('province').value) { alert('Please select your province.'); return false; }
+    const age = parseInt(document.getElementById('age').value);
+    if (!age || age < 18) { alert('Please enter a valid age.'); return false; }
+    if (!document.querySelector('.option[data-group="period-status"].selected')) {
+      alert('Please select your current menstrual status.'); return false;
+    }
+  }
+  if (currentStep === 5) {
+    const fn = document.getElementById('firstName').value.trim();
+    const ln = document.getElementById('lastName').value.trim();
+    const em = document.getElementById('email').value.trim();
+    if (!fn) { alert('Please enter your first name.'); return false; }
+    if (!ln) { alert('Please enter your last name.'); return false; }
+    if (!em || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) { alert('Please enter a valid email address.'); return false; }
+  }
+  return true;
+}
+
+function nextStep() {
+  if (!validateStep()) return;
+  if (currentStep < totalSteps) { showStep(currentStep + 1); }
+  else { submitAssessment(); }
+}
+function prevStep() { if (currentStep > 1) showStep(currentStep - 1); }
+
+function submitAssessment() {
+  const hardStopValues = ['breast-cancer', 'endometrial-cancer', 'unexplained-bleeding'];
+  const selected = [...document.querySelectorAll('.option[data-group="contraindications"].selected')].map(el => el.dataset.value);
+  hardStop = hardStopValues.some(v => selected.includes(v));
+
+  document.getElementById('quizProgress').style.display = 'none';
+  document.getElementById('quizNav').style.display = 'none';
+  document.querySelectorAll('.step').forEach(s => s.style.display = 'none');
+  document.getElementById(hardStop ? 'resultDecline' : 'resultEligible').classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function handlePayment() {
+  // STRIPE INTEGRATION POINT — $69/month subscription
+  alert('Stripe integration coming — $69/month subscription checkout.');
+}
+
+// Update main quiz to route here
+updateProgress();
+</script>
+</body>
+</html>
