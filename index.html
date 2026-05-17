@@ -213,7 +213,13 @@ nav.scrolled {
   width: 100%;
   position: relative;
   z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
 }
+
+.hero-left {}
 
 .hero-label {
   font-size: 0.72rem;
@@ -236,13 +242,12 @@ nav.scrolled {
 
 .hero h1 {
   font-family: var(--font-display);
-  font-size: clamp(3rem, 6.5vw, 6.5rem);
+  font-size: clamp(3rem, 5.5vw, 5.75rem);
   font-weight: 300;
   line-height: 1.04;
   letter-spacing: -0.025em;
   color: var(--ink);
-  max-width: 14ch;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
 }
 .hero h1 em {
   font-style: italic;
@@ -250,13 +255,53 @@ nav.scrolled {
 }
 
 .hero-sub {
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 300;
   color: var(--dust);
-  line-height: 1.8;
-  max-width: 42ch;
-  margin-bottom: 3rem;
+  line-height: 1.85;
+  margin-bottom: 2.75rem;
   letter-spacing: 0.01em;
+}
+
+.hero-right {
+  border-left: 1px solid rgba(26,23,20,0.1);
+  padding-left: 5rem;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+}
+
+.hero-stat {
+  padding: 2.25rem 0;
+  border-bottom: 1px solid rgba(26,23,20,0.07);
+}
+.hero-stat:first-child { padding-top: 0; }
+.hero-stat:last-child { border-bottom: none; padding-bottom: 0; }
+
+.hero-stat-num {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.5vw, 3.25rem);
+  font-weight: 300;
+  color: var(--ink);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+.hero-stat-num em {
+  font-style: italic;
+  color: var(--brass);
+}
+.hero-stat-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dust);
+  line-height: 1.6;
+  display: block;
 }
 
 .hero-actions {
@@ -780,6 +825,10 @@ footer {
   .nav-cta { display: none; }
   section { padding: 4.5rem 1.5rem; }
   .hero { padding: 7rem 1.5rem 4.5rem; }
+  .hero-content { grid-template-columns: 1fr; gap: 3rem; }
+  .hero-right { border-left: none; border-top: 1px solid rgba(26,23,20,0.08); padding-left: 0; padding-top: 2.5rem; flex-direction: row; flex-wrap: wrap; }
+  .hero-stat { flex: 1; min-width: 140px; padding: 0 1.5rem 0 0; border-bottom: none; border-right: 1px solid rgba(26,23,20,0.08); }
+  .hero-stat:last-child { border-right: none; padding-right: 0; }
   .announcement { padding: 1rem 1.5rem; }
   .trust { padding: 2rem 1.5rem; }
   .trust-inner { grid-template-columns: repeat(2, 1fr); }
@@ -840,12 +889,28 @@ footer {
     <path d="M-100,800 Q160,680 520,720 Q820,760 1120,640 Q1320,580 1600,620" stroke="#1A1714" stroke-width="0.8" fill="none"/>
   </svg>
   <div class="hero-content">
-    <p class="hero-label fade-up">Physician-guided health programs</p>
-    <h1 class="fade-up fd1">Medicine<br>the way it<br><em>should feel.</em></h1>
-    <p class="hero-sub fade-up fd2">Sylven connects Canadians with independent licensed physicians who assess each patient individually, and with Health Canada registered pharmacies that dispense only approved medications — for weight loss, men's health, and women's health programs delivered to your door.</p>
-    <div class="hero-actions fade-up fd3">
-      <a href="quiz.html" class="btn-primary">Begin Your Assessment</a>
-      <a href="#how-it-works" class="btn-text">How it works</a>
+    <div class="hero-left">
+      <p class="hero-label fade-up">Physician-guided health programs</p>
+      <h1 class="fade-up fd1">Medicine<br>the way it<br><em>should feel.</em></h1>
+      <p class="hero-sub fade-up fd2">Sylven connects Canadians with independent licensed physicians and Health Canada registered pharmacies — for weight loss, men's health, and women's health programs delivered to your door.</p>
+      <div class="hero-actions fade-up fd3">
+        <a href="quiz.html" class="btn-primary">Begin Your Assessment</a>
+        <a href="#how-it-works" class="btn-text">How it works</a>
+      </div>
+    </div>
+    <div class="hero-right fade-up fd2">
+      <div class="hero-stat">
+        <span class="hero-stat-num">First <em>G7</em></span>
+        <span class="hero-stat-label">Country with approved<br>generic semaglutide</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num"><em>~60%</em> less</span>
+        <span class="hero-stat-label">Than branded Ozempic<br>or Wegovy</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">24 <em>hrs</em></span>
+        <span class="hero-stat-label">From assessment<br>to physician response</span>
+      </div>
     </div>
   </div>
 </section>
