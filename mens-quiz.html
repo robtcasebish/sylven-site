@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Men's Health Assessment — Sylven</title>
+<meta name="description" content="Begin your Sylven men's health assessment. A licensed Canadian physician will review your information within 24 hours.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --parchment: #F4EFE6;
+  --cream: #FAF8F3;
+  --mist: #EDE8DF;
+  --ink: #1A1714;
+  --ink-mid: #2D2825;
+  --dust: #8A8078;
+  --brass: #9C845A;
+  --brass-light: #B89D70;
+  --white: #FFFFFF;
+  --success: #3D6B4F;
+  --error: #8B2E2E;
+  --font-display: 'Newsreader', Georgia, serif;
+  --font-body: 'Jost', sans-serif;
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); background: var(--parchment); color: var(--ink); min-height: 100vh; -webkit-font-smoothing: antialiased; }
+
+.disclaimer-bar { background: var(--ink-mid); padding: 0.5rem 2rem; position: fixed; top: 0; left: 0; right: 0; z-index: 300; }
+.disclaimer-bar p { font-size: 0.68rem; font-weight: 300; color: rgba(244,239,230,0.45); line-height: 1.5; max-width: 1200px; margin: 0 auto; }
+.disclaimer-bar strong { font-weight: 500; color: rgba(244,239,230,0.7); }
+.disclaimer-bar a { color: var(--brass-light); text-decoration: none; }
+
+nav { position: fixed; top: var(--nav-top, 34px); left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 4rem; background: rgba(244,239,230,0.97); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(26,23,20,0.08); }
+.nav-logo { font-family: var(--font-display); font-size: 1.4rem; font-weight: 400; color: var(--ink); text-decoration: none; letter-spacing: -0.01em; }
+.nav-back { font-size: 0.75rem; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; color: var(--dust); text-decoration: none; display: flex; align-items: center; gap: 0.4rem; transition: color 0.2s; }
+.nav-back::before { content: '←'; }
+.nav-back:hover { color: var(--ink); }
+
+.quiz-wrap { min-height: 100vh; display: flex; align-items: flex-start; justify-content: center; padding: 10rem 1.5rem 4rem; }
+.quiz-card { background: var(--white); width: 100%; max-width: 680px; border: 1px solid rgba(26,23,20,0.08); position: relative; }
+
+.quiz-progress { padding: 1.75rem 2.5rem 0; }
+.progress-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; }
+.progress-step { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--brass); }
+.progress-fraction { font-size: 0.68rem; font-weight: 400; color: var(--dust); letter-spacing: 0.04em; }
+.progress-bar { height: 1px; background: rgba(26,23,20,0.08); position: relative; overflow: hidden; }
+.progress-fill { position: absolute; left: 0; top: 0; bottom: 0; background: var(--brass); transition: width 0.5s var(--ease); }
+
+.quiz-body { padding: 2.5rem 2.5rem 2rem; }
+.step { display: none; }
+.step.active { display: block; animation: stepIn 0.35s var(--ease); }
+@keyframes stepIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+.step-eyebrow { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dust); margin-bottom: 0.6rem; display: block; }
+.step h2 { font-family: var(--font-display); font-size: clamp(1.4rem, 3vw, 1.85rem); font-weight: 400; color: var(--ink); line-height: 1.2; letter-spacing: -0.015em; margin-bottom: 0.5rem; }
+.step h2 em { font-style: italic; }
+.step-desc { font-size: 0.85rem; font-weight: 300; color: var(--dust); line-height: 1.7; margin-bottom: 1.75rem; }
+
+.options-grid { display: grid; gap: 0.5rem; margin-bottom: 1.5rem; }
+.options-grid.two-col { grid-template-columns: 1fr 1fr; }
+
+.option { display: flex; align-items: center; gap: 0.875rem; padding: 0.95rem 1.1rem; border: 1px solid rgba(26,23,20,0.12); cursor: pointer; transition: border-color 0.2s, background 0.2s; user-select: none; background: var(--white); }
+.option:hover { border-color: rgba(26,23,20,0.3); background: rgba(26,23,20,0.015); }
+.option.selected { border-color: var(--ink); background: rgba(26,23,20,0.03); }
+.option.selected .option-indicator { background: var(--ink); border-color: var(--ink); }
+.option.selected .option-indicator::after { opacity: 1; }
+.option-indicator { width: 18px; height: 18px; border: 1.5px solid rgba(26,23,20,0.25); border-radius: 50%; flex-shrink: 0; position: relative; transition: background 0.15s, border-color 0.15s; }
+.option-indicator.square { border-radius: 3px; }
+.option-indicator::after { content: ''; position: absolute; inset: 3px; background: var(--parchment); border-radius: 50%; opacity: 0; transition: opacity 0.15s; }
+.option-indicator.square::after { border-radius: 1px; content: '✓'; background: none; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: white; font-weight: 600; }
+.option-text { font-size: 0.875rem; font-weight: 400; color: var(--ink); line-height: 1.4; }
+.option-sub { font-size: 0.75rem; font-weight: 300; color: var(--dust); margin-top: 0.1rem; display: block; }
+.option.danger.selected { border-color: var(--error); background: rgba(139,46,46,0.04); }
+.option.danger.selected .option-indicator { background: var(--error); border-color: var(--error); }
+
+.field-group { margin-bottom: 1.25rem; }
+.field-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dust); margin-bottom: 0.45rem; display: block; }
+.field-input { width: 100%; padding: 0.8rem 1rem; border: 1px solid rgba(26,23,20,0.15); font-family: var(--font-body); font-size: 0.9rem; font-weight: 400; color: var(--ink); background: var(--white); outline: none; transition: border-color 0.2s; -webkit-appearance: none; }
+.field-input:focus { border-color: var(--ink); }
+.field-input::placeholder { color: var(--dust); }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+.text-area { width: 100%; padding: 0.8rem 1rem; border: 1px solid rgba(26,23,20,0.15); font-family: var(--font-body); font-size: 0.875rem; font-weight: 300; color: var(--ink); background: var(--white); outline: none; resize: vertical; min-height: 90px; transition: border-color 0.2s; line-height: 1.6; }
+.text-area:focus { border-color: var(--ink); }
+.text-area::placeholder { color: var(--dust); }
+.section-divider { border: none; border-top: 1px solid rgba(26,23,20,0.08); margin: 1.5rem 0; }
+.section-title { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dust); margin-bottom: 0.875rem; display: block; }
+
+.quiz-nav { padding: 0 2.5rem 2.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.btn-continue { font-family: var(--font-body); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--parchment); background: var(--ink); padding: 0.9rem 2.25rem; border: none; cursor: pointer; transition: background 0.25s; flex-shrink: 0; }
+.btn-continue:hover { background: var(--brass); }
+.btn-back { font-family: var(--font-body); font-size: 0.78rem; font-weight: 400; letter-spacing: 0.04em; color: var(--dust); background: none; border: none; cursor: pointer; padding: 0; transition: color 0.2s; display: flex; align-items: center; gap: 0.35rem; }
+.btn-back::before { content: '←'; }
+.btn-back:hover { color: var(--ink); }
+
+/* RESULT SCREENS */
+.result-screen { display: none; }
+.result-screen.active { display: block; }
+
+.result-eligible { padding: 2.5rem 2.5rem 0; }
+.result-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0.875rem; background: rgba(61,107,79,0.1); border: 1px solid rgba(61,107,79,0.2); margin-bottom: 1.5rem; }
+.result-badge span { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--success); }
+.result-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--success); flex-shrink: 0; }
+.result-eligible h2 { font-family: var(--font-display); font-size: clamp(1.4rem, 3vw, 1.85rem); font-weight: 400; color: var(--ink); line-height: 1.2; letter-spacing: -0.015em; margin-bottom: 0.75rem; }
+.result-eligible h2 em { font-style: italic; }
+.result-eligible p { font-size: 0.875rem; font-weight: 300; color: var(--dust); line-height: 1.75; margin-bottom: 1rem; }
+
+.timeline-strip { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; margin: 1.75rem 0 0; border-top: 1px solid rgba(26,23,20,0.08); border-bottom: 1px solid rgba(26,23,20,0.08); }
+.timeline-item { padding: 1.25rem 1rem; border-right: 1px solid rgba(26,23,20,0.08); text-align: center; }
+.timeline-item:last-child { border-right: none; }
+.timeline-num { font-family: var(--font-display); font-size: 0.7rem; color: var(--brass); letter-spacing: 0.08em; text-transform: uppercase; display: block; margin-bottom: 0.3rem; }
+.timeline-action { font-size: 0.78rem; font-weight: 500; color: var(--ink); display: block; margin-bottom: 0.2rem; line-height: 1.3; }
+.timeline-when { font-size: 0.68rem; font-weight: 300; color: var(--dust); display: block; }
+
+.payment-section { border-top: 1px solid rgba(26,23,20,0.08); padding: 2rem 2.5rem 2.5rem; }
+.payment-header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 1.5rem; }
+.payment-title { font-family: var(--font-display); font-size: 1.1rem; font-weight: 400; color: var(--ink); }
+.payment-amount { font-family: var(--font-display); font-size: 1.75rem; font-weight: 300; color: var(--ink); line-height: 1; }
+.payment-amount span { font-family: var(--font-body); font-size: 0.8rem; font-weight: 300; color: var(--dust); }
+.payment-includes { margin-bottom: 1.5rem; }
+.payment-includes li { font-size: 0.82rem; font-weight: 300; color: var(--dust); line-height: 1.6; padding: 0.3rem 0; padding-left: 1rem; position: relative; list-style: none; }
+.payment-includes li::before { content: '—'; position: absolute; left: 0; color: var(--brass); font-size: 0.75rem; }
+
+.cost-reframe { background: rgba(156,132,90,0.07); border: 1px solid rgba(156,132,90,0.18); padding: 1rem 1.25rem; margin-bottom: 1.25rem; }
+.cost-reframe-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.2rem; display: block; }
+.cost-reframe p { font-size: 0.8rem; font-weight: 300; color: var(--ink-mid); line-height: 1.5; margin-bottom: 0; }
+.cost-reframe p strong { font-weight: 500; }
+
+.conversion-quote { padding: 1.5rem 0 1.25rem; border-bottom: 1px solid rgba(26,23,20,0.08); margin-bottom: 1.25rem; position: relative; }
+.conversion-quote::before { content: '\201C'; font-family: var(--font-display); font-size: 4rem; font-weight: 300; color: rgba(26,23,20,0.07); line-height: 1; position: absolute; top: 0.75rem; left: -0.25rem; pointer-events: none; }
+.conversion-quote blockquote { font-family: var(--font-display); font-size: 1rem; font-weight: 300; font-style: italic; color: var(--ink-mid); line-height: 1.7; position: relative; z-index: 1; margin-bottom: 0.75rem; }
+.conversion-quote cite { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dust); font-style: normal; display: block; }
+
+.trust-marks { display: flex; align-items: center; justify-content: center; gap: 1.5rem; padding: 0.875rem 0; margin-bottom: 0.875rem; border-top: 1px solid rgba(26,23,20,0.06); border-bottom: 1px solid rgba(26,23,20,0.06); flex-wrap: wrap; }
+.trust-mark { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.09em; text-transform: uppercase; color: var(--dust); display: flex; align-items: center; gap: 0.35rem; }
+.trust-mark::before { content: '✓'; color: var(--success); font-size: 0.7rem; }
+
+.stripe-placeholder { border: 1px solid rgba(26,23,20,0.12); padding: 1.25rem; margin-bottom: 1rem; background: var(--white); }
+.stripe-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 0.75rem; }
+.stripe-field { width: 100%; padding: 0.7rem 0.875rem; border: 1px solid rgba(26,23,20,0.12); font-family: var(--font-body); font-size: 0.875rem; color: var(--ink); background: var(--white); outline: none; }
+.stripe-field:focus { border-color: var(--ink); }
+.stripe-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dust); margin-bottom: 0.35rem; display: block; }
+.stripe-powered p { font-size: 0.65rem; color: var(--dust); font-weight: 300; margin-top: 0.5rem; }
+
+.guarantee-block { background: rgba(61,107,79,0.06); border: 1px solid rgba(61,107,79,0.18); padding: 1rem 1.25rem; margin-bottom: 1rem; display: flex; align-items: flex-start; gap: 0.875rem; }
+.guarantee-block p { font-size: 0.82rem; font-weight: 300; color: var(--ink-mid); line-height: 1.6; margin-bottom: 0; }
+.guarantee-block strong { font-weight: 600; color: var(--success); }
+
+.btn-pay { width: 100%; padding: 1rem; font-family: var(--font-body); font-size: 0.82rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--parchment); background: var(--ink); border: none; cursor: pointer; transition: background 0.25s; margin-bottom: 0.875rem; }
+.btn-pay:hover { background: var(--brass); }
+.payment-legal { font-size: 0.68rem; font-weight: 300; color: var(--dust); line-height: 1.65; text-align: center; }
+
+.result-decline { padding: 2.5rem; }
+.decline-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0.875rem; background: rgba(26,23,20,0.05); border: 1px solid rgba(26,23,20,0.1); margin-bottom: 1.5rem; }
+.decline-badge span { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dust); }
+.result-decline h2 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 400; color: var(--ink); margin-bottom: 1rem; line-height: 1.2; }
+.result-decline p { font-size: 0.875rem; font-weight: 300; color: var(--dust); line-height: 1.75; margin-bottom: 1rem; }
+.result-decline a { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink); text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 0.5rem; transition: color 0.2s; }
+.result-decline a::after { content: '→'; }
+.result-decline a:hover { color: var(--brass); }
+
+@media (max-width: 640px) {
+  nav { padding: 1rem 1.25rem; }
+  .quiz-body { padding: 1.75rem 1.5rem 1.25rem; }
+  .quiz-nav { padding: 0 1.5rem 2rem; }
+  .quiz-progress { padding: 1.5rem 1.5rem 0; }
+  .options-grid.two-col { grid-template-columns: 1fr; }
+  .field-row { grid-template-columns: 1fr; }
+  .payment-section { padding: 1.5rem 1.5rem 2rem; }
+  .result-eligible { padding: 1.75rem 1.5rem 0; }
+  .result-decline { padding: 1.75rem 1.5rem; }
+  .timeline-strip { grid-template-columns: 1fr; }
+  .timeline-item { border-right: none; border-bottom: 1px solid rgba(26,23,20,0.08); text-align: left; }
+  .timeline-item:last-child { border-bottom: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="disclaimer-bar">
+  <p><strong>Medical Information Only.</strong> This platform facilitates access to independent licensed Canadian physicians. All treatment decisions are made solely by your treating physician. <a href="medical-consent.html">Learn more →</a></p>
+</div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Sylven</a>
+  <a href="mens-health.html" class="nav-back">Back to Men's Health</a>
+</nav>
+
+<div class="quiz-wrap">
+  <div class="quiz-card">
+
+    <div class="quiz-progress" id="quizProgress">
+      <div class="progress-meta">
+        <span class="progress-step" id="stepLabel">Step 1 of 5</span>
+        <span class="progress-fraction" id="stepFraction">Men's health assessment</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width: 20%"></div>
+      </div>
+    </div>
+
+    <div class="quiz-body">
+
+      <!-- STEP 1: CONDITION -->
+      <div class="step active" id="step-1">
+        <span class="step-eyebrow">Getting started</span>
+        <h2>Which condition are<br>you seeking care <em>for?</em></h2>
+        <p class="step-desc">Select all that apply. Both can be addressed through a single assessment.</p>
+        <div class="options-grid">
+          <div class="option" data-group="condition" data-value="ed" onclick="toggleOption(this)">
+            <div class="option-indicator square"></div>
+            <div class="option-text">Erectile Dysfunction<span class="option-sub">Difficulty achieving or maintaining an erection</span></div>
+          </div>
+          <div class="option" data-group="condition" data-value="hair-loss" onclick="toggleOption(this)">
+            <div class="option-indicator square"></div>
+            <div class="option-text">Hair Loss<span class="option-sub">Male pattern baldness, receding hairline</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2: ABOUT YOU -->
+      <div class="step" id="step-2">
+        <span class="step-eyebrow">About you</span>
+        <h2>A few details for<br>your <em>physician.</em></h2>
+        <p class="step-desc">Your province determines which physician is licensed to assess you.</p>
+        <div class="field-group">
+          <label class="field-label" for="province">Province of residence</label>
+          <select class="field-input" id="province">
+            <option value="">Select your province</option>
+            <option value="AB">Alberta</option>
+            <option value="BC">British Columbia</option>
+            <option value="MB">Manitoba</option>
+            <option value="NB">New Brunswick</option>
+            <option value="NL">Newfoundland and Labrador</option>
+            <option value="NS">Nova Scotia</option>
+            <option value="ON">Ontario</option>
+            <option value="PE">Prince Edward Island</option>
+            <option value="QC">Quebec</option>
+            <option value="SK">Saskatchewan</option>
+            <option value="NT">Northwest Territories</option>
+            <option value="NU">Nunavut</option>
+            <option value="YT">Yukon</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="age">Age</label>
+          <input class="field-input" type="number" id="age" placeholder="e.g. 38" min="18" max="120">
+        </div>
+      </div>
+
+      <!-- STEP 3: CONDITION-SPECIFIC QUESTIONS -->
+      <div class="step" id="step-3">
+        <span class="step-eyebrow">Your condition</span>
+        <h2>A few clinical<br><em>questions.</em></h2>
+        <p class="step-desc">This helps your physician understand your situation before reviewing your file.</p>
+
+        <!-- ED questions — shown if ED selected -->
+        <div id="ed-questions">
+          <span class="section-title">Erectile dysfunction</span>
+          <div class="options-grid" style="margin-bottom: 1.5rem;">
+            <div class="option" data-group="ed-duration" data-value="under-6m" onclick="selectSingle(this)">
+              <div class="option-indicator"></div>
+              <div class="option-text">Less than 6 months</div>
+            </div>
+            <div class="option" data-group="ed-duration" data-value="6m-2y" onclick="selectSingle(this)">
+              <div class="option-indicator"></div>
+              <div class="option-text">6 months to 2 years</div>
+            </div>
+            <div class="option" data-group="ed-duration" data-value="over-2y" onclick="selectSingle(this)">
+              <div class="option-indicator"></div>
+              <div class="option-text">More than 2 years</div>
+            </div>
+          </div>
+          <span class="section-title">How would you describe it?</span>
+          <div class="options-grid" style="margin-bottom: 1.5rem;">
+            <div class="option" data-group="ed-severity" data-value="occasional" onclick="selectSingle(this)">
+              <div class="option-indicator"></div>
+              <div class="option-text">Occasional<span class="option-sub">Happens sometimes, not always</span></div>
+            </div>
+            <div class="option" data-group="ed-severity" data-value="frequent" onclick="selectSingle(this)">
+              <div class="option-indicator"></div>
+              <div class="option-text">Frequent<span class="option-sub">Most of the time</span></div>
+            </div>
+            <div class="option" data-group="ed-severity" data-value="always" onclick="selectSingle(this)">
+              <div class="option-indicator"></div>
+              <div class="option-text">Consistent<span class="option-sub">Almost always present</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hair loss questions — shown if hair loss selected -->
+        <div id="hair-questions" style="display: none;">
+          <hr class="section-divider" id="hair-divider" style="display: none;">
+          <span class="section-title">Hair loss</span>
+          <div class="options-grid" style="margin-bottom: 1.5rem;">
+            <div class="option" data-group="hair-pattern" data-value="receding" onclick="toggleOption(this)">
+              <div class="option-indicator square"></div>
+              <div class="option-text">Receding hairline</div>
+            </div>
+            <div class="option" data-group="hair-pattern" data-value="crown" onclick="toggleOption(this)">
+              <div class="option-indicator square"></div>
+              <div class="option-text">Thinning at the crown</div>
+            </div>
+            <div class="option" data-group="hair-pattern" data-value="general" onclick="toggleOption(this)">
+              <div class="option-indicator square"></div>
+              <div class="option-text">General thinning overall</div>
+            </div>
+          </div>
+          <span class="section-title">How long has this been happening?</span>
+          <div class="options-grid two-col" style="margin-bottom: 1rem;">
+            <div class="option" data-group="hair-duration" data-value="under-2y" onclick="selectSingle(this)">
+              <div class="option-indicator"></div>
+              <div class="option-text">Under 2 years</div>
+            </div>
+            <div class="option" data-group="hair-duration" data-value="2-5y" onclick="selectSingle(this)">
+              <div class="option-indicator"></div>
+              <div class="option-text">2 to 5 years</div>
+            </div>
+            <div class="option" data-group="hair-duration" data-value="over-5y" onclick="selectSingle(this)">
+              <div class="option-indicator"></div>
+              <div class="option-text">More than 5 years</div>
+            </div>
+            <div class="option" data-group="hair-duration" data-value="unsure" onclick="selectSingle(this)">
+              <div class="option-indicator"></div>
+              <div class="option-text">Not sure</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4: MEDICAL HISTORY -->
+      <div class="step" id="step-4">
+        <span class="step-eyebrow">Medical history</span>
+        <h2>A few safety<br><em>questions.</em></h2>
+        <p class="step-desc">Your physician needs to know about any conditions or medications that may affect which treatment is safe for you.</p>
+
+        <!-- ED safety — shown if ED selected -->
+        <div id="ed-safety">
+          <span class="section-title">Are you currently taking any of these medications?</span>
+          <p class="step-desc" style="font-size: 0.78rem; margin-bottom: 0.875rem;">Nitrate medications interact seriously with ED treatments. It is important to answer accurately.</p>
+          <div class="options-grid" style="margin-bottom: 1.5rem;">
+            <div class="option danger" data-group="nitrates" data-value="nitrates-yes" onclick="selectSingle(this)">
+              <div class="option-indicator"></div>
+              <div class="option-text">Yes, I take nitrates<span class="option-sub">Nitroglycerin, isosorbide, or similar heart medications</span></div>
+            </div>
+            <div class="option" data-group="nitrates" data-value="nitrates-no" onclick="selectSingle(this)">
+              <div class="option-indicator"></div>
+              <div class="option-text">No, I do not take nitrates</div>
+            </div>
+            <div class="option" data-group="nitrates" data-value="nitrates-unsure" onclick="selectSingle(this)">
+              <div class="option-indicator"></div>
+              <div class="option-text">I'm not sure</div>
+            </div>
+          </div>
+          <span class="section-title">Have you experienced any of the following in the last 6 months?</span>
+          <div class="options-grid" style="margin-bottom: 1.5rem;">
+            <div class="option danger" data-group="cardiac" data-value="heart-attack" onclick="toggleOption(this)">
+              <div class="option-indicator square"></div>
+              <div class="option-text">Heart attack or stroke</div>
+            </div>
+            <div class="option danger" data-group="cardiac" data-value="unstable-angina" onclick="toggleOption(this)">
+              <div class="option-indicator square"></div>
+              <div class="option-text">Unstable angina or chest pain at rest</div>
+            </div>
+            <div class="option" data-group="cardiac" data-value="cardiac-none" onclick="selectNone(this)">
+              <div class="option-indicator square"></div>
+              <div class="option-text">None of the above</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hair loss safety — shown if hair loss selected -->
+        <div id="hair-safety" style="display: none;">
+          <hr class="section-divider" id="hair-safety-divider" style="display: none;">
+          <span class="section-title">Hair loss safety questions</span>
+          <div class="options-grid" style="margin-bottom: 1.5rem;">
+            <div class="option danger" data-group="hair-safety-q" data-value="liver-disease" onclick="toggleOption(this)">
+              <div class="option-indicator square"></div>
+              <div class="option-text">Severe liver disease or liver failure</div>
+            </div>
+            <div class="option" data-group="hair-safety-q" data-value="conceive-soon" onclick="toggleOption(this)">
+              <div class="option-indicator square"></div>
+              <div class="option-text">Planning to father a child within 3 months<span class="option-sub">Finasteride may affect sperm</span></div>
+            </div>
+            <div class="option" data-group="hair-safety-q" data-value="hair-safety-none" onclick="selectNone(this)">
+              <div class="option-indicator square"></div>
+              <div class="option-text">None of the above</div>
+            </div>
+          </div>
+        </div>
+
+        <hr class="section-divider">
+        <div class="field-group">
+          <label class="field-label" for="currentMeds">Other current medications or supplements</label>
+          <textarea class="text-area" id="currentMeds" placeholder="List any other medications, vitamins, or supplements you take. Your physician will review these."></textarea>
+        </div>
+        <div class="field-group" style="margin-bottom: 0;">
+          <label class="field-label" for="additionalInfo">Anything else your physician should know?</label>
+          <textarea class="text-area" id="additionalInfo" placeholder="Optional — any additional context about your health history or concerns."></textarea>
+        </div>
+      </div>
+
+      <!-- STEP 5: YOUR DETAILS -->
+      <div class="step" id="step-5">
+        <span class="step-eyebrow">Your details</span>
+        <h2>Almost there.<br><em>Last step.</em></h2>
+        <p class="step-desc">Your physician uses this to communicate their assessment decision. All information is protected under PIPEDA.</p>
+        <div class="field-row" style="margin-bottom: 0.625rem;">
+          <div class="field-group" style="margin-bottom: 0;">
+            <label class="field-label" for="firstName">First name</label>
+            <input class="field-input" type="text" id="firstName" placeholder="e.g. Robert" autocomplete="given-name">
+          </div>
+          <div class="field-group" style="margin-bottom: 0;">
+            <label class="field-label" for="lastName">Last name</label>
+            <input class="field-input" type="text" id="lastName" placeholder="e.g. Parsons" autocomplete="family-name">
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="email">Email address</label>
+          <input class="field-input" type="email" id="email" placeholder="you@example.com" autocomplete="email">
+        </div>
+        <div class="field-group" style="margin-bottom: 0;">
+          <label class="field-label" for="phone">Phone <span style="font-weight:300; text-transform:none; letter-spacing:0;">(optional)</span></label>
+          <input class="field-input" type="tel" id="phone" placeholder="e.g. 604-555-0182" autocomplete="tel">
+        </div>
+      </div>
+
+    </div><!-- end quiz-body -->
+
+    <div class="quiz-nav" id="quizNav">
+      <button class="btn-back" id="btnBack" onclick="prevStep()" style="visibility: hidden;">Back</button>
+      <button class="btn-continue" id="btnContinue" onclick="nextStep()">Continue</button>
+    </div>
+
+    <!-- RESULT: ELIGIBLE -->
+    <div class="result-screen" id="resultEligible">
+      <div class="result-eligible">
+        <div class="result-badge"><span>Assessment complete</span></div>
+        <h2>You appear to be a<br>strong <em>candidate.</em></h2>
+        <p>Based on your responses, you appear to qualify for treatment. A licensed Canadian physician, independent of Sylven and licensed in your province, will review your full file and respond within 24 hours.</p>
+        <div class="timeline-strip">
+          <div class="timeline-item">
+            <span class="timeline-num">Step 1</span>
+            <span class="timeline-action">Physician review</span>
+            <span class="timeline-when">Within 24 hours</span>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-num">Step 2</span>
+            <span class="timeline-action">Prescription issued</span>
+            <span class="timeline-when">If approved</span>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-num">Step 3</span>
+            <span class="timeline-action">Discreet delivery</span>
+            <span class="timeline-when">3–5 business days</span>
+          </div>
+        </div>
+      </div>
+      <div class="payment-section">
+        <div class="payment-header">
+          <span class="payment-title">Program membership</span>
+          <div class="payment-amount">$49<span>/month</span></div>
+        </div>
+        <ul class="payment-includes">
+          <li>Physician assessment and ongoing check-ins</li>
+          <li>Secure patient portal and messaging</li>
+          <li>Prescription renewal coordination</li>
+          <li>Discreet nationwide delivery</li>
+          <li>Cancel anytime, no long-term commitment</li>
+        </ul>
+        <div class="cost-reframe">
+          <span class="cost-reframe-label">What you'll actually pay</span>
+          <p>Program fee + medication via pharmacy. Sildenafil from <strong>~$1–3 per dose.</strong> Finasteride from <strong>~$30–50/month.</strong> Generic pricing. No markups.</p>
+        </div>
+        <div class="conversion-quote">
+          <blockquote>"I had been putting it off for two years. This took fifteen minutes online and the prescription arrived three days later. I genuinely wish I had done it sooner."</blockquote>
+          <cite>Robert P. &nbsp;·&nbsp; Edmonton, AB &nbsp;·&nbsp; Men's Health Program</cite>
+        </div>
+        <div class="trust-marks">
+          <span class="trust-mark">Independent Canadian Physicians</span>
+          <span class="trust-mark">Discreet Packaging</span>
+          <span class="trust-mark">Cancel Anytime</span>
+        </div>
+        <!-- STRIPE INTEGRATION POINT -->
+        <div class="stripe-placeholder">
+          <span class="stripe-label">Card number</span>
+          <input class="stripe-field" type="text" placeholder="1234 1234 1234 1234" style="width: 100%; margin-bottom: 0.75rem;">
+          <div class="stripe-row">
+            <div><span class="stripe-label">Expiry</span><input class="stripe-field" type="text" placeholder="MM / YY" style="width: 100%;"></div>
+            <div><span class="stripe-label">CVC</span><input class="stripe-field" type="text" placeholder="123" style="width: 100%;"></div>
+          </div>
+          <p class="stripe-powered" style="font-size: 0.65rem; color: var(--dust); margin-top: 0.5rem;">Secured by Stripe · 256-bit encryption</p>
+        </div>
+        <!-- END STRIPE BLOCK -->
+        <div class="guarantee-block">
+          <span style="font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem;">🛡</span>
+          <p><strong>Full refund if not approved.</strong> If your physician determines treatment is not clinically appropriate, your $49 is refunded in full. No questions asked.</p>
+        </div>
+        <button class="btn-pay" onclick="handlePayment()">Begin My Program — $49/month</button>
+        <p class="payment-legal">Your membership begins today. Cancel anytime. Medication costs are separate and paid directly to our pharmacy partner. © Corbin Care Health Inc.</p>
+      </div>
+    </div>
+
+    <!-- RESULT: HARD STOP -->
+    <div class="result-screen" id="resultDecline">
+      <div class="result-decline">
+        <div class="decline-badge"><span>Assessment reviewed</span></div>
+        <h2>We can't process your<br>assessment right now.</h2>
+        <p>Based on one or more of your answers, the treatments available through Sylven may not be safe for you at this time. This is not a final medical determination.</p>
+        <p>If you are taking nitrate medications for a heart condition, PDE5 inhibitors (sildenafil, tadalafil) are contraindicated due to the risk of serious blood pressure changes. Please speak with your cardiologist or GP about alternatives.</p>
+        <p>There is no charge. Your information has not been shared and will not be retained beyond this session.</p>
+        <a href="mens-health.html">Return to Men's Health</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+let currentStep = 1;
+const totalSteps = 5;
+let hasED = false;
+let hasHairLoss = false;
+let hardStop = false;
+
+const stepLabels = ['Your condition', 'About you', 'Clinical questions', 'Medical history', 'Your details'];
+
+function positionHeader() {
+  const bar = document.querySelector('.disclaimer-bar');
+  const nav = document.getElementById('navbar');
+  if (!bar || !nav) return;
+  document.documentElement.style.setProperty('--nav-top', bar.offsetHeight + 'px');
+}
+positionHeader();
+window.addEventListener('resize', positionHeader);
+
+function toggleOption(el) {
+  el.classList.toggle('selected');
+  const group = el.dataset.group;
+  const noneOpt = document.querySelector(`.option[data-group="${group}"][data-value$="-none"], .option[data-group="${group}"][data-value="none"]`);
+  if (el.dataset.value && !el.dataset.value.includes('none')) {
+    if (noneOpt) noneOpt.classList.remove('selected');
+  }
+}
+function selectSingle(el) {
+  const group = el.dataset.group;
+  document.querySelectorAll(`.option[data-group="${group}"]`).forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+function selectNone(el) {
+  const group = el.dataset.group;
+  document.querySelectorAll(`.option[data-group="${group}"]`).forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function updateProgress() {
+  document.getElementById('progressFill').style.width = (currentStep / totalSteps * 100) + '%';
+  document.getElementById('stepLabel').textContent = `Step ${currentStep} of ${totalSteps}`;
+  document.getElementById('stepFraction').textContent = stepLabels[currentStep - 1];
+  document.getElementById('btnBack').style.visibility = currentStep > 1 ? 'visible' : 'hidden';
+  document.getElementById('btnContinue').textContent = currentStep === totalSteps ? 'Review & Pay' : 'Continue';
+}
+
+function showStep(n) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.getElementById(`step-${n}`).classList.add('active');
+  currentStep = n;
+
+  // Step 3: show/hide condition sections
+  if (n === 3) {
+    const edQ = document.getElementById('ed-questions');
+    const hairQ = document.getElementById('hair-questions');
+    const hairDiv = document.getElementById('hair-divider');
+    edQ.style.display = hasED ? 'block' : 'none';
+    hairQ.style.display = hasHairLoss ? 'block' : 'none';
+    if (hairDiv) hairDiv.style.display = (hasED && hasHairLoss) ? 'block' : 'none';
+  }
+
+  // Step 4: show/hide safety sections
+  if (n === 4) {
+    const edS = document.getElementById('ed-safety');
+    const hairS = document.getElementById('hair-safety');
+    const hairSD = document.getElementById('hair-safety-divider');
+    edS.style.display = hasED ? 'block' : 'none';
+    hairS.style.display = hasHairLoss ? 'block' : 'none';
+    if (hairSD) hairSD.style.display = (hasED && hasHairLoss) ? 'block' : 'none';
+  }
+
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function validateStep() {
+  if (currentStep === 1) {
+    hasED = !!document.querySelector('.option[data-value="ed"].selected');
+    hasHairLoss = !!document.querySelector('.option[data-value="hair-loss"].selected');
+    if (!hasED && !hasHairLoss) { alert('Please select at least one condition.'); return false; }
+  }
+  if (currentStep === 2) {
+    if (!document.getElementById('province').value) { alert('Please select your province.'); return false; }
+    const age = parseInt(document.getElementById('age').value);
+    if (!age || age < 18) { alert('Please enter a valid age. You must be 18 or older.'); return false; }
+  }
+  if (currentStep === 5) {
+    const fn = document.getElementById('firstName').value.trim();
+    const ln = document.getElementById('lastName').value.trim();
+    const em = document.getElementById('email').value.trim();
+    if (!fn) { alert('Please enter your first name.'); return false; }
+    if (!ln) { alert('Please enter your last name.'); return false; }
+    if (!em || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) { alert('Please enter a valid email address.'); return false; }
+  }
+  return true;
+}
+
+function nextStep() {
+  if (!validateStep()) return;
+  if (currentStep < totalSteps) {
+    showStep(currentStep + 1);
+  } else {
+    submitAssessment();
+  }
+}
+
+function prevStep() {
+  if (currentStep > 1) showStep(currentStep - 1);
+}
+
+function submitAssessment() {
+  // Check hard stops
+  const nitrateAnswer = document.querySelector('.option[data-group="nitrates"].selected');
+  if (nitrateAnswer && nitrateAnswer.dataset.value === 'nitrates-yes') hardStop = true;
+  const recentCardiac = document.querySelector('.option[data-group="cardiac"][data-value="heart-attack"].selected, .option[data-group="cardiac"][data-value="unstable-angina"].selected');
+  if (recentCardiac) hardStop = true;
+  const liverDisease = document.querySelector('.option[data-group="hair-safety-q"][data-value="liver-disease"].selected');
+  if (liverDisease) hardStop = true;
+
+  document.getElementById('quizProgress').style.display = 'none';
+  document.getElementById('quizNav').style.display = 'none';
+  document.querySelectorAll('.step').forEach(s => s.style.display = 'none');
+  document.getElementById(hardStop ? 'resultDecline' : 'resultEligible').classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function handlePayment() {
+  // STRIPE INTEGRATION POINT
+  alert('Stripe integration coming — $49/month subscription checkout.');
+}
+
+updateProgress();
+</script>
+</body>
+</html>

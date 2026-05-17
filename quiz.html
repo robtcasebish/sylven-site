@@ -862,9 +862,9 @@ nav {
             <div class="option-indicator square"></div>
             <div class="option-text">Weight Loss<span class="option-sub">GLP-1 programs, generic semaglutide</span></div>
           </div>
-          <div class="option coming-soon" data-group="goal" data-value="mens-health">
+          <div class="option" data-group="goal" data-value="mens-health" onclick="routeToMensHealth(event)">
             <div class="option-indicator square"></div>
-            <div class="option-text">Men's Health<span class="option-sub">Coming soon — join the waitlist</span></div>
+            <div class="option-text">Men's Health<span class="option-sub">ED and hair loss programs</span></div>
           </div>
           <div class="option coming-soon" data-group="goal" data-value="womens-health">
             <div class="option-indicator square"></div>
@@ -1504,6 +1504,14 @@ document.querySelectorAll('.option[data-group="sex"]').forEach(opt => {
     }
   });
 });
+
+// ============================================
+// MENS HEALTH ROUTING
+// ============================================
+function routeToMensHealth(e) {
+  e.stopPropagation();
+  window.location.href = 'mens-quiz.html';
+}
 
 // ============================================
 // INIT
