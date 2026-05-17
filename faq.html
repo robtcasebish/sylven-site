@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frequently Asked Questions | Sylven</title>
+<meta name="description" content="Answers to common questions about Sylven's physician-guided health programs, GLP-1 weight loss, HRT, men's health, and how the platform works for Canadians.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --parchment: #F4EFE6; --cream: #FAF8F3; --mist: #EDE8DF;
+  --ink: #1A1714; --ink-mid: #2D2825; --dust: #8A8078;
+  --brass: #9C845A; --brass-light: #B89D70; --white: #FFFFFF;
+  --success: #3D6B4F;
+  --font-display: 'Newsreader', Georgia, serif;
+  --font-body: 'Jost', sans-serif;
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --max: 1200px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); background: var(--parchment); color: var(--ink); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+body::after { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.018; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E"); background-size: 180px; }
+
+.disclaimer-bar { background: var(--ink-mid); padding: 0.5rem 4rem; position: fixed; top: 0; left: 0; right: 0; z-index: 300; }
+.disclaimer-bar p { font-size: 0.68rem; font-weight: 300; color: rgba(244,239,230,0.45); line-height: 1.5; max-width: var(--max); margin: 0 auto; }
+.disclaimer-bar strong { font-weight: 500; color: rgba(244,239,230,0.7); }
+.disclaimer-bar a { color: var(--brass-light); text-decoration: none; }
+
+nav { position: fixed; top: var(--nav-top, 34px); left: 0; right: 0; z-index: 200; display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 4rem; background: rgba(244,239,230,0.97); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(26,23,20,0.08); }
+nav.scrolled { box-shadow: 0 2px 20px rgba(26,23,20,0.06); }
+.nav-logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 400; color: var(--ink); text-decoration: none; letter-spacing: -0.01em; }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a { font-size: 0.8rem; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-mid); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--brass); }
+.nav-cta { font-family: var(--font-body); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--parchment); background: var(--ink); border: none; padding: 0.65rem 1.5rem; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.25s; }
+.nav-cta:hover { background: var(--brass); }
+.hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+.hamburger span { display: block; width: 22px; height: 1.5px; background: var(--ink); transition: transform 0.3s, opacity 0.3s; }
+.hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+.mobile-menu { display: none; position: fixed; inset: 0; background: var(--parchment); z-index: 190; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
+.mobile-menu.open { display: flex; }
+.mobile-menu a { font-family: var(--font-display); font-size: 2.2rem; font-weight: 400; color: var(--ink); text-decoration: none; }
+.mobile-menu .m-cta { font-family: var(--font-body); font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--parchment); background: var(--ink); padding: 0.875rem 2rem; margin-top: 1rem; text-decoration: none; }
+
+/* PAGE HEADER */
+.page-header { padding: 9rem 4rem 5rem; background: var(--parchment); }
+.page-header-inner { max-width: var(--max); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: end; }
+.breadcrumb { display: flex; align-items: center; gap: 0.5rem; font-size: 0.72rem; color: var(--dust); margin-bottom: 1.5rem; }
+.breadcrumb a { color: var(--dust); text-decoration: none; transition: color 0.2s; }
+.breadcrumb a:hover { color: var(--ink); }
+.breadcrumb span { color: rgba(26,23,20,0.2); }
+.section-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brass); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.75rem; }
+.section-label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--brass); }
+.page-header h1 { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 300; line-height: 1.06; letter-spacing: -0.025em; color: var(--ink); margin-bottom: 1.5rem; }
+.page-header h1 em { font-style: italic; }
+.page-header-desc { font-size: 1.05rem; font-weight: 400; color: var(--dust); line-height: 1.85; margin-bottom: 0; }
+
+/* TOPIC NAV */
+.topic-nav { background: var(--white); border-top: 1px solid rgba(26,23,20,0.08); border-bottom: 1px solid rgba(26,23,20,0.08); position: sticky; top: var(--nav-bottom, 80px); z-index: 100; }
+.topic-nav-inner { max-width: var(--max); margin: 0 auto; padding: 0 4rem; display: flex; gap: 0; overflow-x: auto; }
+.topic-btn { font-family: var(--font-body); font-size: 0.78rem; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase; color: var(--dust); background: none; border: none; padding: 1rem 1.5rem 1rem 0; margin-right: 1.5rem; cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: color 0.2s, border-color 0.2s; }
+.topic-btn:hover { color: var(--ink); }
+.topic-btn.active { color: var(--ink); border-bottom-color: var(--brass); }
+
+/* MAIN LAYOUT */
+.faq-layout { max-width: var(--max); margin: 0 auto; padding: 0 4rem; display: grid; grid-template-columns: 240px 1fr; gap: 6rem; align-items: start; padding-bottom: 8rem; }
+
+/* SIDEBAR */
+.faq-sidebar { position: sticky; top: calc(var(--nav-bottom, 80px) + 52px + 3rem); padding-top: 4rem; }
+.sidebar-section { margin-bottom: 2rem; }
+.sidebar-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(26,23,20,0.3); margin-bottom: 0.875rem; display: block; }
+.sidebar-links { list-style: none; }
+.sidebar-links li { margin-bottom: 0.1rem; }
+.sidebar-links a { font-size: 0.82rem; font-weight: 400; color: var(--dust); text-decoration: none; display: block; padding: 0.3rem 0; border-left: 2px solid transparent; padding-left: 0.75rem; transition: color 0.2s, border-color 0.2s; line-height: 1.4; }
+.sidebar-links a:hover { color: var(--ink); }
+.sidebar-links a.active { color: var(--ink); border-left-color: var(--brass); }
+.sidebar-cta { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgba(26,23,20,0.08); }
+.sidebar-cta p { font-size: 0.82rem; font-weight: 400; color: var(--dust); line-height: 1.65; margin-bottom: 1rem; }
+.btn-small { font-family: var(--font-body); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--parchment); background: var(--ink); padding: 0.7rem 1.25rem; text-decoration: none; display: inline-block; transition: background 0.25s; }
+.btn-small:hover { background: var(--brass); }
+
+/* FAQ CONTENT */
+.faq-content { padding-top: 4rem; }
+.faq-section { margin-bottom: 5rem; scroll-margin-top: calc(var(--nav-bottom, 80px) + 52px + 2rem); }
+.faq-section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; padding-bottom: 1.25rem; border-bottom: 1px solid rgba(26,23,20,0.1); }
+.faq-section-num { font-family: var(--font-display); font-size: 0.8rem; font-weight: 300; color: var(--brass); letter-spacing: 0.06em; }
+.faq-section h2 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 400; color: var(--ink); letter-spacing: -0.015em; margin-bottom: 0; }
+
+/* FAQ ITEMS */
+.faq-item { border-bottom: 1px solid rgba(26,23,20,0.08); }
+.faq-question { width: 100%; background: none; border: none; cursor: pointer; display: flex; align-items: flex-start; justify-content: space-between; gap: 1.5rem; padding: 1.25rem 0; font-family: var(--font-body); font-size: 0.95rem; font-weight: 400; color: var(--ink); text-align: left; line-height: 1.5; transition: color 0.25s; }
+.faq-question:hover, .faq-question.open { color: var(--brass); }
+.faq-icon { width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0; border: 1px solid rgba(26,23,20,0.15); display: flex; align-items: center; justify-content: center; transition: background 0.25s, transform 0.35s; margin-top: 0.1rem; }
+.faq-question.open .faq-icon { background: var(--brass); border-color: var(--brass); transform: rotate(45deg); }
+.faq-icon svg { width: 10px; height: 10px; stroke: var(--dust); transition: stroke 0.25s; }
+.faq-question.open .faq-icon svg { stroke: white; }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.45s var(--ease); }
+.faq-answer.open { max-height: 1000px; }
+.faq-answer-inner { padding-bottom: 1.5rem; }
+.faq-answer-inner p { font-size: 0.9rem; font-weight: 400; color: var(--dust); line-height: 1.85; }
+.faq-answer-inner p + p { margin-top: 0.875rem; }
+.faq-answer-inner a { color: var(--brass); text-decoration: none; border-bottom: 1px solid rgba(156,132,90,0.3); transition: border-color 0.2s; }
+.faq-answer-inner a:hover { border-color: var(--brass); }
+
+/* CTA BANNER */
+.cta-banner { background: var(--ink); padding: 6rem 4rem; text-align: center; }
+.cta-banner .section-label { color: var(--brass-light); justify-content: center; margin-bottom: 1.5rem; }
+.cta-banner .section-label::before { background: var(--brass-light); }
+.cta-banner h2 { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 300; color: var(--white); max-width: 20ch; margin: 0 auto 1.25rem; line-height: 1.15; letter-spacing: -0.02em; }
+.cta-banner h2 em { font-style: italic; color: var(--brass-light); }
+.cta-banner p { font-size: 0.95rem; font-weight: 300; color: rgba(244,239,230,0.4); max-width: 44ch; margin: 0 auto 2.5rem; line-height: 1.8; }
+.btn-cta { font-family: var(--font-body); font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); background: var(--parchment); padding: 0.95rem 2.5rem; text-decoration: none; display: inline-block; transition: background 0.25s, color 0.25s; }
+.btn-cta:hover { background: var(--brass-light); color: var(--parchment); }
+
+/* FOOTER */
+footer { background: var(--ink-mid); padding: 4rem 4rem 2.5rem; }
+.footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 3rem; max-width: var(--max); margin: 0 auto 3rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(244,239,230,0.07); }
+.footer-brand { font-family: var(--font-display); font-size: 1.35rem; font-weight: 400; color: var(--white); letter-spacing: -0.01em; margin-bottom: 1rem; display: block; }
+.footer-desc { font-size: 0.82rem; font-weight: 300; color: rgba(244,239,230,0.3); line-height: 1.75; max-width: 260px; }
+.footer-col h4 { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(244,239,230,0.25); margin-bottom: 1.25rem; }
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 0.6rem; }
+.footer-col ul li a { font-size: 0.82rem; font-weight: 300; color: rgba(244,239,230,0.4); text-decoration: none; transition: color 0.2s; }
+.footer-col ul li a:hover { color: rgba(244,239,230,0.75); }
+.footer-bottom { max-width: var(--max); margin: 0 auto; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+.footer-bottom p { font-size: 0.72rem; font-weight: 300; color: rgba(244,239,230,0.2); line-height: 1.7; max-width: 600px; }
+.footer-legal-links { display: flex; gap: 1.5rem; flex-wrap: wrap; flex-shrink: 0; }
+.footer-legal-links a { font-size: 0.72rem; color: rgba(244,239,230,0.25); text-decoration: none; transition: color 0.2s; white-space: nowrap; }
+.footer-legal-links a:hover { color: rgba(244,239,230,0.6); }
+
+.fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
+.fade-up.visible { opacity: 1; transform: none; }
+
+@media (max-width: 1024px) {
+  .disclaimer-bar { padding: 0.5rem 1.5rem; }
+  nav { padding: 1.25rem 1.5rem; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .nav-cta { display: none; }
+  .page-header { padding: 8rem 1.5rem 4rem; }
+  .page-header-inner { grid-template-columns: 1fr; gap: 1.5rem; }
+  .topic-nav-inner { padding: 0 1.5rem; }
+  .faq-layout { grid-template-columns: 1fr; gap: 0; padding: 0 1.5rem 5rem; }
+  .faq-sidebar { display: none; }
+  .faq-content { padding-top: 2.5rem; }
+  .cta-banner { padding: 4.5rem 1.5rem; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  footer { padding: 3rem 1.5rem 2rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="disclaimer-bar">
+  <p><strong>Medical Information Only.</strong> This platform facilitates access to independent licensed Canadian physicians. All treatment decisions are made solely by your treating physician following individual consultation. <a href="medical-consent.html">Learn more →</a></p>
+</div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Sylven</a>
+  <ul class="nav-links">
+    <li><a href="weight-loss.html">Weight Loss</a></li>
+    <li><a href="mens-health.html">Men's Health</a></li>
+    <li><a href="womens-health.html">Women's Health</a></li>
+    <li><a href="index.html#how-it-works">How It Works</a></li>
+  </ul>
+  <a href="quiz.html" class="nav-cta">Begin Assessment</a>
+  <button class="hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="weight-loss.html" onclick="closeMobileMenu()">Weight Loss</a>
+  <a href="mens-health.html" onclick="closeMobileMenu()">Men's Health</a>
+  <a href="womens-health.html" onclick="closeMobileMenu()">Women's Health</a>
+  <a href="quiz.html" class="m-cta" onclick="closeMobileMenu()">Begin Assessment</a>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="fade-up">
+      <div class="breadcrumb">
+        <a href="index.html">Sylven</a>
+        <span>/</span>
+        <span>FAQ</span>
+      </div>
+      <p class="section-label">Common questions</p>
+      <h1>Everything you<br>want to <em>know.</em></h1>
+    </div>
+    <div class="fade-up">
+      <p class="page-header-desc">Questions about how Sylven works, what the physician assessment involves, what medications are available, and what to expect. If you don't find your answer here, your care team is available around the clock.</p>
+    </div>
+  </div>
+</div>
+
+<!-- TOPIC NAV -->
+<div class="topic-nav" id="topicNav">
+  <div class="topic-nav-inner">
+    <button class="topic-btn active" onclick="scrollToSection('platform')">Platform and process</button>
+    <button class="topic-btn" onclick="scrollToSection('weight-loss')">Weight loss and GLP-1</button>
+    <button class="topic-btn" onclick="scrollToSection('mens')">Men's health</button>
+    <button class="topic-btn" onclick="scrollToSection('womens')">Women's health</button>
+    <button class="topic-btn" onclick="scrollToSection('billing')">Billing and cancellation</button>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="faq-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="faq-sidebar">
+    <div class="sidebar-section">
+      <span class="sidebar-label">Platform and process</span>
+      <ul class="sidebar-links">
+        <li><a href="#q-how-platform-works">How the platform works</a></li>
+        <li><a href="#q-provinces">Which provinces are served</a></li>
+        <li><a href="#q-physicians">Who the physicians are</a></li>
+        <li><a href="#q-pharmacy">How medication is dispensed</a></li>
+        <li><a href="#q-how-long">How long it takes</a></li>
+        <li><a href="#q-not-approved">If not approved</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-section">
+      <span class="sidebar-label">Weight loss and GLP-1</span>
+      <ul class="sidebar-links">
+        <li><a href="#q-generic-sema">Generic semaglutide</a></li>
+        <li><a href="#q-glp1-works">How GLP-1 works</a></li>
+        <li><a href="#q-side-effects">Side effects</a></li>
+        <li><a href="#q-how-long-meds">Duration of treatment</a></li>
+        <li><a href="#q-dietitian">Dietitian support</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-section">
+      <span class="sidebar-label">Men's and women's health</span>
+      <ul class="sidebar-links">
+        <li><a href="#q-ed-generic">Generic ED medication</a></li>
+        <li><a href="#q-hair-timeline">Hair loss timeline</a></li>
+        <li><a href="#q-hrt-safe">Is HRT safe</a></li>
+        <li><a href="#q-perimenopause">Perimenopause</a></li>
+      </ul>
+    </div>
+    <div class="sidebar-cta">
+      <p>Still have questions? Your care team responds within a few hours.</p>
+      <a href="quiz.html" class="btn-small">Begin Assessment</a>
+    </div>
+  </aside>
+
+  <!-- FAQ CONTENT -->
+  <div class="faq-content">
+
+    <!-- SECTION 1: PLATFORM -->
+    <div class="faq-section" id="platform">
+      <div class="faq-section-header">
+        <span class="faq-section-num">01</span>
+        <h2>Platform and process</h2>
+      </div>
+
+      <div class="faq-item" id="q-how-platform-works">
+        <button class="faq-question" aria-expanded="false">
+          <span>How does Sylven work?</span>
+          <div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          <p>Sylven is a health coordination platform. We connect patients with independent licensed Canadian physicians and Health Canada registered pharmacies. We do not employ physicians or dispense medication ourselves.</p>
+          <p>The process has three steps. You complete a clinical intake assessment online — typically five to ten minutes. An independent physician licensed in your province reviews your file and determines whether treatment is clinically appropriate. If approved, a prescription is sent to our pharmacy partner, who dispenses and ships your medication directly to you.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item" id="q-provinces">
+        <button class="faq-question" aria-expanded="false">
+          <span>Which provinces does Sylven serve?</span>
+          <div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          <p>Sylven serves patients in all ten provinces and three territories. Physicians must be licensed in the province or territory where the patient lives. We match you with a physician who holds the appropriate license for your location.</p>
+          <p>Medication is shipped nationwide by our pharmacy partner. Delivery typically takes three to five business days regardless of where in Canada you are located.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item" id="q-physicians">
+        <button class="faq-question" aria-expanded="false">
+          <span>Who are the physicians on the platform?</span>
+          <div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          <p>All physicians on the Sylven network are independent, licensed Canadian medical doctors. They are not employees of Sylven. They are independent practitioners who have chosen to offer asynchronous and virtual assessments through our platform.</p>
+          <p>All treatment decisions are made solely by your physician. Sylven does not influence, direct, or override physician decisions. If a physician determines that treatment is not appropriate, that decision stands regardless of what the patient prefers.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item" id="q-pharmacy">
+        <button class="faq-question" aria-expanded="false">
+          <span>How is medication dispensed and shipped?</span>
+          <div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          <p>Medication is dispensed by our Health Canada registered pharmacy partner and shipped directly to your door. Sylven does not handle, store, or ship medication. The pharmacy operates independently and is responsible for dispensing and delivery.</p>
+          <p>All medication arrives in plain, discreet packaging with no indication of contents on the outside. The billing name on your statement will show the pharmacy partner's name. Medication costs are paid directly to the pharmacy and are not collected by Sylven.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item" id="q-how-long">
+        <button class="faq-question" aria-expanded="false">
+          <span>How long does the whole process take?</span>
+          <div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          <p>The intake assessment takes five to ten minutes. Physician review typically takes less than 24 hours. If approved, the prescription is sent to the pharmacy the same day. Medication ships within one to two business days of the prescription being received and arrives within three to five business days.</p>
+          <p>From the moment you complete your assessment to medication arriving at your door, most patients wait five to seven business days in total.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item" id="q-not-approved">
+        <button class="faq-question" aria-expanded="false">
+          <span>What happens if my physician does not approve me?</span>
+          <div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          <p>You receive a full refund of your program membership fee. No questions asked. Your physician will typically explain why treatment was not approved and may suggest alternative approaches or next steps.</p>
+          <p>A decision not to approve does not mean treatment will never be appropriate. It means the physician determined it is not appropriate based on your current health profile. You can discuss the decision with your physician through the patient portal.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>Is Sylven a clinic? Is this telemedicine?</span>
+          <div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          <p>Sylven is not a clinic. We are a health coordination platform. The distinction matters legally and practically. Sylven does not provide medical care. We provide the coordination infrastructure — the assessment tools, the patient portal, the pharmacy referral, and the support layer — that connects patients with independent practitioners.</p>
+          <p>The physicians on the platform conduct asynchronous assessments based on your submitted health information. This is different from a live telemedicine video call, though your physician may request a follow-up if they need more information before making a decision.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>How is my health information protected?</span>
+          <div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          <p>Your health information is protected under the Personal Information Protection and Electronic Documents Act (PIPEDA) and applicable provincial health privacy legislation. It is shared only with your treating physician and dispensing pharmacist, both of whom are bound by their own professional privacy obligations.</p>
+          <p>Sylven does not sell, share, or use your health data for marketing purposes. All data is stored on Canadian servers. For full details, see our <a href="privacy.html">Privacy Policy</a>.</p>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- SECTION 2: WEIGHT LOSS -->
+    <div class="faq-section" id="weight-loss">
+      <div class="faq-section-header">
+        <span class="faq-section-num">02</span>
+        <h2>Weight loss and GLP-1</h2>
+      </div>
+
+      <div class="faq-item" id="q-generic-sema">
+        <button class="faq-question" aria-expanded="false">
+          <span>What is generic semaglutide and is it as effective as Ozempic or Wegovy?</span>
+          <div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          <p>Semaglutide is the active molecule in both Ozempic and Wegovy. In April 2026, Canada became the first G7 country to approve generic versions of semaglutide after Novo Nordisk's Canadian patent lapsed. The generics approved by Health Canada contain the identical molecule at the same doses.</p>
+          <p>Health Canada requires generic medications to demonstrate bioequivalence: the same active ingredient, the same absorption rate, and the same clinical effect as the reference brand. Generic semaglutide is clinically equivalent to Ozempic and Wegovy, at approximately 60% lower cost.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item" id="q-glp1-works">
+        <button class="faq-question" aria-expanded="false">
+          <span>How do GLP-1 medications actually cause weight loss?</span>
+          <div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          <p>GLP-1 receptor agonists work by mimicking a hormone your body naturally produces after eating. They act on receptors in the brain that regulate appetite and satiety, reducing hunger signals. They also slow gastric emptying, which means food stays in your stomach longer and you feel full with less.</p>
+          <p>The result is a significant reduction in caloric intake without requiring the same level of conscious effort that conventional dieting demands. In clinical trials, patients lost an average of 15% of body weight over 68 weeks. GLP-1 medications also improve insulin sensitivity and have demonstrated cardiovascular benefits in patients with type 2 diabetes and obesity.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item" id="q-side-effects">
+        <button class="faq-question" aria-expanded="false">
+          <span>What are the side effects of semaglutide?</span>
+          <div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          <p>The most common side effects are nausea, mild constipation, and fatigue, particularly during the dose escalation period. These typically ease within a few weeks as your body adjusts. Your physician will prescribe a gradual titration schedule specifically to minimise discomfort during this period.</p>
+          <p>Less common but more serious side effects include acute pancreatitis and gallbladder disease. These are why a clinical assessment is required before prescribing, and why ongoing physician monitoring is part of the program. If you experience severe or persistent abdominal pain, you should contact your physician immediately.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item" id="q-how-long-meds">
+        <button class="faq-question" aria-expanded="false">
+          <span>How long do I need to take the medication?</span>
+          <div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          <p>GLP-1 therapy is generally considered a long-term treatment. Clinical research consistently shows that the majority of patients regain weight when medication is stopped. This is because obesity is a chronic metabolic condition, not a short-term problem with a fixed endpoint.</p>
+          <p>Most physicians recommend continuing treatment as long as it is effective and well-tolerated, alongside sustained lifestyle changes. Your physician will review your progress at regular intervals and help you plan an approach appropriate to your situation and goals.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item" id="q-dietitian">
+        <button class="faq-question" aria-expanded="false">
+          <span>What does the registered dietitian support include?</span>
+          <div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          <p>Registered dietitian consultations are included with the weight loss program membership. A Canadian-registered dietitian provides personalised nutrition guidance based on your current eating patterns, health goals, and how you are responding to GLP-1 therapy.</p>
+          <p>The focus is on supporting muscle preservation during weight loss, managing the appetite changes that come with GLP-1 therapy, and building sustainable eating habits. GLP-1 medications are most effective when paired with appropriate nutritional guidance, which is why dietitian support is a core part of the program rather than an add-on.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>Do I qualify if my BMI is below 30?</span>
+          <div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          <p>The Canadian Adult Obesity Clinical Practice Guidelines indicate GLP-1 therapy for adults with a BMI of 30 or above, or a BMI of 27 or above with at least one weight-related comorbidity such as type 2 diabetes, high blood pressure, high cholesterol, sleep apnea, or cardiovascular disease.</p>
+          <p>If your BMI is below 27, you are unlikely to meet the current clinical criteria. Your physician will review your full health profile and make the final determination. If you are near the threshold and have qualifying conditions, we encourage you to complete the assessment anyway.</p>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- SECTION 3: MEN'S HEALTH -->
+    <div class="faq-section" id="mens">
+      <div class="faq-section-header">
+        <span class="faq-section-num">03</span>
+        <h2>Men's health</h2>
+      </div>
+
+      <div class="faq-item" id="q-ed-generic">
+        <button class="faq-question" aria-expanded="false">
+          <span>Is generic sildenafil as effective as Viagra?</span>
+          <div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          <p>Yes. Sildenafil is the active ingredient in Viagra. Health Canada requires generics to demonstrate bioequivalence, meaning the same molecule, the same absorption, and the same clinical effect. The only meaningful difference is cost.</p>
+          <p>Generic sildenafil is available in Canada at a fraction of the brand-name price, typically from $1 to $3 per dose versus $15 to $25 for branded Viagra. Both are manufactured under the same quality standards required by Health Canada.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>What is the difference between sildenafil and tadalafil?</span>
+          <div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          <p>Both are PDE5 inhibitors that work by the same mechanism — increasing blood flow during sexual stimulation. The main practical difference is duration. Sildenafil (Viagra) works for four to six hours and is typically taken as needed, about 30 to 60 minutes before activity.</p>
+          <p>Tadalafil (Cialis) lasts up to 36 hours and is available in both as-needed and low-dose daily formulations. Daily tadalafil means you do not need to plan around a dose, which some patients prefer. Your physician will discuss which option suits your situation.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item" id="q-hair-timeline">
+        <button class="faq-question" aria-expanded="false">
+          <span>How long before finasteride shows results for hair loss?</span>
+          <div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          <p>Finasteride typically takes three to six months before visible results appear. It works by preventing further hair loss first, then allowing follicles that have been miniaturised to gradually recover. Most men see meaningful improvement at twelve months of consistent use.</p>
+          <p>The earlier treatment begins, the more effective it tends to be. Follicles that have been inactive for a long time may not recover as well as those that were recently affected. Stopping finasteride reverses its effect within six to twelve months, so it is generally continued long-term if it is working.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>Can ED be a sign of something more serious?</span>
+          <div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          <p>Yes, occasionally. Erectile dysfunction can be an early indicator of cardiovascular disease, type 2 diabetes, or hormonal issues, because the vascular system and hormonal regulation that affect erectile function also affect broader health. This is why clinical assessment before prescribing matters.</p>
+          <p>Your physician reviews your full health history as part of the assessment and will flag anything that warrants further investigation. If they identify a concern that should be assessed by another specialist, they will advise you accordingly. In most cases, ED is not a sign of serious underlying disease, but it is worth ruling out.</p>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- SECTION 4: WOMEN'S HEALTH -->
+    <div class="faq-section" id="womens">
+      <div class="faq-section-header">
+        <span class="faq-section-num">04</span>
+        <h2>Women's health</h2>
+      </div>
+
+      <div class="faq-item" id="q-hrt-safe">
+        <button class="faq-question" aria-expanded="false">
+          <span>Is HRT safe? I heard it causes cancer.</span>
+          <div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          <p>The concern comes from a 2002 study called the Women's Health Initiative, which led to a generation of women being denied effective treatment. That study used older oral synthetic hormones in older women, many of whom already had cardiovascular risk factors. The results were misapplied to all women, in all formulations, at all ages.</p>
+          <p>Twenty years of subsequent research, including re-analysis of the original WHI data, has substantially revised the picture. For healthy women in their 40s and 50s starting HRT within ten years of menopause onset, current evidence shows that the benefits generally outweigh the risks. The Canadian Menopause Society and the International Menopause Society now support HRT as appropriate first-line treatment for symptomatic women without contraindications. Your physician will review your individual situation and discuss the relevant evidence with you.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item" id="q-perimenopause">
+        <button class="faq-question" aria-expanded="false">
+          <span>Do I need to wait until my periods have stopped before seeking treatment?</span>
+          <div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          <p>No. Perimenopause, the transition phase before menopause, can begin as early as the mid-40s and can last several years. Symptoms can be significant during this phase even while periods are still occurring, because hormone levels are fluctuating rather than simply declining.</p>
+          <p>You do not need to wait for twelve consecutive months without a period before seeking help. If your symptoms are affecting your quality of life, a physician can assess you and discuss treatment options appropriate to where you are in the transition. Starting treatment earlier often produces better long-term outcomes.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>What is the difference between estrogen-only and combined HRT?</span>
+          <div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          <p>Women with an intact uterus require progesterone alongside estrogen to protect the uterine lining from abnormal growth. This is called combined HRT. Women who have had a hysterectomy can take estrogen alone, since there is no uterus to protect.</p>
+          <p>Formulation also matters. Estrogen delivered through the skin via a patch or gel avoids the first-pass metabolism of oral tablets and may carry a lower clot risk. Your physician will discuss which formulation is most appropriate based on your health history, preferences, and symptom profile.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>How quickly does HRT work?</span>
+          <div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          <p>Many women notice improvement in hot flashes and night sweats within two to four weeks. Sleep often improves shortly after. Mood and cognitive symptoms typically take six to eight weeks. Vaginal dryness and discomfort generally respond within one to three months.</p>
+          <p>Full response is usually assessed at three months, at which point your physician may adjust formulation or dose if needed. Some women require more than one adjustment before finding the right regimen. This is normal and expected with hormone therapy.</p>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- SECTION 5: BILLING -->
+    <div class="faq-section" id="billing">
+      <div class="faq-section-header">
+        <span class="faq-section-num">05</span>
+        <h2>Billing and cancellation</h2>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>What exactly does the program membership fee cover?</span>
+          <div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          <p>The program membership fee covers non-insured support services: physician assessment and ongoing check-ins, patient portal access, care team messaging, prescription renewal coordination, and for the weight loss program, registered dietitian consultations.</p>
+          <p>Medication is a separate cost, paid directly to the pharmacy partner. Sylven does not mark up medication prices. The two-component structure means you always know what you are paying for, and you can see both costs clearly before committing.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>Is the program fee covered by insurance or a health spending account?</span>
+          <div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          <p>The program membership fee covers non-insured services and is not covered by provincial health plans. Some private benefits plans or Health Spending Accounts (HSAs) may cover physician consultation fees or dietitian services. We recommend checking with your benefits provider directly.</p>
+          <p>Medication costs paid to the pharmacy may be partially or fully covered by private drug benefits plans. Generic medications are increasingly included on provincial formularies, though coverage for weight management indications varies by province and plan. Your pharmacy partner can provide an official receipt for benefits claims.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>How do I cancel my membership?</span>
+          <div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          <p>You can cancel at any time through your patient portal or by messaging your care team. There are no cancellation fees and no notice period required. Your membership will not renew after the current billing cycle ends.</p>
+          <p>If you are on a GLP-1 or HRT program, your physician will advise on how to discontinue medication safely before you cancel. Stopping GLP-1 or HRT abruptly without guidance is generally not recommended.</p>
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>What is your refund policy?</span>
+          <div class="faq-icon"><svg viewBox="0 0 12 12" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></div>
+        </button>
+        <div class="faq-answer"><div class="faq-answer-inner">
+          <p>If your physician determines that treatment is not clinically appropriate for you, your program membership fee is refunded in full. This applies regardless of the reason for non-approval.</p>
+          <p>Medication costs are not refunded once dispensed, as is standard for prescription medication. For full details, see our <a href="refund.html">Refund Policy</a>.</p>
+        </div></div>
+      </div>
+    </div>
+
+  </div><!-- end faq-content -->
+</div><!-- end faq-layout -->
+
+<!-- CTA -->
+<div class="cta-banner">
+  <p class="section-label">Ready to begin</p>
+  <h2>Still have<br><em>questions?</em></h2>
+  <p>Your care team is available around the clock. Or begin your assessment and your physician will answer anything specific to your situation.</p>
+  <a href="quiz.html" class="btn-cta">Begin Your Assessment</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <span class="footer-brand">Sylven</span>
+      <p class="footer-desc">Connecting Canadians with independent licensed physicians and Health Canada registered pharmacies. Serving all provinces.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Programs</h4>
+      <ul>
+        <li><a href="weight-loss.html">Weight Loss</a></li>
+        <li><a href="mens-health.html">Men's Health</a></li>
+        <li><a href="womens-health.html">Women's Health</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="physicians.html">Our Physicians</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="terms.html">Terms of Service</a></li>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="medical-consent.html">Medical Consent</a></li>
+        <li><a href="refund.html">Refund Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Corbin Care Health Inc. All rights reserved. Sylven is a health coordination platform, not a medical clinic. All treatment decisions are made solely by independent licensed Canadian physicians. PIPEDA compliant.</p>
+    <div class="footer-legal-links">
+      <a href="terms.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="medical-consent.html">Medical Consent</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function positionHeader() {
+  const bar = document.querySelector('.disclaimer-bar');
+  const nav = document.getElementById('navbar');
+  const topicNav = document.getElementById('topicNav');
+  if (!bar || !nav) return;
+  const h = bar.offsetHeight;
+  document.documentElement.style.setProperty('--nav-top', h + 'px');
+  document.documentElement.style.setProperty('--nav-bottom', (h + nav.offsetHeight) + 'px');
+}
+positionHeader();
+window.addEventListener('resize', positionHeader);
+
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 40));
+
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+function closeMobileMenu() { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); document.body.style.overflow = ''; }
+hamburger.addEventListener('click', () => { const o = mobileMenu.classList.toggle('open'); hamburger.classList.toggle('open', o); document.body.style.overflow = o ? 'hidden' : ''; });
+
+// FAQ accordion
+document.querySelectorAll('.faq-question').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const isOpen = btn.classList.contains('open');
+    document.querySelectorAll('.faq-question.open').forEach(b => {
+      b.classList.remove('open');
+      b.setAttribute('aria-expanded', 'false');
+      b.nextElementSibling.classList.remove('open');
+    });
+    if (!isOpen) {
+      btn.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+      btn.nextElementSibling.classList.add('open');
+    }
+  });
+});
+
+// Scroll to section
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+  document.querySelectorAll('.topic-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+// Active sidebar link on scroll
+const sections = document.querySelectorAll('.faq-section');
+const sidebarLinks = document.querySelectorAll('.sidebar-links a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      sidebarLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + id || a.closest('.sidebar-section')?.querySelector('a')?.getAttribute('href')?.includes(id));
+      });
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+sections.forEach(s => observer.observe(s));
+
+// Fade in
+const io = new IntersectionObserver(e => e.forEach(x => { if (x.isIntersecting) x.target.classList.add('visible'); }), { threshold: 0.08 });
+document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+
+// Open FAQ from URL hash
+if (window.location.hash) {
+  const target = document.querySelector(window.location.hash);
+  if (target) {
+    setTimeout(() => {
+      const btn = target.querySelector('.faq-question');
+      if (btn) btn.click();
+      target.scrollIntoView({ behavior: 'smooth' });
+    }, 300);
+  }
+}
+</script>
+</body>
+</html>
