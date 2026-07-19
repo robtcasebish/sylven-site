@@ -1,8 +1,8 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { Breadcrumbs, EmptyState, PageContainer } from "@/components";
+import { Breadcrumbs, ClinicListingCard, PageContainer } from "@/components";
 import { getService, pilotLocation, services } from "@/lib/directory";
+import { listClinics } from "@/lib/directory-repository";
 
 type ServicePageProps = {
   params: Promise<{ serviceSlug: string }>;
@@ -22,6 +22,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
   const { serviceSlug } = await params;
   const service = getService(serviceSlug);
   if (!service) notFound();
+  const clinics = await listClinics(service.slug);
 
   return (
     <>
@@ -51,18 +52,15 @@ export default async function ServicePage({ params }: ServicePageProps) {
         <PageContainer>
           <div className="results-heading">
             <h2>Clinic listings</h2>
-            <p>0 verified listings in this preview</p>
+            <p>{clinics.length} source-checked {clinics.length === 1 ? "listing" : "listings"}</p>
           </div>
-          <EmptyState title="Verified clinic listings are being prepared">
-            <p>
-              This preview does not invent clinic names, availability, prices,
-              referral rules, or contact details. Listings will appear after
-              provenance and freshness checks are complete.
-            </p>
-            <p>
-              <Link href="/methodology">See how listing verification works</Link>
-            </p>
-          </EmptyState>
+          <div className="clinic-results-list">
+            {clinics.map((clinic) => <ClinicListingCard clinic={clinic} key={clinic.slug} />)}
+          </div>
+          <p className="results-disclaimer">
+            Listings are ordered alphabetically. Source checking is not a quality
+            rating or endorsement. Confirm current details directly with the clinic.
+          </p>
         </PageContainer>
       </section>
     </>

@@ -1,14 +1,17 @@
 import Link from "next/link";
 
 import {
+  ClinicListingCard,
   PageContainer,
   SearchFormShell,
   SectionHeading,
   ServiceCardShell,
 } from "@/components";
 import { pilotLocation, services } from "@/lib/directory";
+import { listClinics } from "@/lib/directory-repository";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const clinics = await listClinics();
   return (
     <>
       <section className="hero">
@@ -137,6 +140,31 @@ export default function HomePage() {
           <Link className="text-link text-link--light" href="/methodology">
             Read the listing methodology <span aria-hidden="true">→</span>
           </Link>
+        </PageContainer>
+      </section>
+
+      <section className="page-section">
+        <PageContainer>
+          <SectionHeading
+            eyebrow="First source-checked listings"
+            title="A small directory, now with real receipts."
+            align="split"
+          >
+            <p>
+              These pilot records use clinic-controlled sources checked on
+              July 19, 2026. Inclusion is not an endorsement or quality ranking.
+            </p>
+          </SectionHeading>
+          <div className="clinic-results-list">
+            {clinics.slice(0, 3).map((clinic) => (
+              <ClinicListingCard clinic={clinic} key={clinic.slug} />
+            ))}
+          </div>
+          <p className="section-action">
+            <Link className="button-link button-link--secondary" href="/locations/british-columbia/metro-vancouver">
+              View all pilot listings <span aria-hidden="true">→</span>
+            </Link>
+          </p>
         </PageContainer>
       </section>
 

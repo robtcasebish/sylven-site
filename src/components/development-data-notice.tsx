@@ -6,8 +6,8 @@ export function DevelopmentDataNotice() {
       <PageContainer>
         <strong>Preview environment.</strong>{" "}
         <span>
-          Clinic listings and inquiries are not live. No medical service is
-          provided here.
+          Pilot listing facts were source-checked for research and still need
+          pre-production review. Inquiries are disabled. No medical service is provided here.
         </span>
       </PageContainer>
     </aside>

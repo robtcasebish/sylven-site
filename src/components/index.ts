@@ -1,5 +1,6 @@
 export { Breadcrumbs } from "@/components/breadcrumbs";
 export { ClinicCardShell } from "@/components/clinic-card-shell";
+export { ClinicListingCard } from "@/components/clinic-listing-card";
 export { ConsentNotice } from "@/components/consent-notice";
 export { DevelopmentDataNotice } from "@/components/development-data-notice";
 export { EmptyState } from "@/components/empty-state";

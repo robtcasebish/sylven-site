@@ -1,8 +1,8 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { Breadcrumbs, EmptyState, PageContainer } from "@/components";
+import { Breadcrumbs, ClinicListingCard, PageContainer } from "@/components";
 import { getService, pilotLocation } from "@/lib/directory";
+import { listClinics } from "@/lib/directory-repository";
 
 type LocationPageProps = {
   params: Promise<{ provinceSlug: string; citySlug: string }>;
@@ -27,6 +27,8 @@ export default async function LocationPage({ params, searchParams }: LocationPag
   ) notFound();
 
   const selectedService = serviceSlug ? getService(serviceSlug) : undefined;
+  if (serviceSlug && !selectedService) notFound();
+  const clinics = await listClinics(selectedService?.slug);
 
   return (
     <>
@@ -69,15 +71,17 @@ export default async function LocationPage({ params, searchParams }: LocationPag
         <PageContainer>
           <div className="results-heading">
             <h2>{selectedService ? `${selectedService.name} listings` : "Directory listings"}</h2>
-            <p>Development data only</p>
+            <p>{clinics.length} source-checked {clinics.length === 1 ? "listing" : "listings"}</p>
           </div>
-          <EmptyState title="No verified clinic inventory yet">
-            <p>
-              Clinics will appear only after public facts have a recorded source,
-              check date, verification status, and approved freshness window.
-            </p>
-            <p><Link href="/services">Browse pilot services</Link></p>
-          </EmptyState>
+          <div className="clinic-results-list">
+            {clinics.map((clinic) => <ClinicListingCard clinic={clinic} key={clinic.slug} />)}
+          </div>
+          <p className="results-disclaimer">
+            Source checking confirms that the displayed facts matched the linked
+            clinic-controlled pages on the date shown. It is not a quality rating,
+            endorsement, or guarantee of current availability. Confirm details with
+            the clinic before making arrangements.
+          </p>
         </PageContainer>
       </section>
     </>

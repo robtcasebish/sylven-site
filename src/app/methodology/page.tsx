@@ -13,9 +13,31 @@ export default function MethodologyPage() {
           <p className="eyebrow">How listings work</p>
           <h1>Facts should arrive with context.</h1>
           <p className="lede">
-            Sylven is designing a directory where people can see what was
+            Sylven is building a directory where people can see what was
             checked, when it was checked, and where the information came from.
           </p>
+        </PageContainer>
+      </section>
+      <section className="page-section">
+        <PageContainer className="content-grid">
+          <div>
+            <p className="eyebrow">Current pilot</p>
+            <h2>Clinic-controlled sources, reviewed by a person.</h2>
+          </div>
+          <div>
+            <p>
+              The initial Metro Vancouver records were checked against public
+              clinic websites on July 19, 2026. Sylven records the exact page used
+              for each listing and excludes unsupported claims, testimonials,
+              ratings, and advertised availability promises.
+            </p>
+            <p>
+              A clinic website is evidence of what the clinic publishes—not an
+              independent assessment of clinical quality. People should confirm
+              current services, referral requirements, availability, and costs
+              directly with the clinic.
+            </p>
+          </div>
         </PageContainer>
       </section>
       <section className="page-section">
