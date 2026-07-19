@@ -54,7 +54,7 @@ export default function ServicesPage() {
               <h3>See how facts earn their place.</h3>
             </div>
             <p>
-              Verification means information was checked—it is not a clinical
+              Verification means information was checked. It is not a clinical
               endorsement, ranking, or guarantee.
             </p>
             <Link className="button-link button-link--secondary" href="/methodology">

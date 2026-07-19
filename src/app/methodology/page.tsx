@@ -32,7 +32,7 @@ export default function MethodologyPage() {
               ratings, and advertised availability promises.
             </p>
             <p>
-              A clinic website is evidence of what the clinic publishes—not an
+              A clinic website is evidence of what the clinic publishes, not an
               independent assessment of clinical quality. People should confirm
               current services, referral requirements, availability, and costs
               directly with the clinic.

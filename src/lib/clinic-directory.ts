@@ -51,11 +51,11 @@ const checkedSource = (
 export const clinicListings: ClinicListing[] = [
   {
     slug: "canada-diagnostic-centres-vancouver",
-    name: "Canada Diagnostic Centres — Vancouver",
+    name: "Canada Diagnostic Centres, Vancouver",
     websiteUrl: "https://www.canadadiagnostic.com/",
     phone: "604-709-8522",
     address: {
-      line1: "Suite 136 — 555 West 12th Avenue",
+      line1: "Suite 136, 555 West 12th Avenue",
       municipality: "Vancouver",
       province: "BC",
       postalCode: "V5Z 3X7",
@@ -174,7 +174,7 @@ export const clinicListings: ClinicListing[] = [
     websiteUrl: "https://vanultrasound.com/",
     phone: "604-569-0616",
     address: {
-      line1: "#303 — 550 West Broadway",
+      line1: "#303, 550 West Broadway",
       municipality: "Vancouver",
       province: "BC",
       postalCode: "V5Z 0E9",

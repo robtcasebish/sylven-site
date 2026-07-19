@@ -14,14 +14,14 @@ const siteUrl =
 
 export const metadata: Metadata = {
   title: {
-    default: "Sylven — Find private healthcare services in Canada",
+    default: "Sylven: Find private healthcare services in Canada",
     template: "%s | Sylven",
   },
   description:
     "A Canadian directory for discovering private healthcare services and contacting clinics you choose.",
   metadataBase: new URL(siteUrl),
   openGraph: {
-    title: "Sylven — Private care, made findable",
+    title: "Sylven: Private care, made findable",
     description:
       "Discover private healthcare services with sourced, dated clinic information.",
     type: "website",
@@ -29,13 +29,13 @@ export const metadata: Metadata = {
     images: [
       {
         url: "/og.png",
-        alt: "Sylven — Private care, made findable",
+        alt: "Sylven: Private care, made findable",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sylven — Private care, made findable",
+    title: "Sylven: Private care, made findable",
     description:
       "Discover private healthcare services with sourced, dated clinic information.",
     images: ["/og.png"],

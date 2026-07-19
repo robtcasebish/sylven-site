@@ -110,8 +110,8 @@ export default async function HomePage() {
             align="split"
           >
             <p>
-              A directory should make facts easier to evaluate—not hide where
-              they came from or imply that placement equals quality.
+              A directory should make facts easier to evaluate. It should not
+              hide where they came from or imply that placement equals quality.
             </p>
           </SectionHeading>
           <ol className="feature-steps">
@@ -172,7 +172,7 @@ export default async function HomePage() {
         <PageContainer className="split-callout">
           <div>
             <p className="eyebrow">For clinic teams</p>
-            <h2>Be easier to find—and easier to understand.</h2>
+            <h2>Be easier to find and easier to understand.</h2>
           </div>
           <div>
             <p>

@@ -50,7 +50,7 @@ export default function ForClinicsPage() {
         <PageContainer className="split-callout">
           <div>
             <p className="eyebrow">Corrections and verification</p>
-            <h2>Clinic-submitted information is a source—not an endorsement.</h2>
+            <h2>Clinic-submitted information is a source, not an endorsement.</h2>
           </div>
           <div>
             <p>
