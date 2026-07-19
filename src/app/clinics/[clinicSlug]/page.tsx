@@ -12,11 +12,35 @@ export default async function ClinicPage({ params }: ClinicPageProps) {
   const { clinicSlug } = await params;
 
   return (
-    <main>
-      <p>Development placeholder</p>
-      <h1>Clinic listing page</h1>
-      <p>Requested clinic identifier: {clinicSlug}</p>
-      <p>No real clinic facts, endorsement, or verification claim is included.</p>
-    </main>
+    <section className="page-section">
+      <PageContainer>
+        <Breadcrumbs
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Clinics" },
+            { label: clinicSlug },
+          ]}
+        />
+        <p className="eyebrow">Development clinic page</p>
+        <h1>Clinic listing page</h1>
+        <p>
+          Requested clinic identifier:{" "}
+          <span className="identifier">{clinicSlug}</span>
+        </p>
+        <EmptyState title="No verified clinic record">
+          <p>
+            No clinic facts, endorsement, source, verification, availability, or
+            contact channel is represented by this placeholder.
+          </p>
+        </EmptyState>
+        <ConsentNotice />
+      </PageContainer>
+    </section>
   );
 }
+import {
+  Breadcrumbs,
+  ConsentNotice,
+  EmptyState,
+  PageContainer,
+} from "@/components";

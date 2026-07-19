@@ -12,11 +12,29 @@ export default async function ServicePage({ params }: ServicePageProps) {
   const { serviceSlug } = await params;
 
   return (
-    <main>
-      <p>Development placeholder</p>
-      <h1>Service directory page</h1>
-      <p>Requested service identifier: {serviceSlug}</p>
-      <p>No clinic availability or medical suitability is represented here.</p>
-    </main>
+    <section className="page-section">
+      <PageContainer>
+        <Breadcrumbs
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Services", href: "/services" },
+            { label: serviceSlug },
+          ]}
+        />
+        <p className="eyebrow">Development service page</p>
+        <h1>Service directory page</h1>
+        <p>
+          Requested service identifier:{" "}
+          <span className="identifier">{serviceSlug}</span>
+        </p>
+        <EmptyState title="No clinic listings yet">
+          <p>
+            No clinic availability, clinical suitability, price, or verification
+            is represented in this scaffold.
+          </p>
+        </EmptyState>
+      </PageContainer>
+    </section>
   );
 }
+import { Breadcrumbs, EmptyState, PageContainer } from "@/components";

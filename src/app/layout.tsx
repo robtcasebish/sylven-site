@@ -1,6 +1,14 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
+import {
+  DevelopmentDataNotice,
+  Footer,
+  Header,
+} from "@/components";
+
+import "./globals.css";
+
 export const metadata: Metadata = {
   title: {
     default: "Sylven directory — development",
@@ -17,7 +25,15 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="en-CA">
-      <body>{children}</body>
+      <body>
+        <a className="skip-link" href="#main-content">
+          Skip to main content
+        </a>
+        <Header />
+        <DevelopmentDataNotice />
+        <main id="main-content">{children}</main>
+        <Footer />
+      </body>
     </html>
   );
 }
