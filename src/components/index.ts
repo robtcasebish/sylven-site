@@ -7,4 +7,5 @@ export { Footer } from "@/components/footer";
 export { Header } from "@/components/header";
 export { PageContainer } from "@/components/page-container";
 export { SearchFormShell } from "@/components/search-form-shell";
+export { SectionHeading } from "@/components/section-heading";
 export { ServiceCardShell } from "@/components/service-card-shell";

@@ -9,13 +9,37 @@ import {
 
 import "./globals.css";
 
+const siteUrl =
+  process.env.URL ?? "https://sylven-directory-staging.netlify.app";
+
 export const metadata: Metadata = {
   title: {
-    default: "Sylven directory — development",
-    template: "%s | Sylven directory",
+    default: "Sylven — Find private healthcare services in Canada",
+    template: "%s | Sylven",
   },
   description:
-    "A non-production foundation for a Canadian private healthcare directory.",
+    "A Canadian directory for discovering private healthcare services and contacting clinics you choose.",
+  metadataBase: new URL(siteUrl),
+  openGraph: {
+    title: "Sylven — Private care, made findable",
+    description:
+      "Discover private healthcare services with sourced, dated clinic information.",
+    type: "website",
+    locale: "en_CA",
+    images: [
+      {
+        url: "/og.png",
+        alt: "Sylven — Private care, made findable",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sylven — Private care, made findable",
+    description:
+      "Discover private healthcare services with sourced, dated clinic information.",
+    images: ["/og.png"],
+  },
   robots: {
     index: false,
     follow: false,

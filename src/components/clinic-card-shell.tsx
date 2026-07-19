@@ -10,7 +10,10 @@ export function ClinicCardShell({ title, children }: ClinicCardShellProps) {
 
   return (
     <article className="clinic-card" aria-labelledby={headingId}>
-      <p className="card-kicker">Development listing shell</p>
+      <div className="clinic-card__status">
+        <span className="status-dot" aria-hidden="true" />
+        Listing preview
+      </div>
       <h3 id={headingId}>{title}</h3>
       <div>{children}</div>
     </article>

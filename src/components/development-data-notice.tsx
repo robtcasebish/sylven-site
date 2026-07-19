@@ -4,10 +4,10 @@ export function DevelopmentDataNotice() {
   return (
     <aside className="development-notice" aria-label="Development status">
       <PageContainer>
-        <strong>Non-production scaffold.</strong>{" "}
+        <strong>Preview environment.</strong>{" "}
         <span>
-          No live clinic inventory, medical assessment, inquiry processing, or
-          patient service is available here.
+          Clinic listings and inquiries are not live. No medical service is
+          provided here.
         </span>
       </PageContainer>
     </aside>
