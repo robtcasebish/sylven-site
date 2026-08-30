@@ -22,6 +22,8 @@ describe("directory helpers", () => {
   it("resolves a published region by province and city slug", () => {
     expect(getRegion("british-columbia", "metro-vancouver")?.name).toBe("Metro Vancouver");
     expect(getRegion("ontario", "toronto")?.name).toBe("Toronto");
+    expect(getRegion("alberta", "calgary")?.name).toBe("Calgary");
+    expect(getRegion("alberta", "edmonton")?.name).toBe("Edmonton");
     expect(getRegion("ontario", "ottawa")).toBeUndefined();
   });
 
@@ -35,6 +37,8 @@ describe("directory helpers", () => {
     expect(getRegionForMunicipality("Surrey")?.name).toBe("Metro Vancouver");
     expect(getRegionForMunicipality("Scarborough")?.name).toBe("Toronto");
     expect(getRegionForMunicipality("toronto")?.name).toBe("Toronto");
+    expect(getRegionForMunicipality("Calgary")?.name).toBe("Calgary");
+    expect(getRegionForMunicipality("Edmonton")?.name).toBe("Edmonton");
     expect(getRegionForMunicipality("Halifax")).toBeUndefined();
   });
 });

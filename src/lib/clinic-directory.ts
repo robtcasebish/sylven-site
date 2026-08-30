@@ -3,6 +3,8 @@ import type { ProvinceCode } from "@/lib/geography";
 export const DIRECTORY_SOURCE_CHECK_DATE = "2026-07-19";
 // Second sourcing batch, added when the Toronto region was researched.
 export const TORONTO_SOURCE_CHECK_DATE = "2026-08-30";
+// Third sourcing batch, added when Calgary and Edmonton (Alberta) were researched.
+export const ALBERTA_SOURCE_CHECK_DATE = "2026-08-30";
 
 export type VerificationStatus = "verified" | "stale" | "disputed";
 export type ReferralRequirement = "required" | "not_required" | "varies" | "unknown";
@@ -310,6 +312,120 @@ export const clinicListings: ClinicListing[] = [
         "Radiant Medical Imaging services and location information",
         "https://radiantmedicalimaging.com/",
         TORONTO_SOURCE_CHECK_DATE,
+      ),
+    ],
+  },
+  {
+    slug: "mayfair-diagnostics-calgary",
+    name: "Mayfair Diagnostics, Mayfair Place",
+    websiteUrl: "https://www.radiology.ca/",
+    phone: "403-777-4674",
+    address: {
+      line1: "132, 6707 Elbow Dr SW",
+      municipality: "Calgary",
+      province: "AB",
+      // No postal code: not published on the clinic's own site or clinic list PDF.
+    },
+    services: [
+      {
+        slug: "mri",
+        name: "MRI",
+        referralRequirement: "required",
+        referralNote:
+          "The clinic's MRI page says an MRI must be requested by a health care practitioner.",
+        sourceId: "mayfair-mri-services",
+      },
+    ],
+    verificationStatus: "verified",
+    lastVerifiedAt: ALBERTA_SOURCE_CHECK_DATE,
+    sources: [
+      checkedSource(
+        "mayfair-mri-services",
+        "Mayfair Diagnostics MRI service information",
+        "https://www.radiology.ca/services/magnetic-resonance-imaging-mri/",
+        ALBERTA_SOURCE_CHECK_DATE,
+      ),
+      checkedSource(
+        "mayfair-clinic-list",
+        "Mayfair Diagnostics clinic and services list",
+        "https://www.radiology.ca/wp-content/uploads/2024/02/Mayfair-Diagnostics-Clinic-and-Services-List.pdf",
+        ALBERTA_SOURCE_CHECK_DATE,
+      ),
+    ],
+  },
+  {
+    slug: "mic-medical-imaging-century-park",
+    name: "MIC Medical Imaging, Century Park",
+    websiteUrl: "https://www.mic.ca/",
+    phone: "780-450-1500",
+    address: {
+      line1: "#201, 2377 - 111 Street NW",
+      municipality: "Edmonton",
+      province: "AB",
+      // No postal code: not published on the clinic's own site.
+    },
+    services: [
+      {
+        slug: "mri",
+        name: "MRI",
+        referralRequirement: "required",
+        referralNote:
+          "Alberta now allows self-referred, self-paid diagnostic imaging, but MIC's own site says it is 'not offering preventative health testing without a requisition at this time', so a requisition is still required here.",
+        sourceId: "mic-self-referral-policy",
+      },
+    ],
+    verificationStatus: "verified",
+    lastVerifiedAt: ALBERTA_SOURCE_CHECK_DATE,
+    sources: [
+      checkedSource(
+        "mic-private-mri",
+        "MIC Medical Imaging private MRI locations",
+        "https://www.mic.ca/for-patients/procedure-information/mri-magnetic-resonance-imaging/private-mri-edmonton/",
+        ALBERTA_SOURCE_CHECK_DATE,
+      ),
+      checkedSource(
+        "mic-self-referral-policy",
+        "MIC Medical Imaging self-referral policy",
+        "https://www.mic.ca/self-referral-for-pht-services/",
+        ALBERTA_SOURCE_CHECK_DATE,
+      ),
+    ],
+  },
+  {
+    slug: "wosler-diagnostics-calgary",
+    name: "Wosler Diagnostics",
+    websiteUrl: "https://wosler.ca/",
+    phone: "1-844-967-5352",
+    address: {
+      line1: "Suite 260, 8500 Blackfoot Trail SE",
+      municipality: "Calgary",
+      province: "AB",
+      postalCode: "T2J 7E1",
+    },
+    services: [
+      {
+        slug: "ultrasound",
+        name: "Ultrasound",
+        referralRequirement: "required",
+        referralNote:
+          "The clinic's FAQ says a valid requisition from a physician, nurse practitioner, or other authorized healthcare provider is required for all diagnostic imaging exams.",
+        sourceId: "wosler-faq",
+      },
+    ],
+    verificationStatus: "verified",
+    lastVerifiedAt: ALBERTA_SOURCE_CHECK_DATE,
+    sources: [
+      checkedSource(
+        "wosler-contact",
+        "Wosler Diagnostics contact and address information",
+        "https://wosler.ca/contact/",
+        ALBERTA_SOURCE_CHECK_DATE,
+      ),
+      checkedSource(
+        "wosler-faq",
+        "Wosler Diagnostics FAQ",
+        "https://wosler.ca/faq/",
+        ALBERTA_SOURCE_CHECK_DATE,
       ),
     ],
   },

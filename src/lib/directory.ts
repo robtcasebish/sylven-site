@@ -46,6 +46,22 @@ export const regions: Region[] = [
       "Markham",
     ],
   },
+  {
+    name: "Calgary",
+    province: "Alberta",
+    provinceCode: "AB",
+    provinceSlug: "alberta",
+    citySlug: "calgary",
+    communities: ["Calgary", "Airdrie"],
+  },
+  {
+    name: "Edmonton",
+    province: "Alberta",
+    provinceCode: "AB",
+    provinceSlug: "alberta",
+    citySlug: "edmonton",
+    communities: ["Edmonton"],
+  },
 ];
 
 // Convenience alias for the first published region, kept for pages that

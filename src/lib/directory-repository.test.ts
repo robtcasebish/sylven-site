@@ -34,6 +34,26 @@ describe("region-scoped clinic listing", () => {
     )).toBe(true);
   });
 
+  it("keeps Calgary and Edmonton clinics scoped to their own region despite sharing a province", () => {
+    const calgary = regions.find((region) => region.name === "Calgary")!;
+    const edmonton = regions.find((region) => region.name === "Edmonton")!;
+
+    return Promise.all([
+      listClinics(undefined, calgary.communities),
+      listClinics(undefined, edmonton.communities),
+    ]).then(([calgaryClinics, edmontonClinics]) => {
+      expect(calgaryClinics.length).toBeGreaterThan(0);
+      expect(edmontonClinics.length).toBeGreaterThan(0);
+
+      for (const clinic of calgaryClinics) {
+        expect(edmonton.communities).not.toContain(clinic.address.municipality);
+      }
+      for (const clinic of edmontonClinics) {
+        expect(calgary.communities).not.toContain(clinic.address.municipality);
+      }
+    });
+  });
+
   it("returns every clinic when no region filter is given", async () => {
     const all = await listClinics();
     const scoped = await listClinics(undefined, regions.flatMap((region) => region.communities));
