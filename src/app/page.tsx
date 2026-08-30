@@ -11,7 +11,7 @@ import { pilotLocation, services } from "@/lib/directory";
 import { listClinics } from "@/lib/directory-repository";
 
 export default async function HomePage() {
-  const clinics = await listClinics();
+  const clinics = await listClinics(undefined, pilotLocation.communities);
   return (
     <>
       <section className="hero">

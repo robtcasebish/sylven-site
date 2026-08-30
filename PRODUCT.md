@@ -81,6 +81,15 @@ The product owner decided to move the geographic scope to Canada-wide ahead of t
 
 What changed as a direct result of this decision: the `locations.province_code` database constraint and the corresponding TypeScript types were widened from a BC-only allow list to all thirteen Canadian provinces and territories, and the locations route now resolves any published region instead of a single hardcoded one. This is a technical capability change only. It does not add, publish, or imply any real clinic data outside the existing sourced Metro Vancouver pilot, and it does not change the review gates in the rollout sequence below.
 
+### Expansion decision: 2026-08-30, Toronto added as a second region
+
+Following the geography decision above, a second region, Toronto (Ontario), was sourced and added to `regions` in `src/lib/directory.ts`, using the same method as the Metro Vancouver pilot: clinic-controlled sources only, dated checks, referral requirement confirmed or marked unknown where the clinic's own site did not say. Three clinics were added: Simply MRI (Toronto, MRI, no referral required), Toronto Ultrasound Imaging (Toronto, ultrasound, referral required), and Radiant Medical Imaging (Scarborough, ultrasound, referral requirement unknown).
+
+Two findings from this sourcing pass are worth recording:
+
+- **Ontario's private imaging market looks different from BC's.** Several sites that surfaced in search (Surgency, Axxess Imaging, MedCentra) turned out to be referral or booking intermediaries that arrange access to imaging at facilities they do not disclose the address of, not clinics with a publishable location themselves. They were excluded rather than listed with a placeholder address. One of these sites also claimed "private MRIs are not legally available in Ontario," which independent sources (an NCBI review of privately operated imaging facilities in Canada, and Ontario's own Independent Health Facilities Act guidance) do not support; Ontario permits privately operated diagnostic MRI, it just runs through a different licensing structure than BC's. Do not repeat that unverified legality claim in any public copy.
+- **Two fields are missing for one listing.** Simply MRI has no publicly listed phone number (email only), and Toronto Ultrasound Imaging has no publicly listed postal code. Both fields were left blank rather than filled from a third-party source, per the provenance rule above. `phone`, `email`, and `postalCode` are now optional on a clinic listing for this reason.
+
 ## Clinic monetization
 
 Use a simple two-tier model:

@@ -30,7 +30,7 @@ export default async function LocationPage({ params, searchParams }: LocationPag
 
   const selectedService = serviceSlug ? getService(serviceSlug) : undefined;
   if (serviceSlug && !selectedService) notFound();
-  const clinics = await listClinics(selectedService?.slug);
+  const clinics = await listClinics(selectedService?.slug, region.communities);
 
   return (
     <>

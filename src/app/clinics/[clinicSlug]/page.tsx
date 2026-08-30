@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 
 import { Breadcrumbs, PageContainer } from "@/components";
+import { getRegionForMunicipality } from "@/lib/directory";
 import { findClinic, getStaticClinicSlugs } from "@/lib/directory-repository";
 
 type ClinicPageProps = { params: Promise<{ clinicSlug: string }> };
@@ -20,17 +21,20 @@ export default async function ClinicPage({ params }: ClinicPageProps) {
   const clinic = await findClinic(clinicSlug);
   if (!clinic) notFound();
 
+  const region = getRegionForMunicipality(clinic.address.municipality);
+  const breadcrumbItems = [
+    { label: "Home", href: "/" },
+    ...(region
+      ? [{ label: region.name, href: `/locations/${region.provinceSlug}/${region.citySlug}` }]
+      : []),
+    { label: clinic.name },
+  ];
+
   return (
     <>
       <section className="page-section page-section--compact">
         <PageContainer>
-          <Breadcrumbs
-            items={[
-              { label: "Home", href: "/" },
-              { label: "Metro Vancouver", href: "/locations/british-columbia/metro-vancouver" },
-              { label: clinic.name },
-            ]}
-          />
+          <Breadcrumbs items={breadcrumbItems} />
           <p className="eyebrow">Source-checked directory listing</p>
           <h1>{clinic.name}</h1>
           <p className="lede">
@@ -48,9 +52,14 @@ export default async function ClinicPage({ params }: ClinicPageProps) {
                 <h2 id="contact-heading">Contact and location</h2>
                 <address>
                   {clinic.address.line1}<br />
-                  {clinic.address.municipality}, {clinic.address.province} {clinic.address.postalCode}
+                  {clinic.address.municipality}, {clinic.address.province}
+                  {clinic.address.postalCode ? ` ${clinic.address.postalCode}` : ""}
                 </address>
-                <p><a href={`tel:${clinic.phone.replace(/[^\d+]/g, "")}`}>{clinic.phone}</a></p>
+                {clinic.phone ? (
+                  <p><a href={`tel:${clinic.phone.replace(/[^\d+]/g, "")}`}>{clinic.phone}</a></p>
+                ) : clinic.email ? (
+                  <p><a href={`mailto:${clinic.email}`}>{clinic.email}</a></p>
+                ) : null}
                 <p>
                   <a href={clinic.websiteUrl} rel="noreferrer">
                     Visit clinic website <span aria-hidden="true">↗</span>

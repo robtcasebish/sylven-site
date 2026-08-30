@@ -21,7 +21,8 @@ export function ClinicListingCard({ clinic }: ClinicListingCardProps) {
       </h3>
       <address>
         {clinic.address.line1}<br />
-        {clinic.address.municipality}, {clinic.address.province} {clinic.address.postalCode}
+        {clinic.address.municipality}, {clinic.address.province}
+        {clinic.address.postalCode ? ` ${clinic.address.postalCode}` : ""}
       </address>
       <ul className="service-tags" aria-label="Services in this pilot directory">
         {clinic.services.map((service) => <li key={service.slug}>{service.name}</li>)}

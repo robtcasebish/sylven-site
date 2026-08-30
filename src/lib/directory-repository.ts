@@ -136,14 +136,24 @@ async function getSupabaseClinics() {
   return rowsToClinics((await response.json()) as PublicDirectoryRow[]);
 }
 
-export async function listClinics(serviceSlug?: string) {
+export async function listClinics(serviceSlug?: string, communities?: readonly string[]) {
   const supabaseClinics = await getSupabaseClinics();
-  const clinics = supabaseClinics ?? getFixtureClinics();
+  let clinics = supabaseClinics ?? getFixtureClinics();
 
-  if (!serviceSlug) return clinics;
-  return clinics.filter((clinic) =>
-    clinic.services.some((service) => service.slug === serviceSlug),
-  );
+  if (serviceSlug) {
+    clinics = clinics.filter((clinic) =>
+      clinic.services.some((service) => service.slug === serviceSlug),
+    );
+  }
+
+  if (communities) {
+    const normalized = communities.map((community) => community.toLowerCase());
+    clinics = clinics.filter((clinic) =>
+      normalized.includes(clinic.address.municipality.toLowerCase()),
+    );
+  }
+
+  return clinics;
 }
 
 export async function findClinic(slug: string) {

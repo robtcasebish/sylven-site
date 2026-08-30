@@ -1,0 +1,502 @@
+diff --git a/PRODUCT.md b/PRODUCT.md
+index d408f16..79fcebe 100644
+--- a/PRODUCT.md
++++ b/PRODUCT.md
+@@ -81,6 +81,15 @@ The product owner decided to move the geographic scope to Canada-wide ahead of t
+ 
+ What changed as a direct result of this decision: the `locations.province_code` database constraint and the corresponding TypeScript types were widened from a BC-only allow list to all thirteen Canadian provinces and territories, and the locations route now resolves any published region instead of a single hardcoded one. This is a technical capability change only. It does not add, publish, or imply any real clinic data outside the existing sourced Metro Vancouver pilot, and it does not change the review gates in the rollout sequence below.
+ 
++### Expansion decision: 2026-08-30, Toronto added as a second region
++
++Following the geography decision above, a second region, Toronto (Ontario), was sourced and added to `regions` in `src/lib/directory.ts`, using the same method as the Metro Vancouver pilot: clinic-controlled sources only, dated checks, referral requirement confirmed or marked unknown where the clinic's own site did not say. Three clinics were added: Simply MRI (Toronto, MRI, no referral required), Toronto Ultrasound Imaging (Toronto, ultrasound, referral required), and Radiant Medical Imaging (Scarborough, ultrasound, referral requirement unknown).
++
++Two findings from this sourcing pass are worth recording:
++
++- **Ontario's private imaging market looks different from BC's.** Several sites that surfaced in search (Surgency, Axxess Imaging, MedCentra) turned out to be referral or booking intermediaries that arrange access to imaging at facilities they do not disclose the address of, not clinics with a publishable location themselves. They were excluded rather than listed with a placeholder address. One of these sites also claimed "private MRIs are not legally available in Ontario," which independent sources (an NCBI review of privately operated imaging facilities in Canada, and Ontario's own Independent Health Facilities Act guidance) do not support; Ontario permits privately operated diagnostic MRI, it just runs through a different licensing structure than BC's. Do not repeat that unverified legality claim in any public copy.
++- **Two fields are missing for one listing.** Simply MRI has no publicly listed phone number (email only), and Toronto Ultrasound Imaging has no publicly listed postal code. Both fields were left blank rather than filled from a third-party source, per the provenance rule above. `phone`, `email`, and `postalCode` are now optional on a clinic listing for this reason.
++
+ ## Clinic monetization
+ 
+ Use a simple two-tier model:
+diff --git a/src/app/clinics/[clinicSlug]/page.tsx b/src/app/clinics/[clinicSlug]/page.tsx
+index b65384e..50e06ea 100644
+--- a/src/app/clinics/[clinicSlug]/page.tsx
++++ b/src/app/clinics/[clinicSlug]/page.tsx
+@@ -1,6 +1,7 @@
+ import { notFound } from "next/navigation";
+ 
+ import { Breadcrumbs, PageContainer } from "@/components";
++import { getRegionForMunicipality } from "@/lib/directory";
+ import { findClinic, getStaticClinicSlugs } from "@/lib/directory-repository";
+ 
+ type ClinicPageProps = { params: Promise<{ clinicSlug: string }> };
+@@ -20,17 +21,20 @@ export default async function ClinicPage({ params }: ClinicPageProps) {
+   const clinic = await findClinic(clinicSlug);
+   if (!clinic) notFound();
+ 
++  const region = getRegionForMunicipality(clinic.address.municipality);
++  const breadcrumbItems = [
++    { label: "Home", href: "/" },
++    ...(region
++      ? [{ label: region.name, href: `/locations/${region.provinceSlug}/${region.citySlug}` }]
++      : []),
++    { label: clinic.name },
++  ];
++
+   return (
+     <>
+       <section className="page-section page-section--compact">
+         <PageContainer>
+-          <Breadcrumbs
+-            items={[
+-              { label: "Home", href: "/" },
+-              { label: "Metro Vancouver", href: "/locations/british-columbia/metro-vancouver" },
+-              { label: clinic.name },
+-            ]}
+-          />
++          <Breadcrumbs items={breadcrumbItems} />
+           <p className="eyebrow">Source-checked directory listing</p>
+           <h1>{clinic.name}</h1>
+           <p className="lede">
+@@ -48,9 +52,14 @@ export default async function ClinicPage({ params }: ClinicPageProps) {
+                 <h2 id="contact-heading">Contact and location</h2>
+                 <address>
+                   {clinic.address.line1}<br />
+-                  {clinic.address.municipality}, {clinic.address.province} {clinic.address.postalCode}
++                  {clinic.address.municipality}, {clinic.address.province}
++                  {clinic.address.postalCode ? ` ${clinic.address.postalCode}` : ""}
+                 </address>
+-                <p><a href={`tel:${clinic.phone.replace(/[^\d+]/g, "")}`}>{clinic.phone}</a></p>
++                {clinic.phone ? (
++                  <p><a href={`tel:${clinic.phone.replace(/[^\d+]/g, "")}`}>{clinic.phone}</a></p>
++                ) : clinic.email ? (
++                  <p><a href={`mailto:${clinic.email}`}>{clinic.email}</a></p>
++                ) : null}
+                 <p>
+                   <a href={clinic.websiteUrl} rel="noreferrer">
+                     Visit clinic website <span aria-hidden="true">↗</span>
+diff --git a/src/app/locations/[provinceSlug]/[citySlug]/page.tsx b/src/app/locations/[provinceSlug]/[citySlug]/page.tsx
+index 4690b2a..9555ce0 100644
+--- a/src/app/locations/[provinceSlug]/[citySlug]/page.tsx
++++ b/src/app/locations/[provinceSlug]/[citySlug]/page.tsx
+@@ -30,7 +30,7 @@ export default async function LocationPage({ params, searchParams }: LocationPag
+ 
+   const selectedService = serviceSlug ? getService(serviceSlug) : undefined;
+   if (serviceSlug && !selectedService) notFound();
+-  const clinics = await listClinics(selectedService?.slug);
++  const clinics = await listClinics(selectedService?.slug, region.communities);
+ 
+   return (
+     <>
+diff --git a/src/app/page.tsx b/src/app/page.tsx
+index 914f8bf..c47b2ba 100644
+--- a/src/app/page.tsx
++++ b/src/app/page.tsx
+@@ -11,7 +11,7 @@ import { pilotLocation, services } from "@/lib/directory";
+ import { listClinics } from "@/lib/directory-repository";
+ 
+ export default async function HomePage() {
+-  const clinics = await listClinics();
++  const clinics = await listClinics(undefined, pilotLocation.communities);
+   return (
+     <>
+       <section className="hero">
+diff --git a/src/components/clinic-listing-card.tsx b/src/components/clinic-listing-card.tsx
+index 0f1bce2..391bcda 100644
+--- a/src/components/clinic-listing-card.tsx
++++ b/src/components/clinic-listing-card.tsx
+@@ -21,7 +21,8 @@ export function ClinicListingCard({ clinic }: ClinicListingCardProps) {
+       </h3>
+       <address>
+         {clinic.address.line1}<br />
+-        {clinic.address.municipality}, {clinic.address.province} {clinic.address.postalCode}
++        {clinic.address.municipality}, {clinic.address.province}
++        {clinic.address.postalCode ? ` ${clinic.address.postalCode}` : ""}
+       </address>
+       <ul className="service-tags" aria-label="Services in this pilot directory">
+         {clinic.services.map((service) => <li key={service.slug}>{service.name}</li>)}
+diff --git a/src/lib/clinic-directory.test.ts b/src/lib/clinic-directory.test.ts
+index 52eb703..d364588 100644
+--- a/src/lib/clinic-directory.test.ts
++++ b/src/lib/clinic-directory.test.ts
+@@ -2,28 +2,33 @@ import { describe, expect, it } from "vitest";
+ 
+ import {
+   DIRECTORY_SOURCE_CHECK_DATE,
++  TORONTO_SOURCE_CHECK_DATE,
+   clinicListings,
+   getClinicListing,
+   getPublishedClinicListings,
+ } from "@/lib/clinic-directory";
+ 
++const VALID_CHECK_DATES = [DIRECTORY_SOURCE_CHECK_DATE, TORONTO_SOURCE_CHECK_DATE];
++
+ describe("source-checked clinic directory", () => {
+   it("publishes only verified records with complete provenance", () => {
+     const published = getPublishedClinicListings();
+ 
+-    expect(published).toHaveLength(4);
++    expect(published).toHaveLength(7);
+     for (const clinic of published) {
+-      expect(clinic.lastVerifiedAt).toBe(DIRECTORY_SOURCE_CHECK_DATE);
++      expect(VALID_CHECK_DATES).toContain(clinic.lastVerifiedAt);
+       expect(clinic.websiteUrl).toMatch(/^https:\/\//);
+       expect(clinic.sources.length).toBeGreaterThan(0);
+       expect(clinic.sources.every((source) =>
+         source.url.startsWith("https://") &&
+-        source.checkedAt === DIRECTORY_SOURCE_CHECK_DATE &&
++        VALID_CHECK_DATES.includes(source.checkedAt) &&
+         source.sourceType === "clinic_website"
+       )).toBe(true);
+       expect(clinic.services.every((service) =>
+         clinic.sources.some((source) => source.id === service.sourceId)
+       )).toBe(true);
++      // A clinic must be reachable some way: phone or email, not neither.
++      expect(clinic.phone || clinic.email).toBeTruthy();
+     }
+   });
+ 
+@@ -32,8 +37,9 @@ describe("source-checked clinic directory", () => {
+       "canada-diagnostic-centres-vancouver",
+       "aim-medical-imaging",
+       "access-mri-surrey",
++      "simply-mri-toronto",
+     ]);
+-    expect(getPublishedClinicListings("ultrasound")).toHaveLength(3);
++    expect(getPublishedClinicListings("ultrasound")).toHaveLength(5);
+     expect(getPublishedClinicListings("prescriptions")).toHaveLength(0);
+   });
+ 
+diff --git a/src/lib/clinic-directory.ts b/src/lib/clinic-directory.ts
+index fa49401..d67c2b5 100644
+--- a/src/lib/clinic-directory.ts
++++ b/src/lib/clinic-directory.ts
+@@ -1,9 +1,11 @@
+ import type { ProvinceCode } from "@/lib/geography";
+ 
+ export const DIRECTORY_SOURCE_CHECK_DATE = "2026-07-19";
++// Second sourcing batch, added when the Toronto region was researched.
++export const TORONTO_SOURCE_CHECK_DATE = "2026-08-30";
+ 
+ export type VerificationStatus = "verified" | "stale" | "disputed";
+-export type ReferralRequirement = "required" | "varies" | "unknown";
++export type ReferralRequirement = "required" | "not_required" | "varies" | "unknown";
+ 
+ export type ListingSource = {
+   id: string;
+@@ -25,12 +27,19 @@ export type ClinicListing = {
+   slug: string;
+   name: string;
+   websiteUrl: string;
+-  phone: string;
++  // Optional because a clinic's own website does not always publish a
++  // phone number; do not fill this in from a third-party source such as
++  // a maps listing (see DATA_MODEL.md's provenance rule).
++  phone?: string;
++  email?: string;
+   address: {
+     line1: string;
+     municipality: string;
+     province: ProvinceCode;
+-    postalCode: string;
++    // Optional because a clinic's own website does not always publish
++    // one; do not fill this in from a third-party source (see
++    // DATA_MODEL.md's provenance rule).
++    postalCode?: string;
+   };
+   services: ClinicServiceListing[];
+   verificationStatus: VerificationStatus;
+@@ -42,12 +51,13 @@ const checkedSource = (
+   id: string,
+   label: string,
+   url: string,
++  checkedAt: string = DIRECTORY_SOURCE_CHECK_DATE,
+ ): ListingSource => ({
+   id,
+   label,
+   sourceType: "clinic_website",
+   url,
+-  checkedAt: DIRECTORY_SOURCE_CHECK_DATE,
++  checkedAt,
+ });
+ 
+ export const clinicListings: ClinicListing[] = [
+@@ -201,6 +211,108 @@ export const clinicListings: ClinicListing[] = [
+       ),
+     ],
+   },
++  {
++    slug: "simply-mri-toronto",
++    name: "Simply MRI",
++    websiteUrl: "https://simplymri.com/",
++    email: "info@simplymri.com",
++    address: {
++      line1: "2888 Bathurst St.",
++      municipality: "Toronto",
++      province: "ON",
++      postalCode: "M6B 4H6",
++    },
++    services: [
++      {
++        slug: "mri",
++        name: "MRI",
++        referralRequirement: "not_required",
++        referralNote:
++          "The clinic's FAQ says it is a private screening service and you can book directly without a physician referral.",
++        sourceId: "simply-mri-faq",
++      },
++    ],
++    verificationStatus: "verified",
++    lastVerifiedAt: TORONTO_SOURCE_CHECK_DATE,
++    sources: [
++      checkedSource(
++        "simply-mri-services",
++        "Simply MRI service and pricing information",
++        "https://simplymri.com/",
++        TORONTO_SOURCE_CHECK_DATE,
++      ),
++      checkedSource(
++        "simply-mri-faq",
++        "Simply MRI referral FAQ",
++        "https://simplymri.com/faq",
++        TORONTO_SOURCE_CHECK_DATE,
++      ),
++    ],
++  },
++  {
++    slug: "toronto-ultrasound-imaging",
++    name: "Toronto Ultrasound Imaging",
++    websiteUrl: "https://torontoultrasound.ca/",
++    phone: "416-921-1333",
++    address: {
++      line1: "180 Bloor Street West, Suite 204",
++      municipality: "Toronto",
++      province: "ON",
++      // No postal code: not published anywhere on the clinic's own site.
++    },
++    services: [
++      {
++        slug: "ultrasound",
++        name: "Ultrasound",
++        referralRequirement: "required",
++        referralNote:
++          "The clinic says appointments are scheduled with a valid medical requisition, and patients should bring the original requisition form.",
++        sourceId: "toronto-ultrasound-imaging-booking",
++      },
++    ],
++    verificationStatus: "verified",
++    lastVerifiedAt: TORONTO_SOURCE_CHECK_DATE,
++    sources: [
++      checkedSource(
++        "toronto-ultrasound-imaging-booking",
++        "Toronto Ultrasound Imaging booking and requisition information",
++        "https://torontoultrasound.ca/",
++        TORONTO_SOURCE_CHECK_DATE,
++      ),
++    ],
++  },
++  {
++    slug: "radiant-medical-imaging-scarborough",
++    name: "Radiant Medical Imaging",
++    websiteUrl: "https://radiantmedicalimaging.com/",
++    phone: "416-321-9243",
++    address: {
++      line1: "385 Silver Star Blvd, Suite 212",
++      municipality: "Scarborough",
++      province: "ON",
++      postalCode: "M1V 0E3",
++    },
++    services: [
++      {
++        slug: "ultrasound",
++        name: "Ultrasound",
++        referralRequirement: "unknown",
++        referralNote:
++          "The clinic's website says it accepts requisition forms but does not state whether one is required to book a general ultrasound; confirm directly.",
++        sourceId: "radiant-medical-imaging-services",
++      },
++    ],
++    verificationStatus: "verified",
++    lastVerifiedAt: TORONTO_SOURCE_CHECK_DATE,
++    sources: [
++      checkedSource(
++        "radiant-medical-imaging-services",
++        "Radiant Medical Imaging services and location information",
++        "https://radiantmedicalimaging.com/",
++        TORONTO_SOURCE_CHECK_DATE,
++      ),
++    ],
++  },
+ ];
+ 
+ export function getPublishedClinicListings(serviceSlug?: string) {
+diff --git a/src/lib/directory-repository.test.ts b/src/lib/directory-repository.test.ts
+new file mode 100644
+index 0000000..9ed5524
+--- /dev/null
++++ b/src/lib/directory-repository.test.ts
+@@ -0,0 +1,43 @@
++import { describe, expect, it } from "vitest";
++
++import { regions } from "@/lib/directory";
++import { listClinics } from "@/lib/directory-repository";
++
++describe("region-scoped clinic listing", () => {
++  it("returns only clinics in the requested region's communities", async () => {
++    const vancouver = regions.find((region) => region.name === "Metro Vancouver")!;
++    const toronto = regions.find((region) => region.name === "Toronto")!;
++
++    const vancouverClinics = await listClinics(undefined, vancouver.communities);
++    const torontoClinics = await listClinics(undefined, toronto.communities);
++
++    expect(vancouverClinics.length).toBeGreaterThan(0);
++    expect(torontoClinics.length).toBeGreaterThan(0);
++
++    for (const clinic of vancouverClinics) {
++      expect(toronto.communities).not.toContain(clinic.address.municipality);
++    }
++    for (const clinic of torontoClinics) {
++      expect(vancouver.communities).not.toContain(clinic.address.municipality);
++    }
++  });
++
++  it("still applies the service filter alongside a region filter", async () => {
++    const toronto = regions.find((region) => region.name === "Toronto")!;
++    const mriInToronto = await listClinics("mri", toronto.communities);
++
++    expect(mriInToronto.every((clinic) =>
++      clinic.services.some((service) => service.slug === "mri"),
++    )).toBe(true);
++    expect(mriInToronto.every((clinic) =>
++      toronto.communities.includes(clinic.address.municipality),
++    )).toBe(true);
++  });
++
++  it("returns every clinic when no region filter is given", async () => {
++    const all = await listClinics();
++    const scoped = await listClinics(undefined, regions.flatMap((region) => region.communities));
++
++    expect(all.length).toBe(scoped.length);
++  });
++});
+diff --git a/src/lib/directory-repository.ts b/src/lib/directory-repository.ts
+index f12b43b..d8056a6 100644
+--- a/src/lib/directory-repository.ts
++++ b/src/lib/directory-repository.ts
+@@ -136,14 +136,24 @@ async function getSupabaseClinics() {
+   return rowsToClinics((await response.json()) as PublicDirectoryRow[]);
+ }
+ 
+-export async function listClinics(serviceSlug?: string) {
++export async function listClinics(serviceSlug?: string, communities?: readonly string[]) {
+   const supabaseClinics = await getSupabaseClinics();
+-  const clinics = supabaseClinics ?? getFixtureClinics();
++  let clinics = supabaseClinics ?? getFixtureClinics();
+ 
+-  if (!serviceSlug) return clinics;
+-  return clinics.filter((clinic) =>
+-    clinic.services.some((service) => service.slug === serviceSlug),
+-  );
++  if (serviceSlug) {
++    clinics = clinics.filter((clinic) =>
++      clinic.services.some((service) => service.slug === serviceSlug),
++    );
++  }
++
++  if (communities) {
++    const normalized = communities.map((community) => community.toLowerCase());
++    clinics = clinics.filter((clinic) =>
++      normalized.includes(clinic.address.municipality.toLowerCase()),
++    );
++  }
++
++  return clinics;
+ }
+ 
+ export async function findClinic(slug: string) {
+diff --git a/src/lib/directory.test.ts b/src/lib/directory.test.ts
+index 764b34b..ef79876 100644
+--- a/src/lib/directory.test.ts
++++ b/src/lib/directory.test.ts
+@@ -1,6 +1,12 @@
+ import { describe, expect, it } from "vitest";
+ 
+-import { getRegion, getService, regions, titleFromSlug } from "@/lib/directory";
++import {
++  getRegion,
++  getRegionForMunicipality,
++  getService,
++  regions,
++  titleFromSlug,
++} from "@/lib/directory";
+ 
+ describe("directory helpers", () => {
+   it("resolves only configured pilot services", () => {
+@@ -15,7 +21,8 @@ describe("directory helpers", () => {
+ 
+   it("resolves a published region by province and city slug", () => {
+     expect(getRegion("british-columbia", "metro-vancouver")?.name).toBe("Metro Vancouver");
+-    expect(getRegion("ontario", "toronto")).toBeUndefined();
++    expect(getRegion("ontario", "toronto")?.name).toBe("Toronto");
++    expect(getRegion("ontario", "ottawa")).toBeUndefined();
+   });
+ 
+   it("keeps every published region's province code inside the Canadian allow list", () => {
+@@ -23,4 +30,11 @@ describe("directory helpers", () => {
+       expect(region.provinceCode).toMatch(/^[A-Z]{2}$/);
+     }
+   });
++
++  it("resolves a clinic's municipality back to its published region", () => {
++    expect(getRegionForMunicipality("Surrey")?.name).toBe("Metro Vancouver");
++    expect(getRegionForMunicipality("Scarborough")?.name).toBe("Toronto");
++    expect(getRegionForMunicipality("toronto")?.name).toBe("Toronto");
++    expect(getRegionForMunicipality("Halifax")).toBeUndefined();
++  });
+ });
+diff --git a/src/lib/directory.ts b/src/lib/directory.ts
+index 1876d15..6fd8e0a 100644
+--- a/src/lib/directory.ts
++++ b/src/lib/directory.ts
+@@ -31,6 +31,21 @@ export const regions: Region[] = [
+       "New Westminster",
+     ],
+   },
++  {
++    name: "Toronto",
++    province: "Ontario",
++    provinceCode: "ON",
++    provinceSlug: "ontario",
++    citySlug: "toronto",
++    communities: [
++      "Toronto",
++      "Scarborough",
++      "North York",
++      "Etobicoke",
++      "Mississauga",
++      "Markham",
++    ],
++  },
+ ];
+ 
+ // Convenience alias for the first published region, kept for pages that
+@@ -43,6 +58,19 @@ export function getRegion(provinceSlug: string, citySlug: string) {
+   );
+ }
+ 
++// Finds which published region a clinic's municipality belongs to, so a
++// clinic detail page can link back to the right region instead of a
++// hardcoded one. Matches the region's own name or any of its listed
++// communities, case-insensitively.
++export function getRegionForMunicipality(municipality: string) {
++  const normalized = municipality.toLowerCase();
++  return regions.find(
++    (region) =>
++      region.name.toLowerCase() === normalized ||
++      region.communities.some((community) => community.toLowerCase() === normalized),
++  );
++}
++
+ export const services = [
+   {
+     slug: "mri",

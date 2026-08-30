@@ -31,6 +31,21 @@ export const regions: Region[] = [
       "New Westminster",
     ],
   },
+  {
+    name: "Toronto",
+    province: "Ontario",
+    provinceCode: "ON",
+    provinceSlug: "ontario",
+    citySlug: "toronto",
+    communities: [
+      "Toronto",
+      "Scarborough",
+      "North York",
+      "Etobicoke",
+      "Mississauga",
+      "Markham",
+    ],
+  },
 ];
 
 // Convenience alias for the first published region, kept for pages that
@@ -40,6 +55,19 @@ export const pilotLocation = regions[0];
 export function getRegion(provinceSlug: string, citySlug: string) {
   return regions.find(
     (region) => region.provinceSlug === provinceSlug && region.citySlug === citySlug,
+  );
+}
+
+// Finds which published region a clinic's municipality belongs to, so a
+// clinic detail page can link back to the right region instead of a
+// hardcoded one. Matches the region's own name or any of its listed
+// communities, case-insensitively.
+export function getRegionForMunicipality(municipality: string) {
+  const normalized = municipality.toLowerCase();
+  return regions.find(
+    (region) =>
+      region.name.toLowerCase() === normalized ||
+      region.communities.some((community) => community.toLowerCase() === normalized),
   );
 }
 
