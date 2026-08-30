@@ -1,8 +1,12 @@
+import { regions } from "@/lib/directory";
+
 export function SearchFormShell() {
+  const firstRegion = regions[0];
+
   return (
     <form
       className="search-shell"
-      action="/locations/british-columbia/metro-vancouver"
+      action={`/locations/${firstRegion.provinceSlug}/${firstRegion.citySlug}`}
       method="get"
       role="search"
     >
@@ -25,7 +29,11 @@ export function SearchFormShell() {
               <option value="" disabled>
                 Select a location
               </option>
-              <option value="metro-vancouver">Metro Vancouver</option>
+              {regions.map((region) => (
+                <option key={region.citySlug} value={region.citySlug}>
+                  {region.name}
+                </option>
+              ))}
             </select>
           </label>
           <button type="submit">
@@ -34,8 +42,8 @@ export function SearchFormShell() {
         </div>
       </fieldset>
       <p className="search-shell__note">
-        Pilot search for Metro Vancouver. Listings will show their source and
-        last verification date before public release.
+        Pilot search across published regions. Listings will show their
+        source and last verification date before public release.
       </p>
     </form>
   );

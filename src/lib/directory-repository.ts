@@ -6,6 +6,7 @@ import {
   type ClinicServiceListing,
   type ListingSource,
 } from "@/lib/clinic-directory";
+import type { ProvinceCode } from "@/lib/geography";
 
 type PublicDirectoryRow = {
   clinic_slug: string;
@@ -13,8 +14,8 @@ type PublicDirectoryRow = {
   website_url: string;
   clinic_phone: string;
   address_line_1: string;
-  municipality: "Vancouver" | "Surrey";
-  province_code: "BC";
+  municipality: string;
+  province_code: ProvinceCode;
   postal_code: string;
   service_slug: "mri" | "ultrasound";
   service_name: "MRI" | "Ultrasound";

@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 
 import { Breadcrumbs, ClinicListingCard, PageContainer } from "@/components";
-import { getService, pilotLocation } from "@/lib/directory";
+import { getRegion, getService, regions } from "@/lib/directory";
 import { listClinics } from "@/lib/directory-repository";
 
 type LocationPageProps = {
@@ -10,21 +10,23 @@ type LocationPageProps = {
 };
 
 export function generateStaticParams() {
-  return [{
-    provinceSlug: pilotLocation.provinceSlug,
-    citySlug: pilotLocation.citySlug,
-  }];
+  return regions.map((region) => ({
+    provinceSlug: region.provinceSlug,
+    citySlug: region.citySlug,
+  }));
 }
 
-export const metadata = { title: "Private healthcare in Metro Vancouver" };
+export async function generateMetadata({ params }: LocationPageProps) {
+  const { citySlug, provinceSlug } = await params;
+  const region = getRegion(provinceSlug, citySlug);
+  return { title: region ? `Private healthcare in ${region.name}` : "Region not found" };
+}
 
 export default async function LocationPage({ params, searchParams }: LocationPageProps) {
   const { citySlug, provinceSlug } = await params;
   const { service: serviceSlug } = await searchParams;
-  if (
-    citySlug !== pilotLocation.citySlug ||
-    provinceSlug !== pilotLocation.provinceSlug
-  ) notFound();
+  const region = getRegion(provinceSlug, citySlug);
+  if (!region) notFound();
 
   const selectedService = serviceSlug ? getService(serviceSlug) : undefined;
   if (serviceSlug && !selectedService) notFound();
@@ -37,33 +39,33 @@ export default async function LocationPage({ params, searchParams }: LocationPag
           <Breadcrumbs
             items={[
               { label: "Home", href: "/" },
-              { label: pilotLocation.province },
-              { label: pilotLocation.name },
+              { label: region.province },
+              { label: region.name },
             ]}
           />
           <div className="content-grid">
             <div>
-              <p className="eyebrow">Initial directory region</p>
+              <p className="eyebrow">Directory region</p>
               <h1>
                 {selectedService ? `${selectedService.name} in ` : "Private care in "}
-                {pilotLocation.name}
+                {region.name}
               </h1>
               <p className="lede">
-                A focused pilot for finding sourced private clinic information
-                across communities in the region.
+                A focused list of sourced private clinic information across
+                communities in the region.
               </p>
             </div>
             <aside className="content-aside">
               <h2>Canada is the destination</h2>
               <p>
-                Metro Vancouver is the starting point, not the product limit.
-                Geography will expand after the sourcing and verification model
-                proves reliable.
+                Each region is added only once it has sourced, verified
+                listings behind it. More regions follow as the sourcing and
+                verification model proves reliable there.
               </p>
             </aside>
           </div>
-          <ul className="community-list" aria-label="Pilot communities">
-            {pilotLocation.communities.map((community) => <li key={community}>{community}</li>)}
+          <ul className="community-list" aria-label="Communities in this region">
+            {region.communities.map((community) => <li key={community}>{community}</li>)}
           </ul>
         </PageContainer>
       </section>

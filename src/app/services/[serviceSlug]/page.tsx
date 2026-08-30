@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 
 import { Breadcrumbs, ClinicListingCard, PageContainer } from "@/components";
-import { getService, pilotLocation, services } from "@/lib/directory";
+import { getService, services } from "@/lib/directory";
 import { listClinics } from "@/lib/directory-repository";
 
 type ServicePageProps = {
@@ -38,7 +38,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
           <div className="content-grid">
             <div>
               <p className="eyebrow">Private service directory</p>
-              <h1>{service.name} clinics in {pilotLocation.name}</h1>
+              <h1>{service.name} clinics</h1>
               <p className="lede">{service.shortDescription}</p>
             </div>
             <aside className="content-aside">

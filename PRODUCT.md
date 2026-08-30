@@ -70,6 +70,17 @@ Only list a modality where a current clinic-controlled source or direct clinic v
 
 Do not add a new province or service category until the initial inventory is materially complete, stale-data review is operating, inquiries are reaching the intended clinics, and correction requests can be handled reliably. Expansion should follow a short written decision covering taxonomy, regulatory language, data sources, and lead fields.
 
+### Expansion decision: 2026-08-30, Canada-wide geography
+
+The product owner decided to move the geographic scope to Canada-wide ahead of the Metro Vancouver inventory being materially complete, to unblock work on the technical foundation while sourcing continues in parallel. This decision is scoped narrowly:
+
+- **Taxonomy**: unchanged. The service category stays private-pay MRI and ultrasound; no new category is in scope yet.
+- **Regulatory language**: not yet reviewed. Quebec's language-of-commerce requirements (public-facing content in French) and any other provincial rules for advertising private health services have not been assessed. Do not publish a region in Quebec, or any other province with an unreviewed regulatory requirement, before that review happens.
+- **Data sources**: unchanged. New regions use the same clinic-controlled source, dated check, and verification-before-publish rules as the Metro Vancouver pilot. No region is added to `regions` in `src/lib/directory.ts` without sourced, dated records behind it.
+- **Lead fields**: unchanged. The `leads` and `lead_consents` schema and its privacy boundaries apply nationally as written; a wider footprint does not relax them.
+
+What changed as a direct result of this decision: the `locations.province_code` database constraint and the corresponding TypeScript types were widened from a BC-only allow list to all thirteen Canadian provinces and territories, and the locations route now resolves any published region instead of a single hardcoded one. This is a technical capability change only. It does not add, publish, or imply any real clinic data outside the existing sourced Metro Vancouver pilot, and it does not change the review gates in the rollout sequence below.
+
 ## Clinic monetization
 
 Use a simple two-tier model:

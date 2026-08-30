@@ -1,3 +1,5 @@
+import type { ProvinceCode } from "@/lib/geography";
+
 export const DIRECTORY_SOURCE_CHECK_DATE = "2026-07-19";
 
 export type VerificationStatus = "verified" | "stale" | "disputed";
@@ -26,8 +28,8 @@ export type ClinicListing = {
   phone: string;
   address: {
     line1: string;
-    municipality: "Vancouver" | "Surrey";
-    province: "BC";
+    municipality: string;
+    province: ProvinceCode;
     postalCode: string;
   };
   services: ClinicServiceListing[];

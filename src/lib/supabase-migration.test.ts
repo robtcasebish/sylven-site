@@ -8,6 +8,11 @@ const migration = readFileSync(
   "utf8",
 );
 
+const provinceExpansionMigration = readFileSync(
+  resolve("supabase/migrations/202608300001_allow_canada_wide_provinces.sql"),
+  "utf8",
+);
+
 const protectedTables = [
   "services",
   "clinics",
@@ -40,5 +45,26 @@ describe("initial Supabase migration policy", () => {
     expect(migration).toContain("Consent evidence is immutable");
     expect(migration).toContain("Consent service must match the lead service and recipient clinic");
     expect(migration).toContain("A lead cannot be delivered without recipient consent");
+  });
+});
+
+describe("Canada-wide province expansion migration", () => {
+  const provinceCodes = [
+    "AB", "BC", "MB", "NB", "NL", "NS", "NT", "NU", "ON", "PE", "QC", "SK", "YT",
+  ];
+
+  it("drops the BC-only constraint and default", () => {
+    expect(provinceExpansionMigration).toContain(
+      "drop constraint locations_province_code_check",
+    );
+    expect(provinceExpansionMigration).toContain(
+      "alter column province_code drop default",
+    );
+  });
+
+  it("replaces it with the full province and territory allow list", () => {
+    for (const code of provinceCodes) {
+      expect(provinceExpansionMigration).toContain(`'${code}'`);
+    }
   });
 });
