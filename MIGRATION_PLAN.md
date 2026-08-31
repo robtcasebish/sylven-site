@@ -142,6 +142,8 @@ Archive means preserve the current state in a dated Git tag and retained deploy,
 - Seed only sourced wedge listings. Keep production inquiries disabled or clearly marked in non-production environments.
 - Make database migrations additive and versioned. Do not make cutover depend on destructive database changes.
 
+**Progress note (2026-08-31):** the schema from `supabase/migrations/202607190001_initial_directory.sql` now has three additive follow-up migrations that seed it with the 17 clinics sourced so far: `202608310001_allow_optional_postal_code.sql` (a handful of sourced clinics do not publish a postal code, so the column is now optional rather than forcing a placeholder value), `202608310002_seed_sourced_directory.sql` (the seed data itself, generated directly from `src/lib/clinic-directory.ts` so it cannot drift from the sourced facts), and `202608310003_add_clinic_email_to_public_view.sql` (the public view was missing e-mail, which would have silently dropped Simply MRI's only published contact method). `src/lib/directory-repository.ts` already reads from `public_clinic_directory` and falls back to the TypeScript fixtures when the Supabase env vars are unset, so nothing changes in production until a project exists and those variables are set in Netlify (see `.env.example`). No project has been provisioned yet; that is still an open step of this section, not something this repository can do on its own.
+
 **Review point:** product, privacy/legal, accessibility, and clinic-operations reviewers approve the directory copy, listing facts, consent language, and correction workflow.
 
 ### 3. Verify the candidate release

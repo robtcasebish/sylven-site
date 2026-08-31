@@ -12,11 +12,16 @@ type PublicDirectoryRow = {
   clinic_slug: string;
   clinic_name: string;
   website_url: string;
-  clinic_phone: string;
+  // A clinic's own website does not always publish a phone number or a
+  // postal code (see the "No postal code"/phone-omitted comments in
+  // clinic-directory.ts); the view passes that absence through as null
+  // rather than a placeholder, so these are nullable here too.
+  clinic_phone: string | null;
+  clinic_email: string | null;
   address_line_1: string;
   municipality: string;
   province_code: ProvinceCode;
-  postal_code: string;
+  postal_code: string | null;
   service_slug: "mri" | "ultrasound";
   service_name: "MRI" | "Ultrasound";
   referral_requirement: ClinicServiceListing["referralRequirement"];
@@ -43,7 +48,7 @@ function getSupabaseConfiguration() {
   return url && anonKey ? { url, anonKey } : undefined;
 }
 
-function rowsToClinics(rows: PublicDirectoryRow[]): ClinicListing[] {
+export function rowsToClinics(rows: PublicDirectoryRow[]): ClinicListing[] {
   const clinics = new Map<string, ClinicListing>();
 
   for (const row of rows) {
@@ -94,12 +99,13 @@ function rowsToClinics(rows: PublicDirectoryRow[]): ClinicListing[] {
       slug: row.clinic_slug,
       name: row.clinic_name,
       websiteUrl: row.website_url,
-      phone: row.clinic_phone,
+      phone: row.clinic_phone ?? undefined,
+      email: row.clinic_email ?? undefined,
       address: {
         line1: row.address_line_1,
         municipality: row.municipality,
         province: row.province_code,
-        postalCode: row.postal_code,
+        postalCode: row.postal_code ?? undefined,
       },
       services: [service],
       verificationStatus: row.verification_status,

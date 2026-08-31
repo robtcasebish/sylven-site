@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { regions } from "@/lib/directory";
-import { listClinics } from "@/lib/directory-repository";
+import { listClinics, rowsToClinics } from "@/lib/directory-repository";
 
 describe("region-scoped clinic listing", () => {
   it("returns only clinics in the requested region's communities", async () => {
@@ -109,5 +109,56 @@ describe("region-scoped clinic listing", () => {
     const scoped = await listClinics(undefined, regions.flatMap((region) => region.communities));
 
     expect(all.length).toBe(scoped.length);
+  });
+});
+
+describe("rowsToClinics (Supabase public_clinic_directory row mapping)", () => {
+  // A clinic's own site does not always publish a phone number or a postal
+  // code, and the public_clinic_directory view passes that through as SQL
+  // null rather than a placeholder string. This must survive the trip from
+  // Postgres/PostgREST to the ClinicListing shape as "field omitted", the
+  // same as the fixture data already does for these clinics.
+  const baseRow = {
+    clinic_slug: "example-clinic",
+    clinic_name: "Example Clinic",
+    website_url: "https://example-clinic.example/",
+    clinic_phone: null,
+    clinic_email: "hello@example-clinic.example",
+    address_line_1: "1 Example St",
+    municipality: "Example City",
+    province_code: "ON" as const,
+    postal_code: null,
+    service_slug: "mri" as const,
+    service_name: "MRI" as const,
+    referral_requirement: "required" as const,
+    referral_notes: "Referral required.",
+    clinic_source_type: "clinic_website" as const,
+    clinic_source_url: "https://example-clinic.example/",
+    clinic_source_label: "Example Clinic site",
+    clinic_source_checked_at: "2026-08-31",
+    location_source_type: "clinic_website" as const,
+    location_source_url: "https://example-clinic.example/",
+    location_source_label: "Example Clinic site",
+    location_source_checked_at: "2026-08-31",
+    service_source_type: "clinic_website" as const,
+    service_source_url: "https://example-clinic.example/mri",
+    service_source_label: "Example Clinic MRI page",
+    service_source_checked_at: "2026-08-31",
+    last_verified_at: "2026-08-31",
+    verification_status: "verified" as const,
+  };
+
+  it("maps a null phone and null postal code to omitted fields, not the string 'null'", () => {
+    const [clinic] = rowsToClinics([baseRow]);
+
+    expect(clinic.phone).toBeUndefined();
+    expect(clinic.address.postalCode).toBeUndefined();
+    expect(clinic.email).toBe("hello@example-clinic.example");
+  });
+
+  it("still surfaces a phone number when the view provides one", () => {
+    const [clinic] = rowsToClinics([{ ...baseRow, clinic_phone: "555-000-1111" }]);
+
+    expect(clinic.phone).toBe("555-000-1111");
   });
 });
