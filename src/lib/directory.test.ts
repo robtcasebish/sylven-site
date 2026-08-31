@@ -28,6 +28,7 @@ describe("directory helpers", () => {
     expect(getRegion("saskatchewan", "saskatoon")?.name).toBe("Saskatoon");
     expect(getRegion("nova-scotia", "halifax")?.name).toBe("Halifax");
     expect(getRegion("new-brunswick", "moncton")?.name).toBe("Moncton");
+    expect(getRegion("prince-edward-island", "summerside")?.name).toBe("Summerside");
     expect(getRegion("ontario", "ottawa")).toBeUndefined();
   });
 
@@ -48,6 +49,7 @@ describe("directory helpers", () => {
     expect(getRegionForMunicipality("Halifax")?.name).toBe("Halifax");
     expect(getRegionForMunicipality("Sackville")?.name).toBe("Halifax");
     expect(getRegionForMunicipality("Moncton")?.name).toBe("Moncton");
+    expect(getRegionForMunicipality("Summerside")?.name).toBe("Summerside");
     expect(getRegionForMunicipality("Yellowknife")).toBeUndefined();
   });
 });

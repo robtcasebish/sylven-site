@@ -94,6 +94,14 @@ export const regions: Region[] = [
     citySlug: "moncton",
     communities: ["Moncton"],
   },
+  {
+    name: "Summerside",
+    province: "Prince Edward Island",
+    provinceCode: "PE",
+    provinceSlug: "prince-edward-island",
+    citySlug: "summerside",
+    communities: ["Summerside"],
+  },
 ];
 
 // Convenience alias for the first published region, kept for pages that

@@ -11,6 +11,8 @@ export const SASKATCHEWAN_SOURCE_CHECK_DATE = "2026-08-31";
 export const NOVA_SCOTIA_SOURCE_CHECK_DATE = "2026-08-31";
 // Sixth sourcing batch, added when Moncton (New Brunswick) was researched.
 export const NEW_BRUNSWICK_SOURCE_CHECK_DATE = "2026-08-31";
+// Seventh sourcing batch, added when Summerside (Prince Edward Island) was researched.
+export const PEI_SOURCE_CHECK_DATE = "2026-08-31";
 
 export type VerificationStatus = "verified" | "stale" | "disputed";
 export type ReferralRequirement = "required" | "not_required" | "varies" | "unknown";
@@ -698,6 +700,47 @@ export const clinicListings: ClinicListing[] = [
         "IRM Moncton MRI ultrasound FAQ",
         "https://monctonmri.com/index.php/ultrasound/faq/",
         NEW_BRUNSWICK_SOURCE_CHECK_DATE,
+      ),
+    ],
+  },
+  {
+    slug: "summerside-diagnostic-imaging-centre",
+    name: "Summerside Diagnostic Imaging Centre",
+    websiteUrl: "https://www.summersideimaging.com/",
+    phone: "902-436-1119",
+    email: "info@summersideimaging.com",
+    address: {
+      line1: "107 Walker Ave",
+      municipality: "Summerside",
+      province: "PE",
+      // No postal code: not published on the clinic's own site.
+    },
+    services: [
+      {
+        slug: "mri",
+        name: "MRI",
+        referralRequirement: "unknown",
+        // Ultrasound is intentionally not listed: the clinic's own site
+        // describes it as "coming soon" and not yet available.
+        referralNote:
+          "The clinic's patient information page says it accepts referrals from a broad range of provider types and lists card payment as an accepted payment method, but does not state whether a referral is strictly required to book; confirm directly.",
+        sourceId: "summerside-patient-info",
+      },
+    ],
+    verificationStatus: "verified",
+    lastVerifiedAt: PEI_SOURCE_CHECK_DATE,
+    sources: [
+      checkedSource(
+        "summerside-home",
+        "Summerside Diagnostic Imaging Centre service and contact information",
+        "https://www.summersideimaging.com/",
+        PEI_SOURCE_CHECK_DATE,
+      ),
+      checkedSource(
+        "summerside-patient-info",
+        "Summerside Diagnostic Imaging Centre patient information",
+        "https://www.summersideimaging.com/patient-information/",
+        PEI_SOURCE_CHECK_DATE,
       ),
     ],
   },

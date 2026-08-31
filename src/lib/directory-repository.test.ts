@@ -94,6 +94,16 @@ describe("region-scoped clinic listing", () => {
     );
   });
 
+  it("scopes Summerside clinics correctly", async () => {
+    const summerside = regions.find((region) => region.name === "Summerside")!;
+    const summersideClinics = await listClinics(undefined, summerside.communities);
+
+    expect(summersideClinics.length).toBeGreaterThan(0);
+    expect(
+      summersideClinics.every((clinic) => clinic.address.municipality === "Summerside"),
+    ).toBe(true);
+  });
+
   it("returns every clinic when no region filter is given", async () => {
     const all = await listClinics();
     const scoped = await listClinics(undefined, regions.flatMap((region) => region.communities));

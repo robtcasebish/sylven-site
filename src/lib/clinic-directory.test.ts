@@ -5,6 +5,7 @@ import {
   DIRECTORY_SOURCE_CHECK_DATE,
   NEW_BRUNSWICK_SOURCE_CHECK_DATE,
   NOVA_SCOTIA_SOURCE_CHECK_DATE,
+  PEI_SOURCE_CHECK_DATE,
   SASKATCHEWAN_SOURCE_CHECK_DATE,
   TORONTO_SOURCE_CHECK_DATE,
   clinicListings,
@@ -19,13 +20,14 @@ const VALID_CHECK_DATES = [
   SASKATCHEWAN_SOURCE_CHECK_DATE,
   NOVA_SCOTIA_SOURCE_CHECK_DATE,
   NEW_BRUNSWICK_SOURCE_CHECK_DATE,
+  PEI_SOURCE_CHECK_DATE,
 ];
 
 describe("source-checked clinic directory", () => {
   it("publishes only verified records with complete provenance", () => {
     const published = getPublishedClinicListings();
 
-    expect(published).toHaveLength(16);
+    expect(published).toHaveLength(17);
     for (const clinic of published) {
       expect(VALID_CHECK_DATES).toContain(clinic.lastVerifiedAt);
       expect(clinic.websiteUrl).toMatch(/^https:\/\//);
@@ -56,6 +58,7 @@ describe("source-checked clinic directory", () => {
       "healthview-medical-imaging-halifax",
       "why-wait-imaging-halifax",
       "irm-moncton-mri",
+      "summerside-diagnostic-imaging-centre",
     ]);
     expect(getPublishedClinicListings("ultrasound")).toHaveLength(11);
     expect(getPublishedClinicListings("prescriptions")).toHaveLength(0);
