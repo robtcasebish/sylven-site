@@ -5,6 +5,8 @@ export const DIRECTORY_SOURCE_CHECK_DATE = "2026-07-19";
 export const TORONTO_SOURCE_CHECK_DATE = "2026-08-30";
 // Third sourcing batch, added when Calgary and Edmonton (Alberta) were researched.
 export const ALBERTA_SOURCE_CHECK_DATE = "2026-08-30";
+// Fourth sourcing batch, added when Regina and Saskatoon (Saskatchewan) were researched.
+export const SASKATCHEWAN_SOURCE_CHECK_DATE = "2026-08-31";
 
 export type VerificationStatus = "verified" | "stale" | "disputed";
 export type ReferralRequirement = "required" | "not_required" | "varies" | "unknown";
@@ -426,6 +428,90 @@ export const clinicListings: ClinicListing[] = [
         "Wosler Diagnostics FAQ",
         "https://wosler.ca/faq/",
         ALBERTA_SOURCE_CHECK_DATE,
+      ),
+    ],
+  },
+  {
+    slug: "open-skies-mri-regina",
+    name: "Open Skies MRI Diagnostics",
+    websiteUrl: "https://openskies.ca/",
+    phone: "306-352-6736",
+    address: {
+      line1: "1-2727 Parliament Avenue",
+      municipality: "Regina",
+      province: "SK",
+      postalCode: "S4S 6X5",
+    },
+    services: [
+      {
+        slug: "mri",
+        name: "MRI",
+        referralRequirement: "required",
+        referralNote:
+          "The clinic's FAQ says a requisition must be sent to their office before an appointment can be scheduled.",
+        sourceId: "open-skies-faq",
+      },
+    ],
+    verificationStatus: "verified",
+    lastVerifiedAt: SASKATCHEWAN_SOURCE_CHECK_DATE,
+    sources: [
+      checkedSource(
+        "open-skies-home",
+        "Open Skies MRI Diagnostics service and contact information",
+        "https://openskies.ca/",
+        SASKATCHEWAN_SOURCE_CHECK_DATE,
+      ),
+      checkedSource(
+        "open-skies-faq",
+        "Open Skies MRI Diagnostics FAQ",
+        "https://openskies.ca/faq",
+        SASKATCHEWAN_SOURCE_CHECK_DATE,
+      ),
+    ],
+  },
+  {
+    slug: "saskatoon-medical-imaging-centre-mall",
+    name: "Saskatoon Medical Imaging, Centre Mall",
+    websiteUrl: "https://www.saskatoonmedicalimaging.ca/",
+    phone: "306-477-1000",
+    address: {
+      line1: "C1 3510 8th Street East",
+      municipality: "Saskatoon",
+      province: "SK",
+      postalCode: "S7H 0W6",
+    },
+    services: [
+      {
+        slug: "mri",
+        name: "MRI",
+        referralRequirement: "required",
+        referralNote:
+          "The clinic's booking process page says your doctor fills out a requisition form that serves as your referral to the clinic.",
+        sourceId: "smi-process",
+      },
+      {
+        slug: "ultrasound",
+        name: "Ultrasound",
+        referralRequirement: "required",
+        referralNote:
+          "The clinic's booking process page says your doctor fills out a requisition form that serves as your referral to the clinic.",
+        sourceId: "smi-process",
+      },
+    ],
+    verificationStatus: "verified",
+    lastVerifiedAt: SASKATCHEWAN_SOURCE_CHECK_DATE,
+    sources: [
+      checkedSource(
+        "smi-locations",
+        "Saskatoon Medical Imaging locations and services",
+        "https://www.saskatoonmedicalimaging.ca/",
+        SASKATCHEWAN_SOURCE_CHECK_DATE,
+      ),
+      checkedSource(
+        "smi-process",
+        "Saskatoon Medical Imaging booking process",
+        "https://www.saskatoonmedicalimaging.ca/our-process",
+        SASKATCHEWAN_SOURCE_CHECK_DATE,
       ),
     ],
   },

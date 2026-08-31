@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
   ALBERTA_SOURCE_CHECK_DATE,
   DIRECTORY_SOURCE_CHECK_DATE,
+  SASKATCHEWAN_SOURCE_CHECK_DATE,
   TORONTO_SOURCE_CHECK_DATE,
   clinicListings,
   getClinicListing,
@@ -13,13 +14,14 @@ const VALID_CHECK_DATES = [
   DIRECTORY_SOURCE_CHECK_DATE,
   TORONTO_SOURCE_CHECK_DATE,
   ALBERTA_SOURCE_CHECK_DATE,
+  SASKATCHEWAN_SOURCE_CHECK_DATE,
 ];
 
 describe("source-checked clinic directory", () => {
   it("publishes only verified records with complete provenance", () => {
     const published = getPublishedClinicListings();
 
-    expect(published).toHaveLength(10);
+    expect(published).toHaveLength(12);
     for (const clinic of published) {
       expect(VALID_CHECK_DATES).toContain(clinic.lastVerifiedAt);
       expect(clinic.websiteUrl).toMatch(/^https:\/\//);
@@ -45,8 +47,10 @@ describe("source-checked clinic directory", () => {
       "simply-mri-toronto",
       "mayfair-diagnostics-calgary",
       "mic-medical-imaging-century-park",
+      "open-skies-mri-regina",
+      "saskatoon-medical-imaging-centre-mall",
     ]);
-    expect(getPublishedClinicListings("ultrasound")).toHaveLength(6);
+    expect(getPublishedClinicListings("ultrasound")).toHaveLength(7);
     expect(getPublishedClinicListings("prescriptions")).toHaveLength(0);
   });
 

@@ -62,6 +62,22 @@ export const regions: Region[] = [
     citySlug: "edmonton",
     communities: ["Edmonton"],
   },
+  {
+    name: "Regina",
+    province: "Saskatchewan",
+    provinceCode: "SK",
+    provinceSlug: "saskatchewan",
+    citySlug: "regina",
+    communities: ["Regina"],
+  },
+  {
+    name: "Saskatoon",
+    province: "Saskatchewan",
+    provinceCode: "SK",
+    provinceSlug: "saskatchewan",
+    citySlug: "saskatoon",
+    communities: ["Saskatoon"],
+  },
 ];
 
 // Convenience alias for the first published region, kept for pages that

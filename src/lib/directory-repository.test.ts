@@ -54,6 +54,26 @@ describe("region-scoped clinic listing", () => {
     });
   });
 
+  it("keeps Regina and Saskatoon clinics scoped to their own region despite sharing a province", () => {
+    const regina = regions.find((region) => region.name === "Regina")!;
+    const saskatoon = regions.find((region) => region.name === "Saskatoon")!;
+
+    return Promise.all([
+      listClinics(undefined, regina.communities),
+      listClinics(undefined, saskatoon.communities),
+    ]).then(([reginaClinics, saskatoonClinics]) => {
+      expect(reginaClinics.length).toBeGreaterThan(0);
+      expect(saskatoonClinics.length).toBeGreaterThan(0);
+
+      for (const clinic of reginaClinics) {
+        expect(saskatoon.communities).not.toContain(clinic.address.municipality);
+      }
+      for (const clinic of saskatoonClinics) {
+        expect(regina.communities).not.toContain(clinic.address.municipality);
+      }
+    });
+  });
+
   it("returns every clinic when no region filter is given", async () => {
     const all = await listClinics();
     const scoped = await listClinics(undefined, regions.flatMap((region) => region.communities));

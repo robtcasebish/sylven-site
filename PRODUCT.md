@@ -101,6 +101,16 @@ Two findings from this sourcing pass are worth recording:
 
 Yukon, the Northwest Territories, and Nunavut are intentionally excluded from this pass. Given their small populations and reliance on the public system for imaging, no private MRI or ultrasound clinics were expected there and none were sourced; add a territory only if evidence of an actual private clinic surfaces.
 
+### Expansion decision: 2026-08-31, Manitoba reviewed and excluded
+
+Manitoba was researched for a Winnipeg region using the same method as the other provinces, and no region was added. A published, methodologically-focused review of privately operated medical imaging in Canada states plainly that there are currently no private MRI or CT facilities operating in Manitoba. Separately, Prota Clinic, a private Winnipeg clinic that had been charging for diagnostic ultrasounds and echocardiograms, was ordered to stop after the federal government clawed back part of Manitoba's health transfer funding over the fees; the clinic's own site now states it is "currently unable to perform medically indicated ultrasounds or echocardiograms." No other candidate cleared the bar. Per the expansion rule above, a region is only added once sourced, dated clinic records support it, so Manitoba stays out of `regions` until that changes; revisit if a new private clinic opens or Prota Clinic resumes a lawful offering.
+
+### Expansion decision: 2026-08-31, Regina and Saskatoon added as Saskatchewan's first regions
+
+Two Saskatchewan regions, Regina and Saskatoon, were sourced and added to `regions` in `src/lib/directory.ts`. Saskatchewan has the longest-running private diagnostic imaging market of the provinces reviewed so far: Open Skies MRI Diagnostics in Regina describes itself as the first accredited and licensed private MRI facility in the province, operating since 2012, well before Saskatchewan's 2015 legislative change formally opened the door to more private-pay MRI providers. Two clinics were added: Open Skies MRI Diagnostics (Regina, MRI, referral required) and Saskatoon Medical Imaging's Centre Mall location (Saskatoon, MRI and ultrasound, referral required).
+
+One candidate was excluded as an unclear hybrid model: National Medical Imaging (Saskatoon) markets itself as a private MRI/CT centre, but its own site says a patient "must have a referral from your physician and be placed on the Saskatchewan Health Authority's (SHA) waitlist to benefit from our services," which reads as a contracted public-waitlist-reduction service rather than a direct self-pay option. It was left out until its actual pricing and access model can be confirmed from a clearer source. YXE Medical Imaging (Saskatoon, ultrasound and mammography) was also looked at but dropped from this pass because its referral policy could not be confirmed from its own site.
+
 ## Clinic monetization
 
 Use a simple two-tier model:
