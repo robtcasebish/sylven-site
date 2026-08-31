@@ -27,6 +27,7 @@ describe("directory helpers", () => {
     expect(getRegion("saskatchewan", "regina")?.name).toBe("Regina");
     expect(getRegion("saskatchewan", "saskatoon")?.name).toBe("Saskatoon");
     expect(getRegion("nova-scotia", "halifax")?.name).toBe("Halifax");
+    expect(getRegion("new-brunswick", "moncton")?.name).toBe("Moncton");
     expect(getRegion("ontario", "ottawa")).toBeUndefined();
   });
 
@@ -46,6 +47,7 @@ describe("directory helpers", () => {
     expect(getRegionForMunicipality("Saskatoon")?.name).toBe("Saskatoon");
     expect(getRegionForMunicipality("Halifax")?.name).toBe("Halifax");
     expect(getRegionForMunicipality("Sackville")?.name).toBe("Halifax");
+    expect(getRegionForMunicipality("Moncton")?.name).toBe("Moncton");
     expect(getRegionForMunicipality("Yellowknife")).toBeUndefined();
   });
 });

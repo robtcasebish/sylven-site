@@ -84,6 +84,16 @@ describe("region-scoped clinic listing", () => {
     );
   });
 
+  it("scopes Moncton clinics correctly", async () => {
+    const moncton = regions.find((region) => region.name === "Moncton")!;
+    const monctonClinics = await listClinics(undefined, moncton.communities);
+
+    expect(monctonClinics.length).toBeGreaterThan(0);
+    expect(monctonClinics.every((clinic) => clinic.address.municipality === "Moncton")).toBe(
+      true,
+    );
+  });
+
   it("returns every clinic when no region filter is given", async () => {
     const all = await listClinics();
     const scoped = await listClinics(undefined, regions.flatMap((region) => region.communities));

@@ -9,6 +9,8 @@ export const ALBERTA_SOURCE_CHECK_DATE = "2026-08-30";
 export const SASKATCHEWAN_SOURCE_CHECK_DATE = "2026-08-31";
 // Fifth sourcing batch, added when Halifax (Nova Scotia) was researched.
 export const NOVA_SCOTIA_SOURCE_CHECK_DATE = "2026-08-31";
+// Sixth sourcing batch, added when Moncton (New Brunswick) was researched.
+export const NEW_BRUNSWICK_SOURCE_CHECK_DATE = "2026-08-31";
 
 export type VerificationStatus = "verified" | "stale" | "disputed";
 export type ReferralRequirement = "required" | "not_required" | "varies" | "unknown";
@@ -644,6 +646,58 @@ export const clinicListings: ClinicListing[] = [
         "Wosler Diagnostics FAQ",
         "https://wosler.ca/faq/",
         NOVA_SCOTIA_SOURCE_CHECK_DATE,
+      ),
+    ],
+  },
+  {
+    slug: "irm-moncton-mri",
+    name: "IRM Moncton MRI",
+    websiteUrl: "https://monctonmri.com/",
+    phone: "506-204-7040",
+    address: {
+      line1: "585 Mapleton Road, Suite 101",
+      municipality: "Moncton",
+      province: "NB",
+      postalCode: "E1G 2K5",
+    },
+    services: [
+      {
+        slug: "mri",
+        name: "MRI",
+        referralRequirement: "required",
+        referralNote:
+          "The clinic's MRI FAQ says all MRI scans require a referral from your healthcare provider.",
+        sourceId: "irm-moncton-mri-faq",
+      },
+      {
+        slug: "ultrasound",
+        name: "Ultrasound",
+        referralRequirement: "required",
+        referralNote:
+          "The clinic's ultrasound FAQ says to bring your requisition, and that the sonographer can only scan the area indicated on the requisition from your doctor.",
+        sourceId: "irm-moncton-ultrasound-faq",
+      },
+    ],
+    verificationStatus: "verified",
+    lastVerifiedAt: NEW_BRUNSWICK_SOURCE_CHECK_DATE,
+    sources: [
+      checkedSource(
+        "irm-moncton-home",
+        "IRM Moncton MRI service and contact information",
+        "https://monctonmri.com/",
+        NEW_BRUNSWICK_SOURCE_CHECK_DATE,
+      ),
+      checkedSource(
+        "irm-moncton-mri-faq",
+        "IRM Moncton MRI FAQ",
+        "https://monctonmri.com/index.php/magnetic-resonance-imaging/faq/",
+        NEW_BRUNSWICK_SOURCE_CHECK_DATE,
+      ),
+      checkedSource(
+        "irm-moncton-ultrasound-faq",
+        "IRM Moncton MRI ultrasound FAQ",
+        "https://monctonmri.com/index.php/ultrasound/faq/",
+        NEW_BRUNSWICK_SOURCE_CHECK_DATE,
       ),
     ],
   },

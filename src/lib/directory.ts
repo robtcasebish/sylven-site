@@ -86,6 +86,14 @@ export const regions: Region[] = [
     citySlug: "halifax",
     communities: ["Halifax", "Dartmouth", "Sackville"],
   },
+  {
+    name: "Moncton",
+    province: "New Brunswick",
+    provinceCode: "NB",
+    provinceSlug: "new-brunswick",
+    citySlug: "moncton",
+    communities: ["Moncton"],
+  },
 ];
 
 // Convenience alias for the first published region, kept for pages that
