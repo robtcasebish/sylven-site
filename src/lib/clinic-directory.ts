@@ -7,6 +7,8 @@ export const TORONTO_SOURCE_CHECK_DATE = "2026-08-30";
 export const ALBERTA_SOURCE_CHECK_DATE = "2026-08-30";
 // Fourth sourcing batch, added when Regina and Saskatoon (Saskatchewan) were researched.
 export const SASKATCHEWAN_SOURCE_CHECK_DATE = "2026-08-31";
+// Fifth sourcing batch, added when Halifax (Nova Scotia) was researched.
+export const NOVA_SCOTIA_SOURCE_CHECK_DATE = "2026-08-31";
 
 export type VerificationStatus = "verified" | "stale" | "disputed";
 export type ReferralRequirement = "required" | "not_required" | "varies" | "unknown";
@@ -512,6 +514,136 @@ export const clinicListings: ClinicListing[] = [
         "Saskatoon Medical Imaging booking process",
         "https://www.saskatoonmedicalimaging.ca/our-process",
         SASKATCHEWAN_SOURCE_CHECK_DATE,
+      ),
+    ],
+  },
+  {
+    slug: "healthview-medical-imaging-halifax",
+    name: "HealthView Medical Imaging",
+    websiteUrl: "https://healthviewimaging.ca/",
+    phone: "902-443-9922",
+    address: {
+      line1: "255 Lacewood Drive, Suite 100A",
+      municipality: "Halifax",
+      province: "NS",
+      postalCode: "B3M 4G2",
+    },
+    services: [
+      {
+        slug: "mri",
+        name: "MRI",
+        referralRequirement: "required",
+        referralNote:
+          "The clinic's MRI FAQ says all Healthview scans require a referral from your healthcare provider.",
+        sourceId: "healthview-mri-faq",
+      },
+      {
+        slug: "ultrasound",
+        name: "Ultrasound",
+        referralRequirement: "required",
+        referralNote:
+          "The clinic's MRI FAQ says all Healthview scans require a referral from your healthcare provider.",
+        sourceId: "healthview-mri-faq",
+      },
+    ],
+    verificationStatus: "verified",
+    lastVerifiedAt: NOVA_SCOTIA_SOURCE_CHECK_DATE,
+    sources: [
+      checkedSource(
+        "healthview-home",
+        "Healthview Medical Imaging service information",
+        "https://healthviewimaging.ca/",
+        NOVA_SCOTIA_SOURCE_CHECK_DATE,
+      ),
+      checkedSource(
+        "healthview-mri-faq",
+        "Healthview Medical Imaging MRI FAQ",
+        "https://healthviewimaging.ca/index.php/mri/faq/",
+        NOVA_SCOTIA_SOURCE_CHECK_DATE,
+      ),
+      checkedSource(
+        "healthview-contact",
+        "Healthview Medical Imaging contact information",
+        "https://healthviewimaging.ca/index.php/contact/",
+        NOVA_SCOTIA_SOURCE_CHECK_DATE,
+      ),
+    ],
+  },
+  {
+    slug: "why-wait-imaging-halifax",
+    name: "Why Wait Imaging",
+    websiteUrl: "https://whywaitimaging.ca/",
+    phone: "902-800-8727",
+    address: {
+      line1: "Suite 50, 6140 Young Street",
+      municipality: "Halifax",
+      province: "NS",
+      postalCode: "B3K 0G2",
+    },
+    services: [
+      {
+        slug: "mri",
+        name: "MRI",
+        referralRequirement: "unknown",
+        referralNote:
+          "The clinic's site advertises same-day private-pay MRI but does not state whether a physician referral is required to book; confirm directly.",
+        sourceId: "why-wait-services",
+      },
+      {
+        slug: "ultrasound",
+        name: "Ultrasound",
+        referralRequirement: "unknown",
+        referralNote:
+          "The clinic's site advertises same-day private-pay ultrasound but does not state whether a physician referral is required to book; confirm directly.",
+        sourceId: "why-wait-services",
+      },
+    ],
+    verificationStatus: "verified",
+    lastVerifiedAt: NOVA_SCOTIA_SOURCE_CHECK_DATE,
+    sources: [
+      checkedSource(
+        "why-wait-services",
+        "Why Wait Imaging services and contact information",
+        "https://whywaitimaging.ca/services/",
+        NOVA_SCOTIA_SOURCE_CHECK_DATE,
+      ),
+    ],
+  },
+  {
+    slug: "wosler-diagnostics-sackville",
+    name: "Wosler Diagnostics",
+    websiteUrl: "https://wosler.ca/",
+    phone: "902-593-4456",
+    address: {
+      line1: "159 Cobequid Road, Suite 203 Lower",
+      municipality: "Sackville",
+      province: "NS",
+      postalCode: "B4C 2N1",
+    },
+    services: [
+      {
+        slug: "ultrasound",
+        name: "Ultrasound",
+        referralRequirement: "required",
+        referralNote:
+          "The clinic's FAQ says a valid requisition from a physician, nurse practitioner, or other authorized healthcare provider is required for all diagnostic imaging exams, and that this applies across the provinces it serves, including Nova Scotia.",
+        sourceId: "wosler-halifax-location",
+      },
+    ],
+    verificationStatus: "verified",
+    lastVerifiedAt: NOVA_SCOTIA_SOURCE_CHECK_DATE,
+    sources: [
+      checkedSource(
+        "wosler-halifax-location",
+        "Wosler Diagnostics Halifax-area location and services",
+        "https://radiology.wosler.ca/halifax",
+        NOVA_SCOTIA_SOURCE_CHECK_DATE,
+      ),
+      checkedSource(
+        "wosler-faq-ns",
+        "Wosler Diagnostics FAQ",
+        "https://wosler.ca/faq/",
+        NOVA_SCOTIA_SOURCE_CHECK_DATE,
       ),
     ],
   },

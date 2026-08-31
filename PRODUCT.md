@@ -111,6 +111,12 @@ Two Saskatchewan regions, Regina and Saskatoon, were sourced and added to `regio
 
 One candidate was excluded as an unclear hybrid model: National Medical Imaging (Saskatoon) markets itself as a private MRI/CT centre, but its own site says a patient "must have a referral from your physician and be placed on the Saskatchewan Health Authority's (SHA) waitlist to benefit from our services," which reads as a contracted public-waitlist-reduction service rather than a direct self-pay option. It was left out until its actual pricing and access model can be confirmed from a clearer source. YXE Medical Imaging (Saskatoon, ultrasound and mammography) was also looked at but dropped from this pass because its referral policy could not be confirmed from its own site.
 
+### Expansion decision: 2026-08-31, Halifax added as Nova Scotia's first region
+
+Halifax was sourced and added to `regions` in `src/lib/directory.ts`. Three clinics were added: HealthView Medical Imaging (Halifax, MRI and ultrasound, referral required), Why Wait Imaging (Halifax, MRI and ultrasound, referral requirement unknown), and Wosler Diagnostics (Sackville, ultrasound, referral required; the same chain already sourced for Calgary, whose own FAQ says it applies the same all-provinces requisition policy in Nova Scotia).
+
+One finding is important enough to flag before this region is treated like the others: **Nova Scotia's private imaging market is under active federal-provincial dispute, unlike Alberta's or Saskatchewan's.** Health Canada has been requiring Nova Scotia to repay federal health transfer funding, over $1.277 million for the 2020-21 fiscal year alone, as a Canada Health Act penalty for allowing HealthView Medical Imaging to charge patients for MRI, arthroscopy, and ultrasound exams. Nova Scotia's government has so far chosen to accept the funding clawback and let HealthView keep operating rather than order it to stop, the opposite of the choice Manitoba made with Prota Clinic. This is a materially different, and less settled, legal footing than BC, Ontario, Alberta, or Saskatchewan, where private-pay diagnostic imaging is not disputed the same way. Do not describe Nova Scotia's private imaging market as settled or risk-free in any public copy; the clinics are real and currently operating, but the underlying legal dispute could change that.
+
 ## Clinic monetization
 
 Use a simple two-tier model:

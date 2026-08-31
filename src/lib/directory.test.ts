@@ -26,6 +26,7 @@ describe("directory helpers", () => {
     expect(getRegion("alberta", "edmonton")?.name).toBe("Edmonton");
     expect(getRegion("saskatchewan", "regina")?.name).toBe("Regina");
     expect(getRegion("saskatchewan", "saskatoon")?.name).toBe("Saskatoon");
+    expect(getRegion("nova-scotia", "halifax")?.name).toBe("Halifax");
     expect(getRegion("ontario", "ottawa")).toBeUndefined();
   });
 
@@ -43,6 +44,8 @@ describe("directory helpers", () => {
     expect(getRegionForMunicipality("Edmonton")?.name).toBe("Edmonton");
     expect(getRegionForMunicipality("Regina")?.name).toBe("Regina");
     expect(getRegionForMunicipality("Saskatoon")?.name).toBe("Saskatoon");
-    expect(getRegionForMunicipality("Halifax")).toBeUndefined();
+    expect(getRegionForMunicipality("Halifax")?.name).toBe("Halifax");
+    expect(getRegionForMunicipality("Sackville")?.name).toBe("Halifax");
+    expect(getRegionForMunicipality("Yellowknife")).toBeUndefined();
   });
 });

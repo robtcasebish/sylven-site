@@ -74,6 +74,16 @@ describe("region-scoped clinic listing", () => {
     });
   });
 
+  it("includes a clinic addressed to a satellite community (Sackville) in its metro region (Halifax)", async () => {
+    const halifax = regions.find((region) => region.name === "Halifax")!;
+    const halifaxClinics = await listClinics(undefined, halifax.communities);
+
+    expect(halifaxClinics.length).toBeGreaterThan(0);
+    expect(halifaxClinics.some((clinic) => clinic.address.municipality === "Sackville")).toBe(
+      true,
+    );
+  });
+
   it("returns every clinic when no region filter is given", async () => {
     const all = await listClinics();
     const scoped = await listClinics(undefined, regions.flatMap((region) => region.communities));

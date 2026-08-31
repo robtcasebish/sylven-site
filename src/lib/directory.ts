@@ -78,6 +78,14 @@ export const regions: Region[] = [
     citySlug: "saskatoon",
     communities: ["Saskatoon"],
   },
+  {
+    name: "Halifax",
+    province: "Nova Scotia",
+    provinceCode: "NS",
+    provinceSlug: "nova-scotia",
+    citySlug: "halifax",
+    communities: ["Halifax", "Dartmouth", "Sackville"],
+  },
 ];
 
 // Convenience alias for the first published region, kept for pages that
