@@ -131,6 +131,10 @@ Newfoundland and Labrador was researched and no region was added, consistent wit
 
 Summerside was sourced and added to `regions` in `src/lib/directory.ts`. One clinic was added: Summerside Diagnostic Imaging Centre (Summerside, MRI only; its own site lists ultrasound as "coming soon" and not yet available, so ultrasound was left off this listing rather than published ahead of the clinic actually offering it). This is PEI's first private MRI clinic, and like Nova Scotia's HealthView, its funding picture is mixed rather than purely private-pay: Health PEI has separately contracted with the clinic to help reduce the province's public MRI wait list, at a reported cost of roughly $720,000, while the clinic's own site also lists card payment as an accepted payment method and accepts referrals from a broad range of provider types (chiropractors, physiotherapists, nurse practitioners, primary physicians, and specialists) without stating whether a referral is strictly required. Referral requirement is recorded as unknown rather than assumed. Separately, Health PEI has also been paying for some Islanders' MRIs to be done out of province at IRM Moncton MRI in New Brunswick (already listed above); that arrangement does not itself create a PEI-based clinic and is not reflected as a listing here.
 
+### Expansion decision: 2026-08-31, Quebec skipped by product owner decision
+
+With every other province and PEI/Nova Scotia/New Brunswick region sourced or explicitly reviewed and excluded, the product owner decided to skip Quebec entirely rather than schedule the outstanding language-of-commerce review referenced in the original Canada-wide geography decision above. This is a decision not to pursue Quebec, not a statement that the review happened and passed; Quebec's requirement that public-facing commercial content be in French, along with any other provincial rule for advertising private health services there, remains unreviewed. No Quebec region or clinic should be added to `regions` or `clinicListings` without a product owner decision reopening this.
+
 ## Clinic monetization
 
 Use a simple two-tier model:
